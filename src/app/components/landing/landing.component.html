@@ -1,0 +1,85 @@
+<div class="flex full-height">
+    <mat-card class="full-height flex column space-between padding-4em">
+        <div class="full-height flex column space-between">
+            <div class="full-height flex column">
+                <div class="header flex space-between a-center full-width j-center">
+                    <div class="flex a-center">
+                        <div class="flex gap-05em a-center cursor" title="Remaining Leave Days" (click)="showProfile()">
+                            <img class="userIcon" src="../../../assets/images/user-icon.png" title="Profile" alt="">
+                            <p class="margin-0 color-blue leaveText">Annual Leave: <span
+                                    class="color-black">{{remainingAnnualLeaveDays}}</span>
+                            </p>
+                            <p class="margin-0 color-blue leaveText">Sick Leave: <span
+                                    class="color-black">{{remainingSickLeaveDays}}</span></p>
+                            <hr class="leavesHr full-width">
+                        </div>
+                        <img (click)="requestLeave()" class="addLeave cursor" src="../../../assets/icons/add_FILL0_wght400_GRAD0_opsz24.svg" alt="Add a leave request" title="Add a leave request">
+                    </div>
+                    <marquee class="neutrinosMarquee half-width">
+                        <img class="no-border-radius" src="../../../assets/images/neutrinos-logo.png" alt="">
+                    </marquee>
+                    <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+                </div>
+                <div class="flex full-width gap-2em">
+                    <div class="width-60">
+                        <mat-tab-group>
+                            <mat-tab label="Human Resource">
+                            </mat-tab>
+                            <mat-tab label="Operations">
+                                <router-outlet *ngIf="showRouter"></router-outlet>
+                                <div *ngIf="showOperations" class="flex wrap gap-1em">
+                                    <div class="operation cursor flex gap-1em column center-center"
+                                        (click)="showVisaApplicationForm()">
+                                        <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
+                                        <p class="margin-0 text-center">Visa Application</p>
+                                    </div>
+                                    <div class="operation cursor flex gap-1em column center-center"
+                                        (click)="showVisaExtensionForm()">
+                                        <img class="visaLogo" src="../../../assets/images/visa-xtend.png" alt="">
+                                        <p class="margin-0 text-center">Visa Extension</p>
+                                    </div>
+                                    <div class="operation cursor flex space-between column a-center"
+                                        (click)="showInternationalTravelForm()">
+                                        <img class="flightLogo margin-top-5" src="../../../assets/images/flightlogo.png" alt="">
+                                        <p class="margin-0 text-center">Internation Travel</p>
+                                    </div>
+                                    <div class="operation cursor flex space-between padding-bottom-10 column a-center"
+                                        (click)="showFlightInformationForm()">
+                                        <img class="landingLogo" src="../../../assets/images/abroad.png" alt="">
+                                        <p class="margin-0 text-center">Flight Information</p>
+                                    </div>
+                                    <div class="operation cursor flex space-between padding-bottom-10 column a-center"
+                                        (click)="showGuesthouseServiceForm()">
+                                        <img class="guesthouseLogo" src="../../../assets/images/services.png" alt="">
+                                        <p class="margin-0 text-center">Guesthouse Service</p>
+                                    </div>
+                                    <div class="operation cursor flex space-between padding-bottom-10 column a-center"
+                                        (click)="showDomesticTravelForm()">
+                                        <img class="domesticTransportLogo"
+                                            src="../../../assets/images/domesticTransport.png" alt="">
+                                        <p class="margin-0 text-center">Domestic Travel</p>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                    <div class="flex-1 relative full-height">
+                        <img class="frame" src="../../../assets/images/phoneframe.jpg" alt="">
+                        <img class="frameImg absolute" src="../../../assets/images/neutrinos-logo.png" alt="">
+                        <div class="flex timeContainer center-center absolute">
+                            <h2 class="frameTime margin-0">{{southAfricanTime}}</h2>
+                        </div>
+                        <img src="../../../assets/images/s-africa.png" class="frameTxt margin-0 absolute"
+                            alt="South Africa Image">
+                    </div>
+                </div>
+            </div>
+            <div class="footer flex column a-center">
+                <img *ngIf="showRouter" class="editIcon cursor" src="../../../assets/images/edit-icon.png" alt="Please adhere to the specification needed on each field and the time
+                frames which have been
+                stipulated" title="Please adhere to the specification needed on each field and the 
+                time frames which have been stipulated">
+            </div>
+        </div>
+    </mat-card>
+</div>

@@ -1,0 +1,55 @@
+<div class="half width">
+    <mat-card class="full-width padding-10">
+        <div class="flex column gap-1em">
+            <div class="flex center-center">
+                <div class="flex container a-center padding-2">
+                    <div class="companyLeave relative">
+                        <img src="../../../assets/images/neutrinos-logo.png" alt="">
+                        <hr class="absolute full-width">
+                        <h2 class="margin-0 absolute">LEAVE</h2>
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="leaveFormGroup" class="flex column">
+                <div class="flex column a-center full-width">
+                    <div class="flex gap-05em a-center">
+                        <h2 class="margin-0 leaveType">Type of leave?</h2>
+                        <h1 class="margin-0 type">{{leaveFormGroup.value.leaveType | titlecase}}</h1>
+                    </div>
+                    <mat-radio-group aria-label="Select an option" formControlName="leaveType">
+                        <mat-radio-button value="annual">Annual</mat-radio-button>
+                        <mat-radio-button value="sick">Sick</mat-radio-button>
+                        <mat-error *ngIf="leaveFormGroup.get('leaveType')?.hasError('required')">
+                            <small>Choose a leave option</small>
+                        </mat-error>
+                    </mat-radio-group>
+                </div>
+                <div class="full-width flex gap-1em">
+                    <!-- Leave Start Date -->
+                    <mat-form-field appearance="fill" class="flex-1">
+                        <mat-label>Leave Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="dateStartLeave" (focus)="picker.open()">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>
+                            Please fill in information
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- Leave End Date -->
+                    <mat-form-field appearance="fill" class="flex-1">
+                        <mat-label>Leave End Date</mat-label>
+                        <input matInput [matDatepicker]="pickerLeaveEndDate" [min]="todayDate" formControlName="dateEndLeave" (focus)="pickerLeaveEndDate.open()">
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerLeaveEndDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerLeaveEndDate></mat-datepicker>
+                        <mat-error>
+                            Please fill in information
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="flex center-center">
+                    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

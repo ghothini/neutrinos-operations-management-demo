@@ -1,0 +1,166 @@
+.visaApplication img {
+    height: 182px;
+}
+
+.visaApplication {
+    max-height: 427px;
+}
+
+.application-container {
+    max-height: 430px;
+}
+
+.visaApplication img:nth-child(2) {
+    height: 29.7px;
+}
+
+.visaApplication img:nth-child(3) {
+    height: 151.8px;
+}
+
+.p {
+    font-size: 16px;
+}
+
+.visaLogo {
+    height: 29px;
+    padding: 2px;
+    border-radius: 7px;
+    border: 1px solid #07080a;
+}
+
+.title {
+    right: 72px;
+    z-index: 1;
+    top: 13px;
+}
+
+.bottomFormPicture {
+    height: 46.3px  !important;
+}
+
+.inner-container {
+    width: 560px;
+}
+
+.home-affairs {
+    top: 56px;
+    left: 21px;
+}
+
+.home-affairs img {
+    height: 91px;
+}
+
+// Form information
+
+.pictureForm {
+    height: 370px;
+}
+
+.nationality {
+    width: 135px;
+    bottom: 11px;
+    right: calc(50% + 46px);
+}
+
+.birth-country {
+    width: 135px;
+    top: calc(50% - -115px);
+    left: 83px;
+}
+
+.fullName {
+    width: 175px;
+    top: 231px;
+    left: 90px;
+}
+
+.passportNo {
+    width: 135px;
+    top: calc(80% - -37px);
+    left: 156px;
+}
+
+.dateOfBirth {
+    width: 135px;
+    top: calc(50% + 15px);
+    left: 360px;
+}
+
+.na1 {
+    top: calc(80% + 64px);
+    left: 352px;
+}
+
+.na2 {
+    top: calc(80% + -84px);
+    left: 93px;
+}
+
+.birthYear0 {
+    top: 307px;
+    left: 91px;
+}
+
+.birthYear1 {
+    top: 307px;
+    left: 111px;
+}
+
+.birthYear2 {
+    top: 307px;
+    left: 132px;
+}
+
+.birthYear3 {
+    top: 307px;
+    left: 155px;
+}
+
+.birthMonth0 {
+    top: calc(50% - -90px);
+    left: 179px;
+}
+
+.birthMonth1 {
+    top: calc(50% - -90px);
+    left: 201px;
+}
+
+.birthDay0 {
+    top: calc(50% - -90px);
+    left: 220px;
+}
+
+.birthDay1 {
+    top: calc(50% - -90px);
+    left: 240px;
+}
+
+.container {
+    height: 420px;
+    overflow-y: auto;
+}
+
+// .accordion {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 5px
+// }
+// Angular material
+
+mat-card {
+    width: 91.5%;;
+    height: 400px;
+    overflow-y: auto;
+
+}
+
+.mat-expansion-panel-spacing {
+    margin: 5px 0 !important;
+}
+
+.mat-expansion-panel-spacing:nth-child(1) {
+    margin: 0px 0px !important;
+}

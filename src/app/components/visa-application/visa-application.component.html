@@ -1,0 +1,75 @@
+<div class="full-height column full-width flex">
+    <div class="flex a-center space-around full-width">
+        <h1 class="operationTitle margin-0">Visa Application</h1>
+        <img (click)="goBack()" title="Go Back" class="backIcon cursor"
+            src="../../../assets/icons/close_icon.svg" alt="Go back button">
+    </div>
+    <form class="visaExtension full-width gap-1em a-center" #visaExtendForm="ngForm">
+        <div class="flex space-between">
+            <!-- Full Name -->
+            <mat-form-field class="width-45">
+                <mat-label>Full Name</mat-label>
+                <input type="text" name="fullName" disabled [(ngModel)]="visaApplicationData.fullName" matInput>
+            </mat-form-field>
+            <!-- Email -->
+            <mat-form-field class="width-45">
+                <mat-label>Email</mat-label>
+                <input type="email" name="email" disabled [(ngModel)]="visaApplicationData.email" matInput>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Phone Number -->
+            <mat-form-field class="width-45">
+                <mat-label>Phone Number</mat-label>
+                <input type="text" name="phoneNo" disabled [(ngModel)]="visaApplicationData.phoneNo" matInput>
+            </mat-form-field>
+            <!-- Passport/Travel Document Number -->
+            <mat-form-field class="width-45">
+                <mat-label>Passport/Travel Document Number</mat-label>
+                <input type="text" name="passportNo" name="passportNo" #passportNo="ngModel" required
+                    [(ngModel)]="visaApplicationData.passportNo" matInput>
+                <mat-error *ngIf="passportNo.invalid && passportNo.errors && passportNo.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Expire Date -->
+            <mat-form-field appearance="fill" class="width-45">
+                <mat-label>Expire Date</mat-label>
+                <input matInput [matDatepicker]="picker" name="expireDate" #expireDate="ngModel" required
+                    [(ngModel)]="visaApplicationData.expireDate" (focus)="picker.open()" placeholder="Passport Date of Expiry">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="expireDate.invalid && expireDate.errors && expireDate.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+            <!-- Nationality -->
+            <mat-form-field class="width-45">
+                <mat-label>Nationality:</mat-label>
+                <input type="text" name="nationality" name="nationality" #nationality="ngModel" required
+                    [(ngModel)]="visaApplicationData.nationality" matInput>
+                <mat-error *ngIf="nationality.invalid && nationality.errors && nationality.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="flex space-between a-center">
+            <!-- Country of birth -->
+            <mat-form-field class="width-45">
+                <mat-label>Country of birth:</mat-label>
+                <input type="text" name="birthCountry" name="birthCountry" #birthCountry="ngModel" required
+                    [(ngModel)]="visaApplicationData.birthCountry" matInput>
+                <mat-error *ngIf="birthCountry.invalid && birthCountry.errors && birthCountry.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+            <div class="flex gap-1em">
+                <button class="flex-1 submitBtn" mat-raised-button color="primary" [disabled]="visaExtendForm.invalid"
+                    (click)="submit()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

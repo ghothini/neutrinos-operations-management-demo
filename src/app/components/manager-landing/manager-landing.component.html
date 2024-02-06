@@ -1,0 +1,60 @@
+<div class="flex full-height">
+    <mat-card class="full-height flex column space-between padding-4em">
+        <div class="full-height flex column space-between">
+            <div class="flex column">
+                <div class="header flex space-between a-center full-width j-center">
+                    <div class="flex a-center">
+                        <div class="flex gap-05em a-center cursor" title="Manager Remaining Leave Days"
+                            (click)="showProfile()">
+                            <img class="userIcon" src="../../../assets/images/admin-img.png" title="Profile" alt="">
+                            <p class="margin-0 color-blue leaveText">Annual Leave: <span
+                                    class="color-black">{{remainingAnnualLeaveDays}}</span>
+                            </p>
+                            <p class="margin-0 color-blue leaveText">Sick Leave: <span
+                                    class="color-black">{{remainingSickLeaveDays}}</span></p>
+                            <hr class="leavesHr full-width">
+                        </div>
+                        <img (click)="requestLeave()" class="addLeave cursor"
+                            src="../../../assets/icons/add_FILL0_wght400_GRAD0_opsz24.svg" alt="Add a leave request"
+                            title="Add a leave request">
+                    </div>
+                    <marquee class="neutrinosMarquee half-width">
+                        <img class="no-border-radius" src="../../../assets/images/neutrinos-logo.png" alt="">
+                    </marquee>
+                    <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+                </div>
+                <div class="main-container flex gap-1em full-height full-width">
+                    <div [class.center-center]="showOperations" class="left flex-1 flex">
+                        <div *ngIf="showRouter">
+                            <router-outlet></router-outlet>
+                        </div>
+                        <div *ngIf="showOperations" class="flex gap-1em">
+                            <div class="all relative flex center-center column cursor gap-1em" (click)="showLeaves()">
+                                <div class="companyLeave relative">
+                                    <img src="../../../assets/images/neutrinos-logo.png" alt="">
+                                    <hr class="absolute full-width">
+                                    <h2 class="margin-0 absolute">LEAVES</h2>
+                                </div>
+                                <p class="margin-0 title">Leaves Applications</p>
+                            </div>
+                            <div class="all relative flex center-center column cursor" (click)="showVisas()">
+                                <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
+                                <p class="margin-0 title">Visa Applications</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="left flex-1">
+                        <div class="full-width full-height column a-center" >
+                            <div>
+                                <h2 class="text-center">Neutrinos Operations Summary</h2>
+                            </div>
+                            <div class="flex center-center">
+                                <canvas class="cursor" id="pie-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

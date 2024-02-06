@@ -1,0 +1,93 @@
+<div class="half width">
+    <mat-card class="full-width padding-10">
+        <div class="full-width flex gap-1em">
+            <div class="left">
+                <form #profileForm="ngForm" class="flex column">
+                    <div class="flex gap-1em full-width">
+                        <!-- Date of Birth -->
+                        <mat-form-field appearance="fill" class="flex-1">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput readonly [matDatepicker]="pickerDateOfBirth" name="dateOfBirth"
+                                #dateOfBirth="ngModel" [(ngModel)]="profileFormData.profile.dateOfBirth">
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerDateOfBirth"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerDateOfBirth></mat-datepicker>
+                        </mat-form-field>
+                        <!-- Gender -->
+                        <mat-form-field class="flex-1">
+                            <mat-label>Gender</mat-label>
+                            <input type="text" readonly name="gender" #gender="ngModel"
+                                [(ngModel)]="profileFormData.profile.gender" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex gap-1em full-width">
+                        <!-- Company Role -->
+                        <mat-form-field class="flex-1">
+                            <mat-label>Company Role</mat-label>
+                            <input type="text" readonly name="role" #role="ngModel" [(ngModel)]="profileFormData.profile.role"
+                                matInput>
+                        </mat-form-field>
+                        <!-- Manager -->
+                        <mat-form-field class="flex-1">
+                            <mat-label>Line Manager</mat-label>
+                            <input type="text" readonly name="manager" #manager="ngModel"
+                                [(ngModel)]="profileFormData.profile.manager" matInput>
+                        </mat-form-field>
+                    </div>
+                    <!-- Email -->
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input type="email" readonly name="email" #email="ngModel" [(ngModel)]="profileFormData.profile.email"
+                            matInput>
+                    </mat-form-field>
+                    <!-- Cellphone Number -->
+                    <mat-form-field class="full-width">
+                        <mat-label>Cellphone Number</mat-label>
+                        <input type="text" readonly name="cellphoneNo" #cellphoneNo="ngModel"
+                            [(ngModel)]="profileFormData.profile.cellphoneNo" matInput>
+                    </mat-form-field>
+                    <!-- Employee ID -->
+                    <mat-form-field class="full-width">
+                        <mat-label>Employee ID</mat-label>
+                        <input type="text" readonly name="employeeId" #employeeId="ngModel"
+                            [(ngModel)]="profileFormData.id" matInput>
+                    </mat-form-field>
+                    <!-- Company Joindate -->
+                    <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Company Joindate</mat-label>
+                        <input matInput readonly [matDatepicker]="pickerJoinDate" name="dateJoinedCompany"
+                            #dateJoinedCompany="ngModel" [(ngModel)]="profileFormData.profile.dateJoinedCompany">
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerJoinDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerJoinDate></mat-datepicker>
+                    </mat-form-field>
+                    <!-- Home Address -->
+                    <mat-form-field class="full-width">
+                        <mat-label>Home Address</mat-label>
+                        <input type="text" readonly name="homeAddress" #homeAddress="ngModel"
+                            [(ngModel)]="profileFormData.profile.homeAddress" matInput>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="flex-1 flex center-center gap-1em relative column">
+                <img (click)="close()" class="backIcon cursor absolute" src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
+            alt="Go back button">
+                <h1 class="margin-0">{{profileFormData.profile.fullName}}</h1>
+                <img class="profileLogo" src="../../../assets/images/user-icon.png" alt="Profile icon">
+                <div>
+                    <p class="leaveInfoTitle margin-0 cursor">Leave Information</p>
+                </div>
+                <div class="flex gap-05em a-center" title="Remaining leave days">
+                    <p class="margin-0 color-blue leaveText">Annual Leave: <span
+                            class="color-black">{{profileFormData.profile.remainingAnnualLeaveDays}}</span>
+                    </p>
+                    <p class="margin-0 color-blue leaveText">Sick Leave: <span
+                            class="color-black">{{profileFormData.profile.remainingSickLeaveDays}}</span></p>
+                </div>
+                <hr class="full-width">
+                <div class="flex column a-center gap-05em">
+                    <p class="margin-0 leaveInfoTitle cursor" >Approved Leave: <span>{{profileFormData.profile.approvedLeaveCount}}</span></p>
+                    <p class="margin-0 color-blue leaveText" title="Current leave duration">{{profileFormData.profile.pendingLeaveDuration}}</p>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

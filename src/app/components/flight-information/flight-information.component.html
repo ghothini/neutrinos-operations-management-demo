@@ -1,0 +1,90 @@
+<div class="full-height column full-width flex">
+    <div class="flex a-center space-around full-width">
+        <h1 class="operationTitle margin-0">Transport Request</h1>
+        <img (click)="goBack()" title="Go Back" class="backIcon cursor" src="../../../assets/icons/close_icon.svg"
+            alt="Go back button">
+    </div>
+    <form class="visaExtension full-width gap-1em a-center" #flightInformationForm="ngForm">
+        <div class="flex space-between">
+            <!-- Full Name -->
+            <mat-form-field class="width-30">
+                <mat-label>Full Name</mat-label>
+                <input type="text" name="fullName" disabled [(ngModel)]="flightInformationData.fullName" matInput>
+            </mat-form-field>
+            <!-- Email -->
+            <mat-form-field class="width-30">
+                <mat-label>Email</mat-label>
+                <input type="email" name="email" disabled [(ngModel)]="flightInformationData.email" matInput>
+            </mat-form-field>
+            <!-- Phone Number -->
+            <mat-form-field class="width-30">
+                <mat-label>Phone Number</mat-label>
+                <input type="text" name="phoneNo" disabled [(ngModel)]="flightInformationData.phoneNo" matInput>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Airline -->
+            <mat-form-field appearance="fill" class="width-30">
+                <mat-label>Airline</mat-label>
+                <input matInput type="text" name="airline" #airline="ngModel" required
+                    [(ngModel)]="flightInformationData.airline" placeholder="Airline">
+                <mat-error *ngIf="airline.invalid && airline.errors && airline.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Airport -->
+            <mat-form-field appearance="fill" class="width-30">
+                <mat-label>Airport</mat-label>
+                <input matInput type="text" name="airport" #airport="ngModel" required
+                    [(ngModel)]="flightInformationData.airport" placeholder="Airport">
+                <mat-error *ngIf="airport.invalid && airport.errors && airport.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Ticket Number -->
+            <mat-form-field class="width-30">
+                <mat-label>Ticket Number</mat-label>
+                <input type="text" name="ticketNo" name="ticketNo" #ticketNo="ngModel" required
+                    placeholder="Ticket Number" [(ngModel)]="flightInformationData.ticketNo" matInput>
+                <mat-error *ngIf="ticketNo.invalid && ticketNo.errors && ticketNo.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Pickup Date -->
+            <mat-form-field appearance="fill" class="width-30">
+                <mat-label>Pickup Date</mat-label>
+                <input matInput [matDatepicker]="picker2" required name="pickupDate" #pickupDate="ngModel"
+                    [(ngModel)]="flightInformationData.pickupDate" (focus)="picker2.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="pickupDate.invalid && pickupDate.errors && pickupDate.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Time -->
+            <mat-form-field class="width-30">
+                <mat-label>Arrival time</mat-label>
+                <input type="time" matInput placeholder="08:00" required [(ngModel)]="flightInformationData.arrivalTime"
+                    name="arrivalTime" #arrivalTime="ngModel">
+                <mat-error *ngIf="arrivalTime.invalid && arrivalTime.errors && arrivalTime.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Whatsapp Number -->
+            <mat-form-field class="width-30">
+                <mat-label>Whatsapp Number</mat-label>
+                <input type="text" name="whatsappNo" name="whatsappNo" #whatsappNo="ngModel" required
+                    placeholder="Whatsapp Number" [(ngModel)]="flightInformationData.whatsappNo" matInput>
+                <mat-error *ngIf="whatsappNo.invalid && whatsappNo.errors && whatsappNo.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex center-center">
+            <button class="half-width submitBtn" mat-raised-button color="primary" [disabled]="flightInformationForm.invalid"
+                (click)="submit()">Submit</button>
+        </div>
+    </form>
+</div>

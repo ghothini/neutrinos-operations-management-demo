@@ -1,0 +1,298 @@
+<div class="full-height column full-width flex">
+    <div class="flex a-center space-around full-width">
+        <h1 class="operationTitle margin-0">International Travel Application</h1>
+        <img (click)="goBack()" title="Go Back" class="backIcon cursor" src="../../../assets/icons/close_icon.svg"
+            alt="Go back button">
+    </div>
+    <form class="internationalTravel full-width gap-1em a-center" #internationalTravelForm="ngForm">
+        <!-- Employee Credentials -->
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Employee Credentials</mat-label>
+            <mat-select>
+                <mat-option class="full-width">
+                    <form class="visaExtension full-width gap-1em a-center" #employeeCredentialsForm="ngForm">
+                        <div class="flex space-between">
+                            <!-- Name -->
+                            <mat-form-field class="width-45">
+                                <mat-label>Name</mat-label>
+                                <input type="text" name="name" disabled [(ngModel)]="employeeCredentialsFormData.name"
+                                    matInput>
+                            </mat-form-field>
+                            <!-- Surname -->
+                            <mat-form-field class="width-45">
+                                <mat-label>Surname</mat-label>
+                                <input type="text" name="surname" disabled
+                                    [(ngModel)]="employeeCredentialsFormData.surname" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex space-between">
+                            <!-- Manager Name -->
+                            <mat-form-field class="width-45">
+                                <mat-label>Manager Name</mat-label>
+                                <input type="text" name="managerName" disabled
+                                    [(ngModel)]="employeeCredentialsFormData.managerName" matInput>
+                            </mat-form-field>
+                            <!-- Manager Email -->
+                            <mat-form-field class="width-45">
+                                <mat-label>Manager Email</mat-label>
+                                <input type="text" name="managerEmail" disabled
+                                    [(ngModel)]="employeeCredentialsFormData.managerEmail" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex space-between">
+                            <!-- Email -->
+                            <mat-form-field class="width-45">
+                                <mat-label>Email</mat-label>
+                                <input type="email" name="email" disabled
+                                    [(ngModel)]="employeeCredentialsFormData.email" matInput>
+                            </mat-form-field>
+                            <!-- Phone Number -->
+                            <mat-form-field class="width-45">
+                                <mat-label>Phone Number</mat-label>
+                                <input type="text" name="phoneNo" disabled
+                                    [(ngModel)]="employeeCredentialsFormData.phoneNo" matInput>
+                            </mat-form-field>
+                            <!-- Expire Date -->
+                            <!-- <mat-form-field appearance="fill" class="width-45">
+                                <mat-label>Expire Date</mat-label>
+                                <input matInput [matDatepicker]="picker" name="expireDate" #expireDate="ngModel"
+                                    required [(ngModel)]="employeeCredentialsFormData.expireDate" (focus)="picker.open()"
+                                    placeholder="Visa Expire Date">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error
+                                    *ngIf="expireDate.invalid && expireDate.errors && expireDate.errors['required']">
+                                    Please fill in required information
+                                </mat-error>
+                            </mat-form-field> -->
+                        </div>
+                    </form>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="flex space-between">
+            <!-- Indian Passport -->
+            <mat-form-field class="width-32">
+                <mat-label>Indian Passport</mat-label>
+                <input type="text" name="indianPassport" required #indianPassport="ngModel"
+                    [(ngModel)]="internationalTravelData.indianPassport" matInput>
+                <mat-error *ngIf="indianPassport.invalid && indianPassport.errors && indianPassport.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Date of Issue -->
+            <mat-form-field appearance="fill" class="width-32">
+                <mat-label>Date of Issue</mat-label>
+                <input matInput [matDatepicker]="picker" name="dateOfIssue" #dateOfIssue="ngModel" required
+                    [(ngModel)]="internationalTravelData.dateOfIssue" (focus)="picker.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="dateOfIssue.invalid && dateOfIssue.errors && dateOfIssue.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Expire Date -->
+            <mat-form-field appearance="fill" class="width-32">
+                <mat-label>Expire Date</mat-label>
+                <input matInput [matDatepicker]="pickerExpireDate" name="expireDate" #expireDate="ngModel" required
+                    [(ngModel)]="internationalTravelData.expireDate" (focus)="pickerExpireDate.open()"
+                    placeholder="Visa Expire Date">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerExpireDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerExpireDate></mat-datepicker>
+                <mat-error *ngIf="expireDate.invalid && expireDate.errors && expireDate.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Date of Request -->
+            <mat-form-field appearance="fill" class="width-32">
+                <mat-label>Date of Request</mat-label>
+                <input matInput [matDatepicker]="picker2" required name="dateOfRequest" #dateOfRequest="ngModel"
+                    [(ngModel)]="internationalTravelData.dateOfRequest" (focus)="picker2.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="dateOfRequest.invalid && dateOfRequest.errors && dateOfRequest.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Confirmed Travel Date -->
+            <mat-form-field appearance="fill" class="width-32">
+                <mat-label>Confirmed Travel Date</mat-label>
+                <input matInput [matDatepicker]="pickerTravelDate" required name="confirmedTravelDate"
+                    #confirmedTravelDate="ngModel" [(ngModel)]="internationalTravelData.confirmedTravelDate"
+                    (focus)="pickerTravelDate.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerTravelDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTravelDate></mat-datepicker>
+                <mat-error
+                    *ngIf="confirmedTravelDate.invalid && confirmedTravelDate.errors && confirmedTravelDate.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Preffered Travel Time -->
+            <mat-form-field class="width-32">
+                <mat-label>Preffered Travel Time</mat-label>
+                <input type="time" matInput placeholder="08:00" required
+                    [(ngModel)]="internationalTravelData.preffedTravelTime" name="preffedTravelTime"
+                    #preffedTravelTime="ngModel">
+                <mat-error
+                    *ngIf="preffedTravelTime.invalid && preffedTravelTime.errors && preffedTravelTime.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between a-center">
+            <!-- Confirmed Return Date -->
+            <mat-form-field appearance="fill" class="width-32">
+                <mat-label>Confirmed Return Date</mat-label>
+                <input matInput [matDatepicker]="pickerReturnDate" required name="confirmedReturnDate"
+                    #confirmedReturnDate="ngModel" [(ngModel)]="internationalTravelData.confirmedReturnDate"
+                    (focus)="pickerReturnDate.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerReturnDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerReturnDate></mat-datepicker>
+                <mat-error
+                    *ngIf="confirmedReturnDate.invalid && confirmedReturnDate.errors && confirmedReturnDate.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Preffered Return Time -->
+            <mat-form-field class="width-32">
+                <mat-label>Preffered Return Time</mat-label>
+                <input type="time" matInput placeholder="08:00" required
+                    [(ngModel)]="internationalTravelData.preffedReturnTime" name="preffedReturnTime"
+                    #preffedReturnTime="ngModel">
+                <mat-error
+                    *ngIf="preffedReturnTime.invalid && preffedReturnTime.errors && preffedReturnTime.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Whatsapp Number -->
+            <mat-form-field class="width-32">
+                <mat-label>Whatsapp Number</mat-label>
+                <input type="text" name="whatsappNo" required #whatsappNo="ngModel"
+                    [(ngModel)]="internationalTravelData.whatsappNo" matInput>
+                <mat-error *ngIf="whatsappNo.invalid && whatsappNo.errors && whatsappNo.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Customer Name -->
+            <mat-form-field class="width-32">
+                <mat-label>Customer Name</mat-label>
+                <input type="text" name="customerName" required #customerName="ngModel"
+                    [(ngModel)]="internationalTravelData.customerName" matInput>
+                <mat-error *ngIf="customerName.invalid && customerName.errors && customerName.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Project Name -->
+            <mat-form-field class="width-32">
+                <mat-label>Project Name</mat-label>
+                <input type="text" name="projectName" required #projectName="ngModel"
+                    [(ngModel)]="internationalTravelData.projectName" matInput>
+                <mat-error *ngIf="projectName.invalid && projectName.errors && projectName.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <div class="flex column a-center width-32">
+                <p class="margin-0">First Time Travel?</p>
+                <mat-radio-group aria-label="Select an option" required
+                    [(ngModel)]="internationalTravelData.firstTimeTravel" #firstTimeTravel="ngModel"
+                    name="firstTimeTravel">
+                    <mat-radio-button value="Yes">YES</mat-radio-button>
+                    <mat-radio-button value="No">NO</mat-radio-button>
+                    <mat-error
+                        *ngIf="firstTimeTravel.invalid && firstTimeTravel.errors && firstTimeTravel.errors['required']">
+                        <small>Choose an option</small>
+                    </mat-error>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div class="flex space-between a-center">
+            <!-- Visa Validity -->
+            <mat-form-field class="width-32">
+                <mat-label>Visa Validity</mat-label>
+                <mat-select name="visaValidity" required #visaValidity="ngModel" [(ngModel)]="internationalTravelData.visaValidity">
+                    <mat-option *ngFor="let _visaValidity of visaValidities" [value]="_visaValidity">{{_visaValidity |
+                        titlecase}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="visaValidity.invalid && visaValidity.errors && visaValidity.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Designation -->
+            <mat-form-field class="width-32">
+                <mat-label>Designation</mat-label>
+                <input type="text" name="designation" required #designation="ngModel"
+                    [(ngModel)]="internationalTravelData.designation" matInput>
+                <mat-error *ngIf="designation.invalid && designation.errors && designation.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Department -->
+            <mat-form-field class="width-32">
+                <mat-label>Department</mat-label>
+                <input type="text" name="department" required #department="ngModel"
+                    [(ngModel)]="internationalTravelData.department" matInput>
+                <mat-error *ngIf="department.invalid && department.errors && department.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex gap-1em">
+            <!-- Sector -->
+            <mat-form-field class="width-32">
+                <mat-label>Sector</mat-label>
+                <input type="text" name="sector" required #sector="ngModel" [(ngModel)]="internationalTravelData.sector"
+                    matInput>
+                <mat-error *ngIf="sector.invalid && sector.errors && sector.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Currensy -->
+            <mat-form-field class="width-32">
+                <mat-label>Currensy</mat-label>
+                <mat-select name="currensy" required #currensy="ngModel" [(ngModel)]="internationalTravelData.currensy">
+                    <mat-option *ngFor="let _currensy of currensies" [value]="_currensy">{{_currensy |
+                        titlecase}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="currensy.invalid && currensy.errors && currensy.errors['required']">
+                    <small>Please fill in required information</small>
+                </mat-error>
+            </mat-form-field>
+            <!-- Travel Days -->
+            <mat-form-field class="width-31">
+                <mat-label>Travel Days</mat-label>
+                <input type="number" name="travelDays" #travelDays="ngModel" placeholder="No. days traveling"
+                    [(ngModel)]="internationalTravelData.travelDays" matInput>
+            </mat-form-field>
+        </div>
+        <div class="flex gap-1em">
+            <!-- Travel Amount/day -->
+            <mat-form-field class="width-31">
+                <mat-label>Travel Amount/day</mat-label>
+                <input type="text" name="travelAmtPerDay" #travelAmtPerDay="ngModel" placeholder="R2 410"
+                    [(ngModel)]="internationalTravelData.travelAmtPerDay" matInput>
+            </mat-form-field>
+            <!-- Full Amount -->
+            <mat-form-field class="width-31">
+                <mat-label>Full Travel Amount</mat-label>
+                <input type="text" name="fullAmt" #fullAmt="ngModel" placeholder="R6 200"
+                    [(ngModel)]="internationalTravelData.fullAmt" matInput>
+            </mat-form-field>
+            <!-- Remarks -->
+            <mat-form-field class="width-31">
+                <mat-label>Remarks</mat-label>
+                <input type="text" name="comment" #comment="ngModel" placeholder="Comment"
+                    [(ngModel)]="internationalTravelData.comment" matInput>
+            </mat-form-field>
+        </div>
+        <div class="flex center-center">
+            <div class="flex gap-1em">
+                <button class="flex-1 submitBtn" mat-raised-button color="primary"
+                    [disabled]="internationalTravelForm.invalid" (click)="submit()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

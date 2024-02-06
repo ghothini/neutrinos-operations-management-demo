@@ -1,0 +1,199 @@
+.header img {
+    height: 41px;
+    z-index: 1;
+    margin-top: 5px;    
+    padding: 3px;
+    background-color: #ced3d9;
+    border-radius: 50%;
+}
+
+.addLeave {
+    height: 30px !important;
+}
+
+canvas {
+    height: 350px !important;
+}
+
+.canvasContainer {
+    width: 70%;
+}
+
+.userIcon {
+    z-index: 1;
+    height: 58px !important;
+}
+
+.leavesHr {
+    rotate: 90deg;
+    width: 30px;
+}
+
+.no-border-radius {
+    border-radius: 0px 0px !important;
+}
+
+footer {
+    color: #325a8d;
+}
+
+.neutrinosMarquee {
+    background-color: #ced3d9;
+    width: 45%;
+    height: 51px;
+    z-index: 1;
+}
+
+.underlineAnnual {
+    width: 109px;
+    height: 2px;
+    background-color: black;
+}
+
+.underlineSick {
+    width: 87px;
+    height: 2px;
+    background-color: black;
+}
+
+.leaveText {
+    font-size: large;
+}
+
+.color-blue {
+    color: #3f51b5;
+}
+
+.color-black {
+    color: black;
+}
+
+.footer {
+    // color: #325a8d;
+    width: 740px;;
+}
+
+.editIcon {
+    width: 32px;
+}
+
+.footer p {
+    font-size: 16px;
+}
+
+.footer {
+    border-radius: 10px;
+    // background-color: #ced3d9;
+}
+.guesthouseLogo {
+    width: 100px;
+}
+
+.frame {
+    height: 500px;
+    margin-top: -44px;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+
+.flightLogo {
+    width: 163px;
+}
+
+.operation {
+    height: 160px;
+    width: 200px;
+    border: 1px solid #ced3d9;
+}
+
+.frameImg {
+    height: 31px;
+    left: 98px;
+    bottom: 94px;
+}
+
+.timeContainer {
+    background-color: black;
+    top: 69px;
+    left: 167px;
+    // rotate: -1deg
+    border-radius: 10px;
+    height: 37px;
+    width: 108px;
+    color: white;
+}
+
+.frameTxt {
+    width: 81px;
+    text-align: center;
+    top: 201px;
+    left: 147px;
+    font-size: 23px;
+}
+
+.operation:nth-child(3) {
+    gap: 1.4em;
+}
+
+.landingLogo {
+    width: 200px;
+}
+
+.domesticTransportLogo {
+    width: 200px;
+}
+
+.mat-mdc-raised-button {
+    height: 45px;
+    width: 129px;
+}
+
+// 
+
+.main-container {
+    width: 93%;
+}
+
+.all {
+    height: 169px;
+    width: 238px;
+    border: 1px solid #ced3d9;
+}
+
+.allKeyWord {
+    background-color: black;
+    color: white;
+    padding: 1px 8px;
+    border-radius: 7px;
+    bottom: 5px;
+    right: 5px;
+}
+
+.companyLeave h2 {
+    top: calc(50% - 6px);
+    right: calc(50% - 57px);
+    font-size: x-large;
+    color: #784d4d;
+    z-index: 1;
+}
+
+.companyLeave img {
+    height: 41px !important;
+}
+
+hr {
+    top: 48%;
+    right: -3%;
+}
+
+.visaLogo {
+    height: 124px;
+}
+
+.title {
+    padding: 2px;
+    border-radius: 7px;
+    background-color: #ced3d9;
+}

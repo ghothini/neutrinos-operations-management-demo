@@ -1,0 +1,80 @@
+<div class="flex full-width flex column">
+    <div class="inner-container flex column center-center">
+        <div class="flex full-width a-center space-around padding-10">
+            <img class="visaLogo cursor" src="../../../assets/images/visa.png" alt="Visa Logo">
+            <h2 class="margin-0 title cursor">Visa Applications</h2>
+        </div>
+        <mat-card class="flex column">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let visaApplication of allVisaApplications">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="flex gap-05em a-center">
+                                <div class="flex a-center">
+                                    <p class="margin-o">application-</p>
+                                    <p class="margin-0">{{visaApplication.passportNo}}</p>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <p class="p margin-0">{{visaApplication.fullName}}</p>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="application-container">
+                        <div class="visaApplication flex column center-center">
+                            <div class="pictureForm relative">
+                                <img src="../../../assets/images/form-top.png" alt="Visa form picture">
+                                <img src="../../../assets/images/form2.png" alt="Visa form picture">
+                                <img src="../../../assets/images/page2form.png" alt="Visa form picture">
+                                <img class="bottomFormPicture" src="../../../assets/images/form-part4.png"
+                                    alt="Visa form picture">
+                            </div>
+                            <div class="home-affairs flex absolute">
+                                <img src="../../../assets/images/home-affairs.png" alt="Showing home affairs logo">
+                            </div>
+                            <div class="absolute nationality">
+                                <p class="margin-0">{{visaApplication.nationality}}</p>
+                            </div>
+                            <div class="absolute fullName">
+                                <p class="margin-0">{{visaApplication.fullName}}</p>
+                            </div>
+                            <div class="absolute birth-country">
+                                <p class="margin-0">{{visaApplication.birthCountry}}</p>
+                            </div>
+                            <div class="absolute birthYear0">
+                                <p class="margin-0">{{dateOfBirth.year[0]}}</p>
+                            </div>
+                            <div class="absolute birthYear1">
+                                <p class="margin-0">{{dateOfBirth.year[1]}}</p>
+                            </div>
+                            <div class="absolute birthYear2">
+                                <p class="margin-0">{{dateOfBirth.year[2]}}</p>
+                            </div>
+                            <div class="absolute birthYear3">
+                                <p class="margin-0">{{dateOfBirth.year[3]}}</p>
+                            </div>
+                            <div class="absolute birthMonth0">
+                                <p class="margin-0">{{dateOfBirth.month[0]}}</p>
+                            </div>
+                            <div class="absolute birthMonth1">
+                                <p class="margin-0">{{dateOfBirth.month[1]}}</p>
+                            </div>
+                            <div class="absolute birthDay0">
+                                <p class="margin-0">{{dateOfBirth.day[0]}}</p>
+                            </div>
+                            <div class="absolute birthDay1">
+                                <p class="margin-0">{{dateOfBirth.day[1]}}</p>
+                            </div>
+                            <div class="absolute na1">
+                                <p class="margin-0">N/A</p>
+                            </div>
+                            <div class="absolute na2">
+                                <p class="margin-0">N/A</p>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card>
+    </div>
+</div>

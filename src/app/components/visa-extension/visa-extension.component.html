@@ -1,0 +1,77 @@
+<div class="full-height column full-width flex">
+    <div class="flex a-center space-around full-width">
+        <h1 class="operationTitle margin-0">Visa Extension Application</h1>
+        <img (click)="goBack()" title="Go Back" class="backIcon cursor"
+            src="../../../assets/icons/close_icon.svg" alt="Go back button">
+    </div>
+    <form class="visaExtension full-width gap-1em a-center" #visaExtendForm="ngForm">
+        <div class="flex space-between">
+            <!-- Full Name -->
+            <mat-form-field class="width-45">
+                <mat-label>Full Name</mat-label>
+                <input type="text" name="fullName" disabled [(ngModel)]="visaExtensionData.fullName" matInput>
+            </mat-form-field>
+            <!-- Email -->
+            <mat-form-field class="width-45">
+                <mat-label>Email</mat-label>
+                <input type="email" name="email" disabled [(ngModel)]="visaExtensionData.email" matInput>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Phone Number -->
+            <mat-form-field class="width-45">
+                <mat-label>Phone Number</mat-label>
+                <input type="text" name="phoneNo" disabled [(ngModel)]="visaExtensionData.phoneNo" matInput>
+            </mat-form-field>
+            <!-- Expire Date -->
+            <mat-form-field appearance="fill" class="width-45">
+                <mat-label>Expire Date</mat-label>
+                <input matInput [matDatepicker]="picker" name="expireDate" #expireDate="ngModel" required
+                    [(ngModel)]="visaExtensionData.expireDate" (focus)="picker.open()" placeholder="Visa Expire Date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="expireDate.invalid && expireDate.errors && expireDate.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex space-between">
+            <!-- Passport Number -->
+            <mat-form-field class="width-45">
+                <mat-label>Passport Number</mat-label>
+                <input type="text" name="passportNo" name="passportNo" #passportNo="ngModel" required
+                    [(ngModel)]="visaExtensionData.passportNo" matInput>
+                <mat-error *ngIf="passportNo.invalid && passportNo.errors && passportNo.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+            <!-- Renewal Date -->
+            <mat-form-field appearance="fill" class="width-45">
+                <mat-label>Renewal Date</mat-label>
+                <input matInput [matDatepicker]="picker2" required name="renewalDate" #renewalDate="ngModel"
+                    [(ngModel)]="visaExtensionData.renewalDate" (focus)="picker2.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="renewalDate.invalid && renewalDate.errors && renewalDate.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="flex space-between a-center">
+            <!-- Time -->
+            <mat-form-field class="width-45">
+                <mat-label>Estimated time</mat-label>
+                <input type="time" matInput placeholder="08:00" required [(ngModel)]="visaExtensionData.time"
+                    name="time" #time="ngModel">
+                <mat-error *ngIf="time.invalid && time.errors && time.errors['required']">
+                    Please fill in required information
+                </mat-error>
+            </mat-form-field>
+            <div class="flex gap-1em">
+                <button class="flex-1 submitBtn" mat-raised-button color="primary" [disabled]="visaExtendForm.invalid"
+                    (click)="submit()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

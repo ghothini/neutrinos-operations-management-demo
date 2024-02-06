@@ -1,0 +1,89 @@
+<div style="background-color: #f4f5f7;" class="flex column full-height">
+    <div class="flex full-height">
+        <div class="flex width-900 a-center space-around column">
+            <div class="neutrios">
+                <img class="world" src="../../../assets/images/complete.png" alt="">
+            </div>
+            <div class="highlights flex column gap-1em">
+                <div class="flex">
+                    <div class="headings flex column center-center gap-1em">
+                        <h2 class="margin-0">Access leave</h2>
+                        <p class="margin-0 text-center">Control how you want to use your leave days</p>
+                    </div>
+                    <div class="headings flex column center-center gap-1em">
+                        <h2 class="margin-0">Manage visa</h2>
+                        <p class="text-center margin-0">Apply for a new visa</p>
+                    </div>
+                    <div class="headings flex column center-center gap-1em">
+                        <h2 class="margin-0">Safe and secure</h2>
+                        <p class="text-center margin-0">Drop-offs/Pick-ups are attended by verified Neutrinos drivers
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer flex space-around a-center">
+                <div class="flex gap-05em">
+                    <img class="swipeUp" src="../../../assets/icons/swipe-up.svg" alt="">
+                </div>
+                <div class="flex gap-1em a-center">
+                    <p class="margin-0 linkFont">Follow us on</p>
+                    <img class="cursor" src="../../../assets/images/LInkedin-new-redesign.png" alt="">
+                    <img class="cursor youtubeIcon" src="../../../assets/icons/youtube-icon.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="right width-430 flex j-center column gap-2em">
+            <div class=" flex column gap-05em">
+                <div class="flex gap-05em center-center padding-10">
+                    <div class="flex">
+                        <img class="logo" src="../../../assets/images/neutrinos-logo.png" alt="Neutrinos Logo">
+                    </div>
+                    <img class="location" src="../../../assets/images/sa.png" alt="">
+                    <!-- Select Country -->
+                    <mat-select>
+                        <mat-option>
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <form class="full-width padding-10" [formGroup]="loginFormGroup">
+                    <!-- Email -->
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input type="email" formControlName="email" matInput placeholder="example@neutrinos.com">
+                        <mat-error *ngIf="loginFormGroup.get('email')?.hasError('pattern')">
+                            Enter valid <strong>email</strong>
+                        </mat-error>
+                        <mat-error *ngIf="loginFormGroup.get('email')?.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- Password -->
+                    <mat-form-field class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input type="password" formControlName="password" matInput placeholder="example@neutrinos.com">
+                        <mat-error *ngIf="loginFormGroup.get('password')?.hasError('required')">
+                            Enter valid <strong>password</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="flex gap-1em">
+                        <button class="flex-1" mat-raised-button color="warn">Cancel</button>
+                        <button class="flex-1" mat-raised-button color="primary" (click)="submit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <p class="downloadPdf margin-0 text-center">WHAT DO YOU NEED TO KNOW ABOUT OUR OPERATIONS APP
+                <sup class="cursor padding-left-5" style="color: #0062e1;">DOWNLOAD PDF</sup>
+            </p>
+            <div class="downloads flex gap-1em j-center">
+                <img src="../../../assets/images/Google.png"
+                    alt="Download google application not available coming soon">
+                <img src="../../../assets/images/app-store-Badges.png"
+                    alt="Download apple application not available coming soon">
+            </div>
+            <!-- <div class="downloads flex j-center">
+                <img src="../../../assets/images/Hauwei-Badges.png"
+                    alt="Download huawei application not available coming soon">
+            </div> -->
+        </div>
+    </div>
+</div>
