@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -13,6 +14,8 @@ export class ManagerLandingComponent implements OnInit {
   showRouter: boolean;
   showOperations: boolean;
   allLeaves: any;
+  allVisaApplications: any;
+  pendingVisaApplications: any;
   pendingLeaves: any;
   manager: any;
   remainingSickLeaveDays: any;
@@ -21,10 +24,20 @@ export class ManagerLandingComponent implements OnInit {
   operationsSubscription: Subscription;
   routerSubscription: Subscription;
   chartContainer: any;
+  notificationsElement: any;
+  showNotifications: boolean = false;
+  allNotifications: any;
+  managerNotifications: any;
 
-  constructor(private sharedService: SharedServiceService, private router: Router) {
+  constructor(private sharedService: SharedServiceService, private router: Router,
+    private snackbar: MatSnackBar) {
     this.manager = this.sharedService.get('manager', 'session');
     this.allLeaves = this.sharedService.get('allLeaves', 'local');
+    this.allNotifications = this.sharedService.get('allNotifications', 'local');
+    this.managerNotifications = this.allNotifications.filter((notification: any) => notification.managerId === this.manager.id && notification.direction === 'toManager' && !notification.seen).reverse();
+    this.allVisaApplications = this.sharedService.get('visaApplications','local');
+    // Pending visa applications
+    this.pendingVisaApplications = this.allVisaApplications.filter((visaApplication: any) => visaApplication.status === 'pending');
     this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
       this.pendingLeaves = allLeaves.filter((leave: any) => leave.status.toLowerCase() === 'pending');
       this.updateChartData(this.pendingLeaves);
@@ -41,6 +54,22 @@ export class ManagerLandingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    const notificationButtonElement = document.getElementById('notificationButton');
+    this.notificationsElement = document.getElementById('notifications');
+    notificationButtonElement?.addEventListener('click',() => {
+      if(this.managerNotifications.length < 1) {
+        this.snackbar.open('No notifications updates to see','Ok',{duration: 3000});
+        return;
+      }
+      this.showNotifications = !this.showNotifications;
+      if(this.showNotifications) {
+        this.notificationsElement?.classList.remove('hide')
+      } else {
+        this.notificationsElement?.classList.add('hide')
+      }
+    })
+
     this.chartContainer = document.getElementById('pie-chart') as HTMLCanvasElement;
     this.chart = new Chart(this.chartContainer, {
       type: 'pie',
@@ -48,7 +77,7 @@ export class ManagerLandingComponent implements OnInit {
         labels: ['Pending Leaves','Pending Visa Applications'],
         datasets: [{
           backgroundColor: ['#a99494','#3f51b5'],
-          data: [this.pendingLeaves.length,6]
+          data: [this.pendingLeaves.length,this.pendingVisaApplications.length]
         }]
       },
       options: {
@@ -59,8 +88,7 @@ export class ManagerLandingComponent implements OnInit {
         }
       }
     })
-    // this.chart.defaults.scale.gridLines.display = false;
-    console.log(this.chart)
+
   }
 
   updateChartData(pendingLeaves: any): void {
@@ -68,7 +96,7 @@ export class ManagerLandingComponent implements OnInit {
     this.chart = new Chart(this.chartContainer, {
       type: 'pie',
       data: {
-        labels: ['Pending Pending','Pending Visa Applications'],
+        labels: ['Pending Leaves','Pending Visa Applications'],
         datasets: [{
           backgroundColor: ['#a99494','#3f51b5'],
           data: [pendingLeaves.length,6]
@@ -115,6 +143,22 @@ export class ManagerLandingComponent implements OnInit {
   showVisas(): void {
     this.sharedService.updateOperationsShow();
     this.router.navigate(['/manager-landing/visas']);
+  }
+
+  seenNotification(notificationId: any): void {
+    console.log(notificationId)
+    this.managerNotifications = this.managerNotifications.filter((notification: any) => notification.id != notificationId);
+    console.log(this.managerNotifications);
+    this.allNotifications.forEach((notification: any) => {
+      if(notification.id === notificationId) {
+        notification.seen = true;
+        this.sharedService.set('allNotifications','local',this.allNotifications);
+      }
+    })
+    // Hide notifications box
+    if(this.managerNotifications.length < 1) {
+      this.notificationsElement.classList.add('hide');
+    }
   }
 
 }

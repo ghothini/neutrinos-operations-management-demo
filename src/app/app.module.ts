@@ -21,6 +21,8 @@ import { ManagerLandingComponent } from './components/manager-landing/manager-la
 import { LeavesComponent } from './components/leaves/leaves.component';
 import { NgChartsModule } from 'ng2-charts';
 import { VisasComponent } from './components/visas/visas.component';
+import { OperatorLandingComponent } from './components/operator-landing/operator-landing.component';
+import { ViewOperationComponent } from './components/view-operation/view-operation.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { VisasComponent } from './components/visas/visas.component';
     ManagerLandingComponent,
     LeavesComponent,
     VisasComponent,
+    OperatorLandingComponent,
+    ViewOperationComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,7 @@ import { VisasComponent } from './components/visas/visas.component';
     FormsModule,
     ReactiveFormsModule,
     NgChartsModule,
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

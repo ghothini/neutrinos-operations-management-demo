@@ -51,6 +51,10 @@ body {
     flex: 1;
 }
 
+.j-end {
+    justify-content: flex-end;
+}
+
 .z-index {
     z-index: 1;
 }
@@ -110,6 +114,10 @@ app-guesthouse-service, app-international-travel, app-domestic-travel
 
 .width-45 {
     width: 45%;
+}
+
+.width-40 {
+    width: 40%;
 }
 
 .width-55 {

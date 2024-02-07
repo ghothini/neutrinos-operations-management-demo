@@ -1,0 +1,63 @@
+<div class="flex column full-height">
+    <div class="flex column gap-1em">
+        <h2 class="text-center">Neutrinos Operations Application</h2>
+        <div class="flex j-end relative">
+            <marquee class="neutrinosMarquee half-width">
+                <img class="no-border-radius" src="../../../assets/images/neutrinos-logo.png" alt="">
+            </marquee>
+            <div class="absolute">
+                <button class="logOutBtn z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+            </div>
+        </div>
+        <div class="containter flex full-width gap-1em">
+            <div class="left width-40">
+                <div class="flex center-center">
+                    <canvas class="cursor" id="pie-chart"></canvas>
+                </div>
+            </div>
+            <div class="right half-width flex column gap-05em">
+                <div class="flex gap-1em">
+                    <mat-card class="padding-10 center-center">
+                        <div class="operation cursor">
+                            <h3 class="margin-0 text-center">Visa Applications</h3>
+                            <img class="visaImg" src="../../../assets/images/visa-application.png" alt="">
+                        </div>
+                    </mat-card>
+                    <mat-card class="padding-10 center-center">
+                        <div class="operation cursor">
+                            <h3 class="margin-0 text-center">International Travel</h3>
+                            <img class="flightImg" src="../../../assets/images/flightlogo.png" alt="">
+                        </div>
+                    </mat-card>
+                    <mat-card class="padding-10 center-center">
+                        <div class="operation cursor">
+                            <h3 class="margin-0 text-center">Guesthouse Service</h3>
+                            <img class="guesthouseImg" src="../../../assets/images/services.png" alt="">
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="flex gap-1em">
+                    <mat-card class="padding-10 center-center">
+                        <div class="operation cursor">
+                            <h3 class="margin-0 text-center">Visa Extensions</h3>
+                            <img class="visaImg" src="../../../assets/images/visa-xtend.png" alt="">
+                        </div>
+                    </mat-card>
+                    <mat-card class="padding-10 center-center">
+                        <div class="operation cursor">
+                            <h3 class="margin-0 text-center">Domestic Travel</h3>
+                            <img class="domesticTransImg" src="../../../assets/images/domesticTransport.png" alt="">
+                        </div>
+                    </mat-card>
+                    <mat-card class="padding-10 center-center">
+                        <div class="operation cursor">
+                            <h3 class="margin-0 text-center">Flight Information</h3>
+                            <img class="flightLandImg"
+                                src="../../../assets/icons/flight_land_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

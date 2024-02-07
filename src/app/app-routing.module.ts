@@ -12,6 +12,7 @@ import { VisaApplicationComponent } from './components/visa-application/visa-app
 import { ManagerLandingComponent } from './components/manager-landing/manager-landing.component';
 import { LeavesComponent } from './components/leaves/leaves.component';
 import { VisasComponent } from './components/visas/visas.component';
+import { OperatorLandingComponent } from './components/operator-landing/operator-landing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' }, // redirect to `sign-in`
@@ -33,6 +34,7 @@ const routes: Routes = [
 
     ]
   },
+  { path: 'operator-landing', component: OperatorLandingComponent },
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
 

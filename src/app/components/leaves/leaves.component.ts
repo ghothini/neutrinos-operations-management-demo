@@ -11,56 +11,79 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
 export class LeavesComponent {
   allLeaves: any;
   allEmployees: any;
+  manager: any;
   displayedColumns: string[] = ['leaveId', 'leaveType', 'leaveStartDate', 'leaveEndDate', 'status'];
   dataSource: any;
   dataSourceAcceptedStatus: any;
   leaveStatuses: string[] = ['accept', 'decline'];
   allLeavesSubscription: Subscription;
 
+  notification: any = {
+    employeeId: '',
+    status: '',
+    managerId: '',
+    seen: false,
+    notificationType: 'Leave Application',
+    direction: 'toEmployee'
+  }
+
   constructor(private sharedService: SharedServiceService, private snackbar: MatSnackBar) {
     this.allLeaves = this.sharedService.get('allLeaves', 'local');
     this.allEmployees = this.sharedService.get('employees', 'local');
-    this.dataSource = this.allLeaves;
+    this.manager = this.sharedService.get('manager', 'session');
+    this.dataSource = this.allLeaves.reverse();
     this.allLeavesSubscription = this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
-      this.dataSource = allLeaves;
+      this.dataSource = allLeaves.reverse();
       // Filter with accepted
-      this.dataSourceAcceptedStatus = allLeaves.filter((leave: any) => leave.status === 'accepted');
+      this.dataSourceAcceptedStatus = allLeaves.filter((leave: any) => leave.status === 'accepted').reverse();
     })
     // Filter with accepted
-    this.dataSourceAcceptedStatus = this.allLeaves.filter((leave: any) => leave.status === 'accepted');
-    console.log(this.dataSourceAcceptedStatus);
+    this.dataSourceAcceptedStatus = this.allLeaves.filter((leave: any) => leave.status === 'accepted').reverse();
   }
 
   submitStatus(leaveStatus: string, leaveId: string,employeeId: string,leaveStartDate: string, leaveEndDate:string): void {
+    const allNotifications = this.sharedService.get('allNotifications','local');
     if (leaveStatus === 'accept') {
       this.allLeaves.forEach((leave: any) => {
         if (leave.id === leaveId) {
+          this.notification.status = 'accepted';
           leave.status = 'accepted';
+          this.notification['id'] = `notification-${new Date().getTime()}`;
           leave['pendingLeaveDuration'] = `${this.convertDate(leave.dateStartLeave)} - ${this.convertDate(leave.dateEndLeave)}`;
-          this.snackbar.open('Leave status updated successfully','Ok',{duration: 3000});
+          this.snackbar.open('Leave status and notification updated successfully','Ok',{duration: 3000});
           this.sharedService.set('allLeaves','local',this.allLeaves);
           this.sharedService.updateAllLeaves(this.allLeaves);
         }
       })
       this.allEmployees.forEach((employee: any) => {
         if(employee.id === employeeId){
+          this.notification.employeeId = employee.id
+          this.notification.managerId = this.manager.id;
           employee.profile['pendingLeaveDuration'] = `${this.convertDate(leaveStartDate)} - ${this.convertDate(leaveEndDate)}`;
           this.sharedService.set('employees','local',this.allEmployees);
           this.sharedService.set('employee','session',employee);
           this.sharedService.updateEmployeeAccount(employee);
         }
       })
+      allNotifications.push(this.notification)
+      this.sharedService.set('allNotifications','local',allNotifications)
     }
     if (leaveStatus === 'decline') {
       this.allLeaves.forEach((leave: any) => {
         if (leave.id === leaveId) {
           leave.status = 'declined'
-          this.snackbar.open('Leave status updated successfully', 'Ok', { duration: 3000 });
+          this.notification.status = 'declined';
+          this.notification['id'] = `notification-${new Date().getTime()}`;
+          this.snackbar.open('Leave status and notification updated successfully', 'Ok', { duration: 3000 });
           this.sharedService.set('allLeaves', 'local', this.allLeaves);
           this.sharedService.updateAllLeaves(this.allLeaves);
           return;
         }
       })
+      this.notification.employeeId = employeeId;
+      this.notification.managerId = this.manager.id;
+      allNotifications.push(this.notification)
+      this.sharedService.set('allNotifications','local',allNotifications)
     }
   }
 

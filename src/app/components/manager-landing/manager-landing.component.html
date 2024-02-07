@@ -22,6 +22,22 @@
                         <img class="no-border-radius" src="../../../assets/images/neutrinos-logo.png" alt="">
                     </marquee>
                     <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+                    <img class="cursor absolute notificationsIcon"
+                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="notificationButton">
+                    <div class="absolute notificationsCount" >
+                        <p class="margin-0">{{managerNotifications.length}}</p>
+                    </div>
+                    <div id="notifications" class="hide flex notifications gap-05em padding-10">
+                        <div class="flex a-center gap-1em column relative cursor">
+                            <div *ngFor="let notification of managerNotifications" (click)="seenNotification(notification.id)" class="flex gap-05em a-center notificationItem">
+                                <p class="margin-0 color-white">new</p>
+                                <div class="flex gap-05em">
+                                    <p class="margin-0">{{notification.notificationType | titlecase}}</p>
+                                    <p class="margin-0">({{notification.lastName}})</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="main-container flex gap-1em full-height full-width">
                     <div [class.center-center]="showOperations" class="left flex-1 flex">

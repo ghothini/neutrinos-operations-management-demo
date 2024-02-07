@@ -13,6 +13,7 @@ export class VisaApplicationComponent {
   employee: any;
   allEmployees: any;
   allVisaApplications: any;
+  allNotifications: any;
   visaApplicationData: any = {
     fullName: 'Thapelo Mokotelakoena',
     email: 'thapeloghothini@gmail.com',
@@ -23,12 +24,22 @@ export class VisaApplicationComponent {
     nationality: ''
   }
 
+  notification: any = {
+    employeeId: '',
+    lastName: '',
+    managerId: '',
+    seen: false,
+    notificationType: 'Visa Application',
+    direction: 'toManager'
+  }
+
   constructor(private location: Location, private sharedService: SharedServiceService, private snackbar: MatSnackBar
     , private router: Router) {
-      this.employee = this.sharedService.get('employee','session');
-      this.allEmployees = this.sharedService.get('employees','local');
-      this.allVisaApplications = this.sharedService.get('visaApplications','local');
-     }
+    this.employee = this.sharedService.get('employee', 'session');
+    this.allEmployees = this.sharedService.get('employees', 'local');
+    this.allVisaApplications = this.sharedService.get('visaApplications', 'local');
+    this.allNotifications = this.sharedService.get('allNotifications', 'local');
+  }
   goBack(): void {
     this.location.back();
     this.sharedService.updateOperationsShow();
@@ -47,14 +58,20 @@ export class VisaApplicationComponent {
     console.log(this.visaApplicationData);
     this.employee.operationsOperated.visaApplications.push(this.visaApplicationData);
     // Update session and local storage and visa applications array
-    this.sharedService.set('employee','session',this.employee);
+    this.sharedService.set('employee', 'session', this.employee);
     this.allEmployees.forEach((employee: any) => {
-      if(employee.id === this.employee.id){
+      if (employee.id === this.employee.id) {
+        this.notification.employeeId = employee.id
+        this.notification.managerId = employee.profile.managerId;
+        this.notification['id'] = `notification-${new Date().getTime()}`;
+        this.notification.lastName = employee.profile.fullName.split(' ')[1];;
         employee.operationsOperated.visaApplications.push(this.visaApplicationData);
-        this.sharedService.set('employees','local',this.allEmployees);
+        this.sharedService.set('employees', 'local', this.allEmployees);
       }
     })
-    this.sharedService.set('visaApplications','local',this.allVisaApplications);
+    this.allNotifications.push(this.notification);
+    this.sharedService.set('allNotifications','local',this.allNotifications);
+    this.sharedService.set('visaApplications', 'local', this.allVisaApplications);
     this.snackbar.open(`Visa was applied for successfully`, 'Ok', { duration: 3000 });
     this.sharedService.updateOperationsShow();
     this.location.back();

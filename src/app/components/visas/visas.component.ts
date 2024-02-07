@@ -12,6 +12,7 @@ export class VisasComponent {
   expandedIndex = 0;
   allVisaApplications: any;
   allEmployees: any;
+  employee: any;
   dateOfBirth: any = {
     year: '',
     month: '',
@@ -23,15 +24,17 @@ export class VisasComponent {
     this.allVisaApplications = this.sharedService.get('visaApplications','local');
     this.allEmployees = this.sharedService.get('employees','local');
     this.allVisaApplications.forEach((visaApplication: any,indx: any) => {
-      if(visaApplication.employeeId == this.allEmployees[indx].profile.id) {
-        visaApplication['dateOfBirth'] = this.allEmployees[indx].profile.dateOfBirth;
-         const dateOfBirth = visaApplication['dateOfBirth'].split('-');
-        this.dateOfBirth.year = dateOfBirth[0].split('');
-        this.dateOfBirth.month = dateOfBirth[1].split('');
-        this.dateOfBirth.day = dateOfBirth[2].substring(0,2).split('');
-        visaApplication['dateOfBirthArr'] = this.dateOfBirth;
-      }
+      this.allEmployees.forEach((employee: any) => {
+        if(employee.id === visaApplication.id){
+          console.log(employee.profile.dateOfBirth)
+          visaApplication['dateOfBirth'] = employee.profile.dateOfBirth;
+           const dateOfBirth = visaApplication['dateOfBirth'].split('-');
+          this.dateOfBirth.year = dateOfBirth[0].split('');
+          this.dateOfBirth.month = dateOfBirth[1].split('');
+          this.dateOfBirth.day = dateOfBirth[2].substring(0,2).split('');
+          visaApplication['dateOfBirthArr'] = this.dateOfBirth;
+        }
+      })
     })
-    console.log(this.allVisaApplications[0])
   }
 }

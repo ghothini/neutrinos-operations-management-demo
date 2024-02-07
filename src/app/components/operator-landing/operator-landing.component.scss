@@ -1,0 +1,59 @@
+.neutrinosMarquee {
+    background-color: #ced3d9;
+    width: 45%;
+    height: 51px;
+    z-index: 1;
+}
+
+.neutrinosMarquee img {
+    height: 41px;
+    z-index: 1;
+    margin-top: 5px;
+    padding: 3px;
+    background-color: #ced3d9;
+}
+
+.logOutBtn {
+    width: 129px;
+    top: 57px;
+    right: 47px;
+}
+
+.containter {
+    margin-top: 30px;
+}
+
+.operation {
+    height: 180px;
+    width: 233px;
+    border-radius: 7px;
+}
+
+.visaImg {
+    height: 146px;
+}
+
+.flightImg {
+    width: 197px;
+    padding-left: 20px;
+}
+
+.guesthouseImg {
+    height: 146px;
+    padding-left: 43px;
+}
+
+.domesticTransImg {
+    width: 210px;
+    padding-left: 18px;
+    padding-top: 5px;
+}
+
+.flightLandImg {
+    height: 141px;
+    padding-left: 48px;
+}
+
+canvas {
+    height: 350px !important;
+}

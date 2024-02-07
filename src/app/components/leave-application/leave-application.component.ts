@@ -17,11 +17,24 @@ export class LeaveApplicationComponent {
   allLeaves: any;
   profileFormData: any;
   todayDate = new Date().toISOString().split("T")[0];
+  allNotifications: any;
+
+  notification: any = {
+    employeeId: '',
+    lastName: '',
+    managerId: '',
+    id: '',
+    seen: false,
+    notificationType: 'Leave Application',
+    direction: 'toManager'
+  }
+
   constructor(private location: Location, private dialogRef: MatDialogRef<LeaveApplicationComponent>,
     private sharedService: SharedServiceService, private snackbar: MatSnackBar) {
     this.employee = this.sharedService.get('employee', 'session');
     this.allLeaves = this.sharedService.get('allLeaves', 'local');
     this.allEmployees = this.sharedService.get('employees', 'local');
+    this.allNotifications = this.sharedService.get('allNotifications', 'local');
     console.log(this.allLeaves);
     
     // this.profileFormData = this.employee;
@@ -77,11 +90,17 @@ export class LeaveApplicationComponent {
       this.sharedService.set('allLeaves','local',this.allLeaves)
       this.allEmployees.forEach((employee: any) => {
         if(employee.id === this.employee.id){
+          this.notification.employeeId = employee.id
+          this.notification.managerId = employee.profile.managerId;
+          this.notification['id'] = `notification-${new Date().getTime()}`;
+          this.notification.lastName = employee.profile.fullName.split(' ')[1];
           employee.profile.approvedLeaveCount = this.employee.profile.approvedLeaveCount;
           employee.profile.remainingAnnualLeaveDays = this.employee.profile.remainingAnnualLeaveDays;
           this.sharedService.set('employees','local',this.allEmployees);
         }
       })
+      this.allNotifications.push(this.notification);
+      this.sharedService.set('allNotifications','local',this.allNotifications);
       this.snackbar.open('Leave application has been successfully sent','Ok',{duration: 3000});
       this.sharedService.updateAllLeaves(this.allLeaves)
       this.dialogRef.close();
@@ -107,11 +126,17 @@ export class LeaveApplicationComponent {
       this.sharedService.set('allLeaves','local',this.allLeaves)
       this.allEmployees.forEach((employee: any) => {
         if(employee.id === this.employee.id){
+          this.notification.employeeId = employee.id
+          this.notification.managerId = employee.profile.managerId;
+          this.notification['id'] = `notification-${new Date().getTime()}`;
+          this.notification.lastName = employee.profile.fullName.split(' ')[1];
           employee.profile.approvedLeaveCount = this.employee.profile.approvedLeaveCount;
           employee.profile.remainingSickLeaveDays = this.employee.profile.remainingSickLeaveDays;
           this.sharedService.set('employees','local',this.allEmployees);
         }
       })
+      this.allNotifications.push(this.notification);
+      this.sharedService.set('allNotifications','local',this.allNotifications);
       this.snackbar.open('Leave application has been successfully sent','Ok',{duration: 3000});
       this.sharedService.updateAllLeaves(this.allLeaves);
       this.dialogRef.close();

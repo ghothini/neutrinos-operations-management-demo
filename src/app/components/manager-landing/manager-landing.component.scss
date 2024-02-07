@@ -197,3 +197,73 @@ hr {
     border-radius: 7px;
     background-color: #ced3d9;
 }
+
+// Notifications panel
+
+
+.notificationItem {
+    height: 34px;
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 0px 5px;
+    background-color: #5b80ba;
+}
+
+.notificationsIcon {
+    left: 98px !important;
+    top: 198px !important;
+}
+ 
+.notifications {
+    position: absolute;
+    left: 154px;
+    top: 140px;
+    z-index: 1;
+    display: flex;
+    background-color: #ced3d9;
+    border-radius: 7px;
+    max-height: 244px;
+    overflow-y: auto;
+}
+
+.notificationsCount {
+    top: 196px;
+    left: 133px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    height: 16px;
+    z-index: 1;
+    font-weight: 500;
+    padding: 2px;
+    background-color: #3f51b5;
+    border-radius: 50%;
+    color: white;
+}
+
+.notificationItem {
+    height: 34px;
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 0px 5px;
+    background-color: #5b80ba;
+}
+
+.notificationsIcon {
+    right: 2px;
+    top: 68px;
+}
+
+.hide {
+    display: none !important;
+}
+
+.notificationItem p:nth-child(2) {
+    font-weight: 600;
+}
+
+// colors
+
+.color-white {
+    color: white;
+}

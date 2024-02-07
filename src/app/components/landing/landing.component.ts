@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit {
   showRouter!: boolean;
   showOperations!: boolean;
   employee: any;
@@ -23,6 +23,10 @@ export class LandingComponent {
   remainingSickLeaveDays: any;
   remainingAnnualLeaveDays: any;
   southAfricanTime: any;
+  showNotifications: boolean = false;
+  allNotifications: any;
+  employeeNotifications: any;
+  notificationsElement: any;
   constructor(private router: Router, private sharedService: SharedServiceService,
     private dialog: MatDialog, private snackbar: MatSnackBar) {
     // Show employee operations options or their routes
@@ -30,12 +34,16 @@ export class LandingComponent {
     this.showRouter = show[0];
     this.showOperations = show[1];
     this.employee = this.sharedService.get('employee', 'session');
+    // Get employee notifications
+    this.allNotifications = this.sharedService.get('allNotifications', 'local');
+    this.employeeNotifications = this.allNotifications.filter((notification: any) => notification.employeeId === this.employee.id && !notification.seen && notification.direction === 'toEmployee').reverse();
     this.routerSubscription = this.sharedService.watchRouterShow().subscribe((showRouterBoolean: boolean) => this.showRouter = showRouterBoolean);
     this.operationsSubscription = this.sharedService.watchOperationsShow().subscribe((showOperationsBoolean: boolean) => this.showOperations = showOperationsBoolean);
     this.sickLeaveDaysSubscription = this.sharedService.watchSickLeaveDays().subscribe((sickLeaveDays: any) => this.remainingSickLeaveDays = sickLeaveDays);
     this.annualLeaveDaysSubscrition = this.sharedService.watchAnnualLeaveDays().subscribe((annualLeaveDays: any) => this.remainingAnnualLeaveDays = annualLeaveDays);
     this.remainingSickLeaveDays = this.employee.profile.remainingSickLeaveDays;
     this.remainingAnnualLeaveDays = this.employee.profile.remainingAnnualLeaveDays;
+
     //  Update showing of time
     setInterval(() => {
       this.southAfricanTime = this.updateDate()
@@ -103,6 +111,23 @@ export class LandingComponent {
     // ]
     // this.sharedService.set('employees','local',employees);
   }
+  
+  ngOnInit(): void {
+    const notificationButtonElement = document.getElementById('notificationButton');
+    this.notificationsElement = document.getElementById('notifications');
+    notificationButtonElement?.addEventListener('click',() => {
+      if(this.employeeNotifications.length < 1) {
+        this.snackbar.open('No notifications updates to see','Ok',{duration: 3000});
+        return;
+      }
+      this.showNotifications = !this.showNotifications;
+      if(this.showNotifications) {
+        this.notificationsElement?.classList.remove('hide')
+      } else {
+        this.notificationsElement?.classList.add('hide')
+      }
+    })
+  }
 
   updateDate(): any {
     // South Africa Time
@@ -169,5 +194,20 @@ export class LandingComponent {
       return;
     }
     this.dialog.open(LeaveApplicationComponent);
+  }
+
+  seenNotification(notificationId: any): void {
+    this.employeeNotifications = this.employeeNotifications.filter((notification: any) => notification.id != notificationId);
+    console.log(this.employeeNotifications);
+    this.allNotifications.forEach((notification: any) => {
+      if(notification.id === notificationId) {
+        notification.seen = true;
+        this.sharedService.set('allNotifications','local',this.allNotifications);
+      }
+    })
+    // Hide notifications box
+    if(this.employeeNotifications.length < 1) {
+      this.notificationsElement.classList.add('hide');
+    }
   }
 }

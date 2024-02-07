@@ -54,10 +54,52 @@ footer {
 
 .color-blue {
     color: #3f51b5;
+} 
+
+.hide {
+    display: none !important;
+}
+
+.notificationsCount {
+    top: 65px;
+    right: 1px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    height: 16px;
+    z-index: 1;
+    font-weight: 500;
+    padding: 2px;
+    background-color: #3f51b5;
+    border-radius: 50%;
+    color: white;
+}
+
+.status {
+    width: 40px;
+    top: 0;
+    right: 44px;
+}
+
+.color-declined {
+   background-color: '#f44336';
+}
+
+.color-accepted {
+   background-color: '#f44336';
+}
+
+.status p {
+    padding: 1px;
+    border-radius: 7px;
 }
 
 .color-black {
     color: black;
+}
+
+.color-white {
+    color: white;
 }
 
 .footer {
@@ -103,6 +145,36 @@ footer {
     width: 200px;
     border-radius: 7px;
     border: 1px solid #ced3d9;
+}
+ 
+.notifications {
+    position: absolute;
+    right: 65px;
+    top: 84px;  
+    width: 252px;
+    z-index: 1;
+    display: flex;
+    background-color: #ced3d9;
+    border-radius: 7px;
+    max-height: 244px;
+    overflow-y: auto;
+}
+
+.notificationsIcon {
+    right: 2px;
+    top: 68px;
+}
+
+.notificationItem {
+    height: 34px;
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 0px 5px;
+    background-color: #5b80ba;
+}
+
+.notificationItem hr {
+    height: 19px;
 }
 
 .margin-top-5 {
