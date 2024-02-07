@@ -41,8 +41,8 @@ export class LandingComponent implements OnInit {
     this.operationsSubscription = this.sharedService.watchOperationsShow().subscribe((showOperationsBoolean: boolean) => this.showOperations = showOperationsBoolean);
     this.sickLeaveDaysSubscription = this.sharedService.watchSickLeaveDays().subscribe((sickLeaveDays: any) => this.remainingSickLeaveDays = sickLeaveDays);
     this.annualLeaveDaysSubscrition = this.sharedService.watchAnnualLeaveDays().subscribe((annualLeaveDays: any) => this.remainingAnnualLeaveDays = annualLeaveDays);
-    this.remainingSickLeaveDays = this.employee.profile.remainingSickLeaveDays;
-    this.remainingAnnualLeaveDays = this.employee.profile.remainingAnnualLeaveDays;
+    this.remainingSickLeaveDays = this.employee.profile?.remainingSickLeaveDays;
+    this.remainingAnnualLeaveDays = this.employee.profile?.remainingAnnualLeaveDays;
 
     //  Update showing of time
     setInterval(() => {

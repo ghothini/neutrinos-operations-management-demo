@@ -6,7 +6,7 @@
         </div>
         <mat-card class="flex column">
             <mat-accordion>
-                <mat-expansion-panel *ngFor="let visaApplication of allVisaApplications">
+                <mat-expansion-panel *ngFor="let visaApplication of allManagerVisaApplications">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <div class="flex gap-05em a-center">
@@ -31,6 +31,15 @@
                             </div>
                             <div class="home-affairs flex absolute">
                                 <img src="../../../assets/images/home-affairs.png" alt="Showing home affairs logo">
+                            </div>
+                            <!-- <div>
+                                <button mat-raised-button color="primary">Pending</button>
+                            </div> -->
+                            <div class="flex mat-menu absolute visaApplicationBtn">
+                                <button mat-raised-button [color]="visaApplication.status === 'accepted' ? 'primary' : 'warn'" [matMenuTriggerFor]="menu">{{visaApplication.status | titlecase}}</button>
+                                <mat-menu class="absolute" #menu="matMenu">
+                                    <button (click)="submitStatus(leaveStatus, visaApplication.visaApplicationId, visaApplication.id)" mat-menu-item *ngFor="let leaveStatus of leaveStatuses">{{leaveStatus | titlecase}}</button>
+                                </mat-menu>
                             </div>
                             <div class="absolute nationality">
                                 <p class="margin-0">{{visaApplication.nationality}}</p>

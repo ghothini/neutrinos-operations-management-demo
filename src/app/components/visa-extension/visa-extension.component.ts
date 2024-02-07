@@ -13,6 +13,8 @@ export class VisaExtensionComponent {
   employee: any;
   allEmployees: any;
   allVisaExtensions: any;
+  managerId: any;
+  allManagers: any;
   visaExtensionData: any = {
     fullName: 'Thapelo Mokotelakoena',
     email: 'thapeloghothini@gmail.com',
@@ -27,6 +29,7 @@ export class VisaExtensionComponent {
     , private router: Router) {
       this.employee = this.sharedService.get('employee','session');
       this.allEmployees = this.sharedService.get('employees','local');
+      this.allManagers = this.sharedService.get('managers','local');
       this.allVisaExtensions = this.sharedService.get('visaExtensionApplications','local');
       console.log(this.allVisaExtensions)
      }
@@ -35,7 +38,20 @@ export class VisaExtensionComponent {
     this.sharedService.updateOperationsShow();
   }
   submit(): void {
+    this.allEmployees.forEach((employee: any) => {
+      if (employee.id === this.employee.id) {
+        this.managerId = employee.profile.managerId;
+      }
+    })
+    
+    // Set company manager to form
+    this.allManagers.forEach((manager: any) => {
+      if (manager.id === this.managerId) {
+        this.visaExtensionData['operator'] = manager.profile.operatorId;
+      }
+    })
     this.employee.operationsOperated.visaExtensions.push(this.visaExtensionData);
+
     // Update session and local storage and visa extensions array
     
     this.sharedService.set('employee','session',this.employee);

@@ -12,6 +12,8 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
 export class InternationalTravelComponent {
   employee: any;
   allEmployees: any;
+  allManagers: any;
+  managerId: any;
   allInternationalTravels: any;
   internationalTravelData: any = {
     indianPassport: '',
@@ -47,6 +49,7 @@ export class InternationalTravelComponent {
     , private router: Router) {
       this.employee = this.sharedService.get('employee','session');
       this.allEmployees = this.sharedService.get('employees','local');
+      this.allManagers = this.sharedService.get('managers','local');
       this.allInternationalTravels = this.sharedService.get('internationalTravels','local');
       console.log(this.allInternationalTravels)
      }
@@ -62,6 +65,20 @@ export class InternationalTravelComponent {
         ...this.employeeCredentialsFormData
       }
     }
+
+    
+    this.allEmployees.forEach((employee: any) => {
+      if (employee.id === this.employee.id) {
+        this.managerId = employee.profile.managerId;
+      }
+    })
+    
+    // Set company manager to form
+    this.allManagers.forEach((manager: any) => {
+      if (manager.id === this.managerId) {
+        internationalTravel['operator'] = manager.profile.operatorId;
+      }
+    })
 
     this.employee.operationsOperated.internationalTravels.push(internationalTravel);
     // Update session and local storage and visa extensions array

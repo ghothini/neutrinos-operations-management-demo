@@ -12,7 +12,9 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
 export class DomesticTravelComponent {
   employee: any;
   allEmployees: any;
+  allManagers: any;
   allDomesticTravels: any;
+  managerId: any;
   domesticTravelFormData: any = {
     dateOfRequest: '',
     confirmedTravelDate: '',
@@ -38,6 +40,7 @@ export class DomesticTravelComponent {
     , private router: Router) {
       this.employee = this.sharedService.get('employee','session');
       this.allEmployees = this.sharedService.get('employees','local');
+      this.allManagers = this.sharedService.get('managers','local');
       this.allDomesticTravels = this.sharedService.get('domesticTravels','local');
      }
   goBack(): void {
@@ -52,6 +55,19 @@ export class DomesticTravelComponent {
         ...this.employeeCredentialsFormData
       }
     }
+
+    this.allEmployees.forEach((employee: any) => {
+      if (employee.id === this.employee.id) {
+        this.managerId = employee.profile.managerId;
+      }
+    })
+    
+    // Set company operator to form
+    this.allManagers.forEach((manager: any) => {
+      if (manager.id === this.managerId) {
+        domesticTravel['operator'] = manager.profile.operatorId;
+      }
+    })
 
     this.employee.operationsOperated.domesticTravels.push(domesticTravel);
     // Update session and local storage and domestic travels array

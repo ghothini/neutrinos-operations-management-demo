@@ -12,7 +12,9 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
 export class GuesthouseServiceComponent {
   employee: any;
   allEmployees: any;
+  allManagers: any;
   allGuesthouseServices: any;
+  managerId: any;
   guesthouseServiceFormData: any = {
     fullName: 'Thapelo Mokotelakoena',
     email: 'thapeloghothini@gmail.com',
@@ -28,6 +30,7 @@ export class GuesthouseServiceComponent {
     , private router: Router) {
     this.employee = this.sharedService.get('employee', 'session');
     this.allEmployees = this.sharedService.get('employees', 'local');
+    this.allManagers = this.sharedService.get('managers', 'local');
     this.allGuesthouseServices = this.sharedService.get('guesthouseServices', 'local');
     console.log(this.allGuesthouseServices)
   }
@@ -37,6 +40,18 @@ export class GuesthouseServiceComponent {
   }
 
   submit(): void {
+    this.allEmployees.forEach((employee: any) => {
+      if (employee.id === this.employee.id) {
+        this.managerId = employee.profile.managerId;
+      }
+    })
+    
+    // Set company manager to form
+    this.allManagers.forEach((manager: any) => {
+      if (manager.id === this.managerId) {
+        this.guesthouseServiceFormData['operator'] = manager.profile.operatorId;
+      }
+    })
     this.employee.operationsOperated.guesthouseServices.push(this.guesthouseServiceFormData);
     // Update session and local storage and visa extensions array
     this.sharedService.set('employee', 'session', this.employee);

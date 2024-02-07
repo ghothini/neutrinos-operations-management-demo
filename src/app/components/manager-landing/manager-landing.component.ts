@@ -28,21 +28,27 @@ export class ManagerLandingComponent implements OnInit {
   showNotifications: boolean = false;
   allNotifications: any;
   managerNotifications: any;
+  allManagerLeaves: any;
+  allManagerVisaApplications: any;
 
   constructor(private sharedService: SharedServiceService, private router: Router,
     private snackbar: MatSnackBar) {
     this.manager = this.sharedService.get('manager', 'session');
     this.allLeaves = this.sharedService.get('allLeaves', 'local');
+    this.allManagerLeaves = this.allLeaves.filter((leave: any) => leave.managerId === this.manager.id);
+    this.pendingLeaves = this.allManagerLeaves.filter((leave: any) => leave.status.toLowerCase() === 'pending')
     this.allNotifications = this.sharedService.get('allNotifications', 'local');
     this.managerNotifications = this.allNotifications.filter((notification: any) => notification.managerId === this.manager.id && notification.direction === 'toManager' && !notification.seen).reverse();
+    // console.log(this.managerNotifications)
     this.allVisaApplications = this.sharedService.get('visaApplications','local');
+    this.allManagerVisaApplications = this.allVisaApplications.filter((leave: any) => leave.managerId === this.manager.id);
+
     // Pending visa applications
-    this.pendingVisaApplications = this.allVisaApplications.filter((visaApplication: any) => visaApplication.status === 'pending');
+    this.pendingVisaApplications = this.allManagerVisaApplications.filter((visaApplication: any) => visaApplication.status === 'pending');
     this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
       this.pendingLeaves = allLeaves.filter((leave: any) => leave.status.toLowerCase() === 'pending');
       this.updateChartData(this.pendingLeaves);
     })
-    this.pendingLeaves = this.allLeaves.filter((leave: any) => leave.status.toLowerCase() === 'pending')
     this.remainingSickLeaveDays = this.manager.profile.remainingSickLeaveDays;
     this.remainingAnnualLeaveDays = this.manager.profile.remainingAnnualLeaveDays;
     // Show employee operations options or their routes
