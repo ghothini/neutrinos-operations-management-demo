@@ -1,4 +1,4 @@
-.header img {
+.headerImg {
     height: 41px;
     z-index: 1;
     margin-top: 5px;    
@@ -162,6 +162,10 @@ footer {
     border: 1px solid #ced3d9;
 }
 
+.textAbs{
+    bottom: 0;
+}
+
 .allKeyWord {
     background-color: black;
     color: white;
@@ -189,23 +193,21 @@ hr {
 }
 
 .visaLogo {
-    height: 124px;
+    height: 143px;
+    margin-top: -20px
 }
 
 .title {
     padding: 2px;
     border-radius: 7px;
-    background-color: #ced3d9;
 }
 
 // Notifications panel
-
 
 .notificationItem {
     height: 34px;
     border-radius: 7px;
     border: 1px solid;
-    padding: 0px 5px;
     background-color: #5b80ba;
 }
 
@@ -220,7 +222,6 @@ hr {
     top: 140px;
     z-index: 1;
     display: flex;
-    background-color: #ced3d9;
     border-radius: 7px;
     max-height: 244px;
     overflow-y: auto;

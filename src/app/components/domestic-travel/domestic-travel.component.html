@@ -72,7 +72,7 @@
             <!-- Confirmed Travel Date -->
             <mat-form-field appearance="fill" class="width-31">
                 <mat-label>Confirmed Travel Date</mat-label>
-                <input matInput [matDatepicker]="picker3" required name="confirmedTravelDate"
+                <input matInput [matDatepicker]="picker3" [min]="todayDate" required name="confirmedTravelDate"
                     #confirmedTravelDate="ngModel" [(ngModel)]="domesticTravelFormData.confirmedTravelDate"
                     (focus)="picker3.open()">
                 <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
@@ -98,7 +98,7 @@
             <!-- Confirmed Return Date -->
             <mat-form-field appearance="fill" class="width-31">
                 <mat-label>Confirmed Return Date</mat-label>
-                <input matInput [matDatepicker]="pickerReturnDate" required name="confirmedReturnDate"
+                <input matInput [matDatepicker]="pickerReturnDate" [min]="todayDate" required name="confirmedReturnDate"
                     #confirmedReturnDate="ngModel" [(ngModel)]="domesticTravelFormData.confirmedReturnDate"
                     (focus)="pickerReturnDate.open()">
                 <mat-datepicker-toggle matIconSuffix [for]="pickerReturnDate"></mat-datepicker-toggle>

@@ -20,6 +20,9 @@ export class LeaveApplicationComponent {
   profileFormData: any;
   todayDate = new Date().toISOString().split("T")[0];
   allNotifications: any;
+  isManager: any;
+  manager: any;
+  managerSwitched: boolean = false;
 
   notification: any = {
     employeeId: '',
@@ -35,6 +38,7 @@ export class LeaveApplicationComponent {
     private sharedService: SharedServiceService, private snackbar: MatSnackBar) {
     this.employee = this.sharedService.get('employee', 'session');
     this.allLeaves = this.sharedService.get('allLeaves', 'local');
+    this.isManager = this.sharedService.get('temp','session')
     this.allEmployees = this.sharedService.get('employees', 'local');
     this.allManagers = this.sharedService.get('managers', 'local');
     this.allNotifications = this.sharedService.get('allNotifications', 'local');
@@ -78,14 +82,19 @@ export class LeaveApplicationComponent {
       }
       this.employee.profile.remainingAnnualLeaveDays = this.employee.profile.remainingAnnualLeaveDays - leaveDaysCount;
       this.employee.profile.approvedLeaveCount++;
-      this.sharedService.set('employee', 'session', this.employee);
       this.sharedService.updateAnnualLeaveDays(this.employee)
+      if(this.managerSwitched){
+        this.sharedService.set('manager', 'session', this.employee);
+      } else {
+        this.sharedService.set('employee', 'session', this.employee);
+      }
+      // this.sharedService.updateAnnualLeaveDays(this.employee)
       this.profileFormData = {
         ...this.leaveFormGroup.value,
         employeeId: this.employee.id,
         id: `leave-${new Date().getTime()}`,
         status: 'pending',
-        managerId: this.employee.profile.managerId,
+        managerId: this.employee.profile.managerId ? this.employee.profile.managerId : null,
         approvedLeaveCount: this.employee.profile.approvedLeaveCount,
         remainingAnnualLeaveDays: this.employee.profile.remainingAnnualLeaveDays,
         remainingSickLeaveDays: this.employee.profile.remainingSickLeaveDays
@@ -103,6 +112,7 @@ export class LeaveApplicationComponent {
       this.allManagers.forEach((manager: any) => {
         if (manager.id === this.managerId) {
           this.profileFormData['operator'] = manager.profile.operatorId;
+          this.notification['operatorId'] = manager.profile.operatorId;
         }
       })
       this.allLeaves.push(this.profileFormData);
@@ -154,6 +164,7 @@ export class LeaveApplicationComponent {
       this.allManagers.forEach((manager: any) => {
         if (manager.id === this.managerId) {
           this.profileFormData['operator'] = manager.profile.operatorId;
+          this.notification['operatorId'] = manager.profile.operatorId;
         }
       })
       this.allLeaves.push(this.profileFormData);
@@ -176,4 +187,11 @@ export class LeaveApplicationComponent {
       this.dialogRef.close();
     }
   }
+
+  checkManager(): void {
+    if(this.isManager.length > 0) {
+      this.managerSwitched = true;
+      this.manager = this.sharedService.get('manager','session');
+      // this.profileFormData = this.isManager;
+    }}
 }

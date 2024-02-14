@@ -55,7 +55,7 @@
             <!-- Pickup Date -->
             <mat-form-field appearance="fill" class="width-30">
                 <mat-label>Pickup Date</mat-label>
-                <input matInput [matDatepicker]="picker2" required name="pickupDate" #pickupDate="ngModel"
+                <input matInput [matDatepicker]="picker2" [min]="todayDate" required name="pickupDate" #pickupDate="ngModel"
                     [(ngModel)]="flightInformationData.pickupDate" (focus)="picker2.open()">
                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>

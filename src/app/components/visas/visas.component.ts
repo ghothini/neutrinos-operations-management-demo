@@ -1,5 +1,8 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
@@ -22,11 +25,21 @@ export class VisasComponent {
   }
   allVisaExtensionApplications: any;
 
-  constructor(private sharedService: SharedServiceService, private snackbar: MatSnackBar){
+  notification: any = {
+    employeeId: '',
+    status: '',
+    managerId: '',
+    seen: false,
+    notificationType: 'Visa Application',
+    direction: 'toEmployee'
+  }
+
+  constructor(private sharedService: SharedServiceService, 
+    private snackbar: MatSnackBar, private router: Router,
+    private location: Location){
     this.allVisaApplications = this.sharedService.get('visaApplications','local');
     this.manager = this.sharedService.get('manager', 'session');
-    this.allManagerVisaApplications = this.allVisaApplications.filter((leave: any) => leave.managerId === this.manager.id);
-    console.log(this.allManagerVisaApplications)
+    this.allManagerVisaApplications = this.allVisaApplications.filter((leave: any) => leave.managerId === this.manager.id).reverse();
     this.allEmployees = this.sharedService.get('employees','local');
     // Data for visa application picture
     this.allVisaApplications.forEach((visaApplication: any,indx: any) => {
@@ -52,18 +65,18 @@ export class VisasComponent {
       this.allVisaApplications.forEach((application: any) => {
         if (application.visaApplicationId === visaApplicationId) {
           application.status = 'accepted';
-          console.log(this.allVisaApplications);
-          // this.notification.status = 'accepted';
-          // this.notification['id'] = `notification-${new Date().getTime()}`;
+          this.notification.status = 'accepted';
+          this.notification['operatorId'] = this.manager.profile.operatorId;
+          this.notification['id'] = `notification-${new Date().getTime()}`;
           this.snackbar.open('Leave status and notification updated successfully', 'Ok', { duration: 3000 });
           this.sharedService.set('visaApplications', 'local', this.allVisaApplications);
-          // this.sharedService.updateAllLeaves(this.allLeaves);
+          this.sharedService.updateVisaApplictions(this.allVisaApplications);
         }
       })
       this.allEmployees.forEach((employee: any) => {
         if (employee.id === employeeId) {
-          // this.notification.employeeId = employee.id
-          // this.notification.managerId = this.manager.id;
+          this.notification.employeeId = employee.id
+          this.notification.managerId = this.manager.id;
           employee.operationsOperated.visaApplications.forEach((visaApplication: any) => {
             if(visaApplication.visaApplicationId = visaApplicationId) {
               visaApplication.status = 'accepted';
@@ -71,30 +84,26 @@ export class VisasComponent {
               this.sharedService.set('employee', 'session', employee);
             }
           })
-          // this.sharedService.updateEmployeeAccount(employee);
         }
       })
-
-
-      // allNotifications.push(this.notification)
-      // this.sharedService.set('allNotifications', 'local', allNotifications)
+      allNotifications.push(this.notification)
+      this.sharedService.set('allNotifications', 'local', allNotifications)
     }
     if (leaveStatus === 'decline') {
       this.allVisaApplications.forEach((visaApplication: any) => {
         if (visaApplication.visaApplicationId === visaApplicationId) {
           visaApplication.status = 'declined'
-          // this.notification.status = 'declined';
-          // this.notification['id'] = `notification-${new Date().getTime()}`;
+          this.notification.status = 'declined';
+          this.notification['id'] = `notification-${new Date().getTime()}`;
           this.snackbar.open('Leave status and notification updated successfully', 'Ok', { duration: 3000 });
           this.sharedService.set('visaApplications', 'local', this.allVisaApplications);
+          this.sharedService.updateVisaApplictions(this.allVisaApplications);
           return;
         }
       })
 
       this.allEmployees.forEach((employee: any) => {
         if (employee.id === employeeId) {
-          // this.notification.employeeId = employee.id
-          // this.notification.managerId = this.manager.id;
           employee.operationsOperated.visaApplications.forEach((visaApplication: any) => {
             if(visaApplication.visaApplicationId = visaApplicationId) {
               visaApplication.status = 'declined';
@@ -105,10 +114,17 @@ export class VisasComponent {
           // this.sharedService.updateEmployeeAccount(employee);
         }
       })
-      // this.notification.employeeId = employeeId;
-      // this.notification.managerId = this.manager.id;
-      // allNotifications.push(this.notification)
-      // this.sharedService.set('allNotifications', 'local', allNotifications)
+      this.notification.employeeId = employeeId;
+      this.notification.managerId = this.manager.id;
+      allNotifications.push(this.notification)
+      this.sharedService.set('allNotifications', 'local', allNotifications)
     }
+  }
+  
+  goBack(): void {
+    this.router.navigate(['/manager-landing'])
+    // this.location.back();
+    this.sharedService.updateshowNotificationsIcon()
+    this.sharedService.updateOperationsShow();
   }
 }

@@ -23,6 +23,10 @@ import { NgChartsModule } from 'ng2-charts';
 import { VisasComponent } from './components/visas/visas.component';
 import { OperatorLandingComponent } from './components/operator-landing/operator-landing.component';
 import { ViewOperationComponent } from './components/view-operation/view-operation.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { PolicyComponent } from './popups/policy/policy.component';
+import { SystemUsersComponent } from './components/system-users/system-users.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { ViewOperationComponent } from './components/view-operation/view-operati
     VisasComponent,
     OperatorLandingComponent,
     ViewOperationComponent,
+    AdminComponent,
+    PolicyComponent,
+    SystemUsersComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

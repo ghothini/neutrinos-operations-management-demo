@@ -15,6 +15,8 @@ export class VisaExtensionComponent {
   allVisaExtensions: any;
   managerId: any;
   allManagers: any;
+  allNotifications: any;
+  todayDate = new Date().toISOString().split("T")[0];
   visaExtensionData: any = {
     fullName: 'Thapelo Mokotelakoena',
     email: 'thapeloghothini@gmail.com',
@@ -25,12 +27,22 @@ export class VisaExtensionComponent {
     time: ''
   }
 
+  notification: any = {
+    employeeId: '',
+    lastName: '',
+    managerId: '',
+    id: '',
+    seen: false,
+    notificationType: 'Visa Extension Application'
+  }
+
   constructor(private location: Location, private sharedService: SharedServiceService, private snackbar: MatSnackBar
     , private router: Router) {
       this.employee = this.sharedService.get('employee','session');
       this.allEmployees = this.sharedService.get('employees','local');
       this.allManagers = this.sharedService.get('managers','local');
       this.allVisaExtensions = this.sharedService.get('visaExtensionApplications','local');
+      this.allNotifications = this.sharedService.get('allNotifications', 'local');
       console.log(this.allVisaExtensions)
      }
   goBack(): void {
@@ -41,6 +53,8 @@ export class VisaExtensionComponent {
     this.allEmployees.forEach((employee: any) => {
       if (employee.id === this.employee.id) {
         this.managerId = employee.profile.managerId;
+        this.notification.employeeId = employee.id
+        this.notification.managerId = employee.profile.managerId;
       }
     })
     
@@ -48,16 +62,19 @@ export class VisaExtensionComponent {
     this.allManagers.forEach((manager: any) => {
       if (manager.id === this.managerId) {
         this.visaExtensionData['operator'] = manager.profile.operatorId;
+        this.notification['operatorId'] = manager.profile.operatorId;
       }
     })
-    this.employee.operationsOperated.visaExtensions.push(this.visaExtensionData);
+    this.employee.profile.operationsOperated.visaExtensions.push(this.visaExtensionData);
 
     // Update session and local storage and visa extensions array
     
     this.sharedService.set('employee','session',this.employee);
     this.allEmployees.forEach((employee: any) => {
       if(employee.id === this.employee.id){
-        employee.operationsOperated.visaExtensions.push(this.visaExtensionData);
+        this.notification['id'] = `notification-${new Date().getTime()}`;
+        this.notification.lastName = employee.profile.fullName.split(' ')[1];
+        employee.profile.operationsOperated.visaExtensions.push(this.visaExtensionData);
         this.sharedService.set('employees','local',this.allEmployees);
       }
     })
@@ -66,7 +83,8 @@ export class VisaExtensionComponent {
       ...this.allVisaExtensions[this.allVisaExtensions.length - 1],
       id: this.employee.id
     }
-    console.log(this.allVisaExtensions);
+    this.allNotifications.push(this.notification);
+    this.sharedService.set('allNotifications', 'local', this.allNotifications);
     this.sharedService.set('visaExtensionApplications','local',this.allVisaExtensions);
     this.snackbar.open(`Visa Extensionn was requested successfully`, 'Ok', { duration: 3000 });
     this.sharedService.updateOperationsShow();

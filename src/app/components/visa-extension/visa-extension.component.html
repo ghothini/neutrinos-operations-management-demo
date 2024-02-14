@@ -48,7 +48,7 @@
             <!-- Renewal Date -->
             <mat-form-field appearance="fill" class="width-45">
                 <mat-label>Renewal Date</mat-label>
-                <input matInput [matDatepicker]="picker2" required name="renewalDate" #renewalDate="ngModel"
+                <input matInput [matDatepicker]="picker2" [min]="todayDate" required name="renewalDate" #renewalDate="ngModel"
                     [(ngModel)]="visaExtensionData.renewalDate" (focus)="picker2.open()">
                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>

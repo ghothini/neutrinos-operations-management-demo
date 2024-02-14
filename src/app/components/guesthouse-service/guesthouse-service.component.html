@@ -46,7 +46,7 @@
             <!-- Renewal Date -->
             <mat-form-field appearance="fill" class="width-45">
                 <mat-label><small>When would you like the problem resolved?</small></mat-label>
-                <input matInput [matDatepicker]="picker2" required name="addressProblemDate" #addressProblemDate="ngModel"
+                <input matInput [matDatepicker]="picker2" [min]="todayDate" required name="addressProblemDate" #addressProblemDate="ngModel"
                     [(ngModel)]="guesthouseServiceFormData.addressProblemDate" (focus)="picker2.open()">
                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>

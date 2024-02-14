@@ -13,12 +13,14 @@ export class SignInComponent {
   allEmployees: any;
   allManagers: any;
   allOperators: any;
+  admin: any;
   loginFormGroup: FormGroup;
 
   constructor(private router: Router, private sharedService: SharedServiceService, private snackbar: MatSnackBar) {
     this.allEmployees = this.sharedService.get('employees', 'local');
     this.allManagers = this.sharedService.get('managers', 'local');
     this.allOperators = this.sharedService.get('operators', 'local');
+    this.admin = this.sharedService.get('admin', 'local');
     console.log(this.allEmployees);
 
     this.loginFormGroup = new FormGroup({
@@ -26,123 +28,28 @@ export class SignInComponent {
       password: new FormControl('', [Validators.required])
     })
 
-    // const managers = [
+    // const admin = [
     //   {
-    //     "startWorkDay": "",
-    //     "id": `manager-${new Date().getTime()}`,
+    //     "id": `admin-00000000`,
     //     "profile": {
-    //       email: 'kamogelo@neutrionsmanagement.com',
+    //       email: 'admin@gmail.com',
     //       password: '123',
-    //       fullName: "Neutrinos Manager",
-    //       cellphoneNo: '072 714 8449',
-    //       dateJoinedCompany: '2024-02-20T22:00:00.000Z',
-    //       gender: 'Male',
+    //       fullName: "Administrator",
+    //       cellphoneNo: '0754455656',
+    //       dateJoinedCompany: '2023-03-21T22:00:00.000Z',
+    //       gender: 'Female',
     //       operatorId: 'operator-1707295342729',
-    //       role: 'Manager',
-    //       dateOfBirth: '1996-05-27T22:00:00.000Z',
-    //       homeAddress: 'Eastern Cape,121 Sandton Street',
+    //       role: 'Admin',
+    //       dateOfBirth: '2005-11-20T22:00:00.000Z',
+    //       homeAddress: 'Cape Town,121 Sandton Street',
     //       remainingSickLeaveDays: 15,
     //       remainingAnnualLeaveDays: 30,
     //       approvedLeaveCount: 0,
     //       pendingLeaveDuration: 'None'
-    //     },
-    //     "operationsOperated": {
-    //       "visaExtensions": [],
-    //       "visaApplications": [],
-    //       "flightsInformation": [],
-    //       "guesthouseServices": [],
-    //       "internationalTravels": [],
-    //       "domesticTravels": []
     //     }
-    //   },
-    //   {
-    //     "startWorkDay": "",
-    //     "id": "manager-1706750245643",
-    //     "profile": {
-    //       email: 'phemelo@neutrionsmanagement.com',
-    //       password: '123',
-    //       fullName: "Phemelo Siduki",
-    //       cellphoneNo: '072 888 4564',
-    //       operatorId: 'operator-1707295600409',
-    //       dateJoinedCompany: '2024-02-20T22:00:00.000Z',
-    //       gender: 'Male',
-    //       role: 'Manager',
-    //       dateOfBirth: '1996-05-27T22:00:00.000Z',
-    //       homeAddress: 'Rustenburg 0202, Boitekong Ext 4',
-    //       remainingSickLeaveDays: 15,
-    //       remainingAnnualLeaveDays: 30,
-    //       approvedLeaveCount: 0,
-    //       pendingLeaveDuration: 'None'
-    //     },
-    //     "operationsOperated": {
-    //       "visaExtensions": [],
-    //       "visaApplications": [],
-    //       "flightsInformation": [],
-    //       "guesthouseServices": [],
-    //       "internationalTravels": [],
-    //       "domesticTravels": []
-    //     }
-    //   }]
-    // this.sharedService.set('managers', 'local', managers)
-
-    // Local Storage Operators
-
-    // const operators = [
-    //   {
-    //     "startWorkDay": "",
-    //     "id": `operator-1707295342729`,
-    //     "profile": {
-    //       email: 'motshabi@neutrionsmanagement.com',
-    //       password: '123',
-    //       fullName: "Neutrinos Operator",
-    //       cellphoneNo: '081 564 8449',
-    //       dateJoinedCompany: '2013-02-10T22:00:00.000Z',
-    //       gender: 'Male',
-    //       role: 'Operator',
-    //       dateOfBirth: '1991-05-05T22:00:00.000Z',
-    //       homeAddress: 'Rustenburg,121 Sandton Street',
-    //       remainingSickLeaveDays: 15,
-    //       remainingAnnualLeaveDays: 30,
-    //       approvedLeaveCount: 0,
-    //       pendingLeaveDuration: 'None'
-    //     },
-    //     "operationsOperated": {
-    //       "visaExtensions": [],
-    //       "visaApplications": [],
-    //       "flightsInformation": [],
-    //       "guesthouseServices": [],
-    //       "internationalTravels": [],
-    //       "domesticTravels": []
-    //     }
-    //   },
-    //   {
-    //     "startWorkDay": "",
-    //     "id": `operator-1707295600409`,
-    //     "profile": {
-    //       email: 'thabiso@neutrionsmanagement.com',
-    //       password: '123',
-    //       fullName: "Neutrinos Operator",
-    //       cellphoneNo: '072 564 8449',
-    //       dateJoinedCompany: '2023-02-10T22:00:00.000Z',
-    //       gender: 'Male',
-    //       role: 'Operator',
-    //       dateOfBirth: '2000-05-15T22:00:00.000Z',
-    //       homeAddress: 'Randburg,121 Sandton Street',
-    //       remainingSickLeaveDays: 15,
-    //       remainingAnnualLeaveDays: 30,
-    //       approvedLeaveCount: 0,
-    //       pendingLeaveDuration: 'None'
-    //     },
-    //     "operationsOperated": {
-    //       "visaExtensions": [],
-    //       "visaApplications": [],
-    //       "flightsInformation": [],
-    //       "guesthouseServices": [],
-    //       "internationalTravels": [],
-    //       "domesticTravels": []
-    //     }
-    //   }]
-    // this.sharedService.set('operators', 'local', operators)
+    //   }
+    // ]
+    // this.sharedService.set('admin', 'local', admin)
   }
 
   submit() {
@@ -169,6 +76,12 @@ export class SignInComponent {
         return;
       }
     })
+    this.admin.forEach((admin: any) => {
+      if (admin.profile.email === this.loginFormGroup.value.email) {
+        isFound = admin;
+        return;
+      }
+    })
 
     if (isFound) {
       if (isFound.profile.password === this.loginFormGroup.value.password) {
@@ -188,6 +101,12 @@ export class SignInComponent {
           this.sharedService.set('operator', 'session', isFound);
           this.snackbar.open('Operator logged in successfully', 'Ok', { duration: 3000 });
           this.router.navigate(['/operator-landing']);
+          return;
+        }
+        if (isFound.profile.role.toLowerCase() === 'admin') {
+          this.sharedService.set('admin', 'session', isFound);
+          this.snackbar.open('Admin logged in successfully', 'Ok', { duration: 3000 });
+          this.router.navigate(['/admin']);
           return;
         }
       } else {

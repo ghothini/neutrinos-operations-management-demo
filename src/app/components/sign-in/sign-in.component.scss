@@ -53,13 +53,15 @@
 }
 
 .downloads img {
-    width: 155px;
+    width: 106px;
+    // height: 26px;;
     cursor: pointer;
 }
 
 .downloadPdf {
-    // color: #325a8d;
-    font-size: x-large;
+    color: white;
+    font-size: large;
+    font-weight: 100;
 }
 
 .loginTitle {
@@ -107,6 +109,10 @@
     color: white;
 }
 
+.height-74 {
+    height: 74px;
+}
+
 .headings:nth-child(2) {
     background-color: white;
 }
@@ -122,4 +128,95 @@
 
 .width-430 {
     width: 430px;
+}
+
+.main-container {
+    background-image: "neutrinosBackgroundImg";
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.neutrinosBackgroundImg {
+    width: 100%;
+}
+
+.z-index {
+    z-index: 1;
+}
+
+.south-neutrinos {
+    top: 0;
+    left: 0;
+}
+
+.form-container {
+    top: calc(50% - -29px);
+}
+
+.margin-top {
+    margin-top: 3px;
+}
+
+label {
+    font-weight: 500;
+}
+
+.background-img-color {
+    background-color: #0545a3;
+}
+
+.mat-mdc-raised-button {
+    height: 43px !important;
+}
+
+.mat-mdc-text-field-wrapper::before {
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.mat-mdc-form-field-bottom-align::before {
+    content: "";
+    /* display: inline-block; */
+    height: -7px !important;
+}
+
+.know-more {
+    width: 228px;
+}
+
+.more-container {
+    bottom: 3px;
+    right: 0;
+    padding-right: 5px;
+}
+
+.input {
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid;
+    padding-left: 9px;
+}
+
+.error-message {
+    color: red;
+}
+
+.show {
+    display: flex;
+}
+
+.buttonCancel {
+    padding: 10px;
+    background-color: #f44336;
+    border-radius: 10px;
+    color: white;
+}
+
+.buttonSubmit {
+    padding: 10px;
+    background-color: #3f51b5;
+    border-radius: 10px;
+    color: white;
 }

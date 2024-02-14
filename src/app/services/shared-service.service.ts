@@ -9,21 +9,32 @@ export class SharedServiceService {
   showRouter: boolean = false;
   showOperations: boolean = true;
   routerShowSubject = new Subject<any>()
+  showNotificationsIcon: boolean = false;
   operationsShowSubject = new Subject<any>()
   allLeaves: any;
+  allVisaApplications: any;
   allLeavesSubject = new Subject<any>();
-  remainingSickLeaveDays: any;
-  remainingAnnualLeaveDays: any;
+  allVisaApplicationsSubject = new Subject<any>();
+  remainingSickLeaveDays: any = 15;
+  remainingAnnualLeaveDays: any = 30;
   remainingSickLeaveDaysSubject = new Subject<any>();
   remainingAnnualLeaveDaysSubject = new Subject<any>();
   employeeAccountSubject = new Subject<any>();
+  showNotificationsIconSubject = new Subject<any>();
+  systemUsersCountSubject = new Subject<any>();
   employee: any;
+  showChangePasswrd: boolean = false;
+  changePasswrdSubject = new Subject<any>();
 
   updateOperationsShow(): any {
     this.showRouter = !this.showRouter;
     this.showOperations = !this.showOperations;
     this.routerShowSubject.next(this.showRouter);
     this.operationsShowSubject.next(this.showOperations);
+  }
+
+  updateChangePasswrd(): any {
+    this.changePasswrdSubject.next(this.showChangePasswrd);
   }
 
   updateAnnualLeaveDays(employee: any): void {
@@ -36,13 +47,45 @@ export class SharedServiceService {
     this.remainingSickLeaveDaysSubject.next(this.remainingSickLeaveDays);
   }
 
+  updateshowNotificationsIcon(): void {
+    this.showNotificationsIcon = true;
+    this.showNotificationsIconSubject.next(this.showNotificationsIcon);
+  }
+
+  updateUsersCount(): void {
+    const systemUsers = localStorage.getItem('systemUsers');
+    const usersCount = systemUsers ? JSON.parse(systemUsers).length : 0;
+    this.systemUsersCountSubject.next(usersCount);
+  }
+
   updateAllLeaves(allLeaves: any): void {
     this.allLeaves = allLeaves;
     this.allLeavesSubject.next(this.allLeaves);
   }
 
+  updateVisaApplictions(allVisaApplications: any): void {
+    this.allVisaApplications = allVisaApplications;
+    this.allVisaApplicationsSubject.next(this.allVisaApplications);
+  }
+
   watchRouterShow(): Observable<any> {
     return this.routerShowSubject.asObservable();
+  }
+
+  watchChangePasswrd(): Observable<any> {
+    return this.changePasswrdSubject.asObservable();
+  }
+
+  watchNotificationIcon(): Observable<any> {
+    return this.showNotificationsIconSubject.asObservable();
+  }
+
+  watchVisaApplications(): Observable<any> {
+    return this.allVisaApplicationsSubject.asObservable();
+  }
+
+  watchSystemUsers(): Observable<any> {
+    return this.systemUsersCountSubject.asObservable();
   }
 
   // Logged In Employee Account
@@ -74,18 +117,18 @@ export class SharedServiceService {
   }
 
   initialOperationsShow(): any {
-    return [this.showRouter,this.showOperations];
+    return [this.showRouter, this.showOperations];
   }
 
   // Storage
 
-  set(key: string, storage: string,data: any): void {
-    storage === 'session' ? sessionStorage.setItem(key,JSON.stringify(data)) : localStorage.setItem(key,JSON.stringify(data))
+  set(key: string, storage: string, data: any): void {
+    storage === 'session' ? sessionStorage.setItem(key, JSON.stringify(data)) : localStorage.setItem(key, JSON.stringify(data))
   }
 
   get(key: string, storage: string): any {
     let data;
-    if(storage === 'session'){
+    if (storage === 'session') {
       data = sessionStorage.getItem(key);
     } else {
       data = localStorage.getItem(key);

@@ -1,7 +1,7 @@
-.header img {
+.headerImg {
     height: 41px;
     z-index: 1;
-    margin-top: 5px;    
+    margin-top: 5px;
     padding: 3px;
     background-color: #ced3d9;
     border-radius: 50%;
@@ -54,7 +54,7 @@ footer {
 
 .color-blue {
     color: #3f51b5;
-} 
+}
 
 .hide {
     display: none !important;
@@ -82,11 +82,11 @@ footer {
 }
 
 .color-declined {
-   background-color: '#f44336';
+    background-color: '#f44336';
 }
 
 .color-accepted {
-   background-color: '#f44336';
+    background-color: '#f44336';
 }
 
 .status p {
@@ -104,7 +104,8 @@ footer {
 
 .footer {
     // color: #325a8d;
-    width: 740px;;
+    width: 740px;
+    ;
 }
 
 .editIcon {
@@ -119,6 +120,7 @@ footer {
     border-radius: 10px;
     // background-color: #ced3d9;
 }
+
 .guesthouseLogo {
     width: 100px;
 }
@@ -141,20 +143,25 @@ footer {
 }
 
 .operation {
-    height: 160px;
-    width: 200px;
+    height: 166px;
+    width: 232px;
+    position: relative;
+    justify-content: center;
     border-radius: 7px;
     border: 1px solid #ced3d9;
 }
- 
+
+.operation img {
+    margin-top: -7px;
+}
+
 .notifications {
     position: absolute;
     right: 65px;
-    top: 84px;  
+    top: 84px;
     width: 252px;
     z-index: 1;
     display: flex;
-    background-color: #ced3d9;
     border-radius: 7px;
     max-height: 244px;
     overflow-y: auto;
@@ -169,7 +176,6 @@ footer {
     height: 34px;
     border-radius: 7px;
     border: 1px solid;
-    padding: 0px 5px;
     background-color: #5b80ba;
 }
 
@@ -211,7 +217,7 @@ footer {
 }
 
 .landingLogo {
-    width: 200px;
+    height: 133px;
 }
 
 .domesticTransportLogo {
@@ -221,4 +227,79 @@ footer {
 .mat-mdc-raised-button {
     height: 45px;
     width: 129px;
+}
+
+.visaApp {
+    bottom: 3px;
+    right: calc(50% - 59px);
+}
+
+.visaExt {
+    bottom: 3px;
+    right: calc(50% - 59px);
+}
+
+.internationalTravel {
+    bottom: 3px;
+    right: calc(50% - 60px);
+}
+
+.flightInfo {
+    bottom: 3px;
+    right: calc(50% - 60px);
+}
+
+.guesthouseService {
+    bottom: 3px;
+    right: calc(50% - 68px);
+}
+
+.domesticTravel {
+    bottom: 3px;
+    right: calc(50% - 59px);
+}
+
+.operation {
+    height: 180px;
+    width: 233px;
+    border-radius: 7px;
+}
+
+.policy {
+    height: 40px;
+}
+
+.policyTitle {
+    height: 17px;
+}
+
+.underline {
+    height: 12px;
+    border-radius: 7px;
+    background-color: #ced3d9;
+}
+
+.policyContainer {
+    display: flex;
+    gap: 0.5em;
+    overflow-x: auto;
+    width: 746px;
+}
+
+.signature {
+    height: 204px;
+}
+
+// .operation h2 {
+//     color: #151555;
+// }
+
+.policyContent {
+    background-color: ghostwhite;
+    border-radius: 10px;
+}
+
+.backBtn {
+    height: 35px;
+    margin-left: 34px;
 }

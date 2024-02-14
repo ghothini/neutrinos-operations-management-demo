@@ -57,3 +57,71 @@
 canvas {
     height: 350px !important;
 }
+
+// Notifications panel
+
+
+.notificationItem {
+    height: 34px;
+    border-radius: 7px;
+    border: 1px solid;
+    background-color: #5b80ba;
+}
+
+.notificationsIcon {
+    left: 30px !important;
+    top: -39px !important;
+}
+ 
+.notifications {
+    position: absolute;
+    left: 95px;
+    top: -58px;
+    z-index: 1;
+    display: flex;
+    border-radius: 7px;
+    max-height: 244px;
+    overflow-y: auto;
+}
+
+.notificationsCount {
+    top: -39px;
+    left: 63px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    height: 16px;
+    z-index: 1;
+    font-weight: 500;
+    padding: 2px;
+    background-color: #3f51b5;
+    border-radius: 50%;
+    color: white;
+}
+
+.notificationItem {
+    height: 34px;
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 0px 5px;
+    background-color: #5b80ba;
+}
+
+.notificationsIcon {
+    right: 2px;
+    top: 68px;
+    height: 41px;
+    z-index: 1;
+    margin-top: 5px;
+    padding: 3px;
+    background-color: #ced3d9;
+    border-radius: 50%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.color-white {
+    color:  white;
+}

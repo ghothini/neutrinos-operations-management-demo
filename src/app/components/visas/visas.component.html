@@ -1,5 +1,5 @@
 <div class="flex full-width flex column">
-    <div class="inner-container flex column center-center">
+    <div class="inner-container flex column center-center relative">
         <div class="flex full-width a-center space-around padding-10">
             <img class="visaLogo cursor" src="../../../assets/images/visa.png" alt="Visa Logo">
             <h2 class="margin-0 title cursor">Visa Applications</h2>
@@ -36,9 +36,14 @@
                                 <button mat-raised-button color="primary">Pending</button>
                             </div> -->
                             <div class="flex mat-menu absolute visaApplicationBtn">
-                                <button mat-raised-button [color]="visaApplication.status === 'accepted' ? 'primary' : 'warn'" [matMenuTriggerFor]="menu">{{visaApplication.status | titlecase}}</button>
+                                <button mat-raised-button [disabled]="visaApplication.status === 'declined'"
+                                    [color]="visaApplication.status === 'accepted' ? 'primary' : 'warn'"
+                                    [matMenuTriggerFor]="menu">{{visaApplication.status | titlecase}}</button>
                                 <mat-menu class="absolute" #menu="matMenu">
-                                    <button (click)="submitStatus(leaveStatus, visaApplication.visaApplicationId, visaApplication.id)" mat-menu-item *ngFor="let leaveStatus of leaveStatuses">{{leaveStatus | titlecase}}</button>
+                                    <button
+                                        (click)="submitStatus(leaveStatus, visaApplication.visaApplicationId, visaApplication.id)"
+                                        mat-menu-item *ngFor="let leaveStatus of leaveStatuses">{{leaveStatus |
+                                        titlecase}}</button>
                                 </mat-menu>
                             </div>
                             <div class="absolute nationality">
@@ -86,4 +91,6 @@
             </mat-accordion>
         </mat-card>
     </div>
+    <img (click)="goBack()" title="Go Back" class="backIcon absolute cursor"
+        src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" alt="Go back button">
 </div>

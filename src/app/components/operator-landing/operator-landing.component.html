@@ -1,12 +1,34 @@
 <div class="flex column full-height">
     <div class="flex column gap-1em">
         <h2 class="text-center">Neutrinos Operations Application</h2>
-        <div class="flex j-end relative">
+        <div class="flex j-end relative a-center gap-05em">
+            <div class="flex cursor">
+                <h2 (click)="switchAcc()" class="margin-0">Switch Account</h2>
+            </div>
             <marquee class="neutrinosMarquee half-width">
                 <img class="no-border-radius" src="../../../assets/images/neutrinos-logo.png" alt="">
             </marquee>
             <div class="absolute">
                 <button class="logOutBtn z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+            </div>
+            <img class="cursor absolute notificationsIcon"
+                src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="notificationButton">
+            <div class="absolute notificationsCount">
+                <p class="margin-0">{{operatorNotifications.length}}</p>
+            </div>
+            <div id="notifications" class="hide flex column notifications gap-05em">
+                <div *ngFor="let notification of operatorNotifications"
+                    class="flex a-center gap-05em relative notificationItem cursor"
+                    (click)="seenNotification('notification.id')">
+                    <img (click)="seenNotification(notification.id)"
+                        src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg" alt="Delete notification">
+                    <div class="notificationTitle">
+                        <p class="margin-0">{{notification.notificationType | titlecase}}</p>
+                    </div>
+                    <div class="flex gap-05em a-center status">
+                        <p class="statusP margin-0 color-white">{{notification.status | titlecase}}</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="containter flex full-width gap-1em">

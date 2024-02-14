@@ -1,0 +1,79 @@
+.adminIcon {
+    height: 92px;
+}
+
+.uploadP {
+    font-size: 16px;
+}
+
+.systemUsersImg {
+    height: 37px;
+}
+
+.logo-container {
+    top: 35px;
+    width: 50%;
+}
+
+.main-container {
+    background-image: "neutrinosBackgroundImg";
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #04429f;
+}
+
+.z-index {
+    z-index: 1;
+}
+
+.neutrinosBackgroundImg {
+    width: 100%;
+}
+
+.add-container {
+    top: 227px;
+    left: 9px;
+    z-index: 1;
+}
+
+.addPolicyIcon {
+    border-radius: 50%;
+    background-color: #7fd1ca;
+    height: 66px;
+    width: 66px;
+}
+
+.nutrinosImg {
+    height: 52px;
+}
+
+.mat-tab-group {
+    height: 300px;
+}
+
+.noUsers {
+    padding: 7px;
+    background-color: #ced3d9;
+    border-radius: 50%;
+}
+
+.usersCount {
+    background-color: #3f51b5;
+    padding: 5px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.usersCount h2 {
+    font-size: 23px;
+}
+
+.header {
+    padding: 0px 20px 0px 20px;
+}
+
+.systemUsersNo {
+    font-size: large;
+}

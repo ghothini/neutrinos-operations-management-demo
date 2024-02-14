@@ -3,33 +3,33 @@
         <div class="full-height flex column space-between">
             <div class="flex column">
                 <div class="header flex space-between a-center full-width j-center">
-                    <div class="flex a-center">
-                        <div class="flex gap-05em a-center cursor" title="Manager Remaining Leave Days"
-                            (click)="showProfile()">
-                            <img class="userIcon" src="../../../assets/images/admin-img.png" title="Profile" alt="">
-                            <p class="margin-0 color-blue leaveText">Annual Leave: <span
-                                    class="color-black">{{remainingAnnualLeaveDays}}</span>
-                            </p>
-                            <p class="margin-0 color-blue leaveText">Sick Leave: <span
-                                    class="color-black">{{remainingSickLeaveDays}}</span></p>
-                            <hr class="leavesHr full-width">
+                    <div class="flex a-center gap-1em">
+                        <div class="flex gap-05em a-center cursor" title="Switch to your employee account">
+                            <img class="userIcon headerImg" src="../../../assets/images/admin-img.png" title="Profile" alt="">
+                            <div class="flex">
+                                <h2 (click)="switchAcc()" class="margin-0">Switch Account</h2>
+                            </div>
                         </div>
-                        <img (click)="requestLeave()" class="addLeave cursor"
-                            src="../../../assets/icons/add_FILL0_wght400_GRAD0_opsz24.svg" alt="Add a leave request"
-                            title="Add a leave request">
                     </div>
                     <marquee class="neutrinosMarquee half-width">
-                        <img class="no-border-radius" src="../../../assets/images/neutrinos-logo.png" alt="">
+                        <img class="no-border-radius headerImg " src="../../../assets/images/neutrinos-logo.png" alt="">
                     </marquee>
                     <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
-                    <img class="cursor absolute notificationsIcon"
-                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="notificationButton">
-                    <div class="absolute notificationsCount" >
+                    <div>
+                        <img class="headerImg cursor absolute notificationsIcon"
+                            src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
+                            id="notificationButton">
+                    </div>
+                    <div id="notificationsCount" class="absolute notificationsCount">
                         <p class="margin-0">{{managerNotifications.length}}</p>
                     </div>
-                    <div id="notifications" class="hide flex notifications gap-05em padding-10">
-                        <div class="flex a-center gap-1em column relative cursor">
-                            <div *ngFor="let notification of managerNotifications" (click)="seenNotification(notification.id)" class="flex gap-05em a-center notificationItem">
+                    <div id="notifications" class="hide flex notifications gap-05em">
+                        <div class="flex a-center gap-05em column relative cursor">
+                            <div *ngFor="let notification of managerNotifications"
+                                class="flex gap-05em a-center notificationItem">
+                                    <img (click)="seenNotification(notification.id)"
+                                        src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg"
+                                        alt="Delete notification">
                                 <p class="margin-0 color-white">new</p>
                                 <div class="flex gap-05em">
                                     <p class="margin-0">{{notification.notificationType | titlecase}}</p>
@@ -45,22 +45,23 @@
                             <router-outlet></router-outlet>
                         </div>
                         <div *ngIf="showOperations" class="flex gap-1em">
-                            <div class="all relative flex center-center column cursor gap-1em" (click)="showLeaves()">
+                            <mat-card class="all relative flex center-center column cursor gap-1em"
+                                (click)="showLeaves()">
                                 <div class="companyLeave relative">
                                     <img src="../../../assets/images/neutrinos-logo.png" alt="">
                                     <hr class="absolute full-width">
                                     <h2 class="margin-0 absolute">LEAVES</h2>
                                 </div>
-                                <p class="margin-0 title">Leaves Applications</p>
-                            </div>
-                            <div class="all relative flex center-center column cursor" (click)="showVisas()">
+                                <p class="margin-0 title absolute textAbs">Leaves Applications</p>
+                            </mat-card>
+                            <mat-card class="all relative flex center-center column cursor" (click)="showVisas()">
                                 <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
-                                <p class="margin-0 title">Visa Applications</p>
-                            </div>
+                                <p class="margin-0 title absolute textAbs">Visa Applications</p>
+                            </mat-card>
                         </div>
                     </div>
                     <div class="left flex-1">
-                        <div class="full-width full-height column a-center" >
+                        <div class="full-width full-height column a-center">
                             <div>
                                 <h2 class="text-center">Neutrinos Operations Summary</h2>
                             </div>

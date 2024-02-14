@@ -1,5 +1,7 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
@@ -17,7 +19,8 @@ export class LeavesComponent {
   dataSource: any;
   dataSourceAcceptedStatus: any;
   leaveStatuses: string[] = ['accept', 'decline'];
-  allLeavesSubscription: Subscription;
+  isOperator: any;
+  operator: any;
 
   notification: any = {
     employeeId: '',
@@ -28,21 +31,44 @@ export class LeavesComponent {
     direction: 'toEmployee'
   }
 
-  constructor(private sharedService: SharedServiceService, private snackbar: MatSnackBar) {
+  constructor(private sharedService: SharedServiceService, 
+    private snackbar: MatSnackBar, private location: Location, private router: Router) {
     this.allLeaves = this.sharedService.get('allLeaves', 'local');
     this.manager = this.sharedService.get('manager', 'session');
-    this.allManagerLeaves = this.allLeaves.filter((leave: any) => leave.managerId === this.manager.id);
     this.allEmployees = this.sharedService.get('employees', 'local');
-    this.dataSource = this.allManagerLeaves.reverse();
-    this.allLeavesSubscription = this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
-      this.dataSource = allLeaves.reverse();
-      const managerLeaves = allLeaves.filter((leave: any) => leave.managerId === this.manager.id);
-
+    this.isOperator = this.sharedService.get('temp', 'session');
+    this.checkOperator();
+    
+    if (this.isOperator.profile) {
+      this.allManagerLeaves = this.allLeaves;
+      this.dataSource = this.allManagerLeaves.reverse();
+      this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
+        const managerLeaves = allLeaves
+        this.dataSource = managerLeaves.reverse();
+        // Filter with accepted
+        this.dataSourceAcceptedStatus = managerLeaves
+      })
       // Filter with accepted
-      this.dataSourceAcceptedStatus = managerLeaves.filter((leave: any) => leave.status === 'accepted').reverse();
-    })
-    // Filter with accepted
-    this.dataSourceAcceptedStatus = this.allManagerLeaves.filter((leave: any) => leave.status === 'accepted').reverse();
+      this.dataSourceAcceptedStatus = this.allManagerLeaves
+    } else {
+      this.allManagerLeaves = this.allLeaves.filter((leave: any) => leave.managerId === this.manager.id);
+      this.dataSource = this.allManagerLeaves.reverse();
+      this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
+        const managerLeaves = allLeaves.filter((leave: any) => leave.managerId === this.manager.id);
+        this.dataSource = managerLeaves.reverse();
+        // Filter with accepted
+        this.dataSourceAcceptedStatus = managerLeaves.filter((leave: any) => leave.status === 'accepted').reverse();
+      })
+      // Filter with accepted
+      this.dataSourceAcceptedStatus = this.allManagerLeaves.filter((leave: any) => leave.status === 'accepted').reverse();
+    }
+  }
+
+  checkOperator(): void {
+    if (this.isOperator.profile) {
+      this.operator = this.sharedService.get('operator', 'session');
+      this.manager = this.isOperator;
+    }
   }
 
   submitStatus(leaveStatus: string, leaveId: string, employeeId: string, leaveStartDate: string, leaveEndDate: string): void {
@@ -51,6 +77,7 @@ export class LeavesComponent {
       this.allLeaves.forEach((leave: any) => {
         if (leave.id === leaveId) {
           this.notification.status = 'accepted';
+          this.notification['operatorId'] = this.manager.profile.role.toLowerCase() === 'manager' ? this.manager.profile.operatorId : this.manager.id;
           leave.status = 'accepted';
           this.notification['id'] = `notification-${new Date().getTime()}`;
           leave['pendingLeaveDuration'] = `${this.convertDate(leave.dateStartLeave)} - ${this.convertDate(leave.dateEndLeave)}`;
@@ -77,6 +104,7 @@ export class LeavesComponent {
         if (leave.id === leaveId) {
           leave.status = 'declined'
           this.notification.status = 'declined';
+          this.notification['operatorId'] = this.manager.profile.role.toLowerCase() === 'manager' ? this.manager.profile.operatorId : this.manager.id;
           this.notification['id'] = `notification-${new Date().getTime()}`;
           this.snackbar.open('Leave status and notification updated successfully', 'Ok', { duration: 3000 });
           this.sharedService.set('allLeaves', 'local', this.allLeaves);
@@ -98,5 +126,11 @@ export class LeavesComponent {
     correctDate = Number(correctDate) + 1
     dateStart = `${dateStartArr[0]}/${dateStartArr[1]}/${correctDate}`
     return dateStart;
+  }
+
+  goBack(): void {
+    this.router.navigate(['/manager-landing']);
+    this.sharedService.updateshowNotificationsIcon()
+    this.sharedService.updateOperationsShow();
   }
 }

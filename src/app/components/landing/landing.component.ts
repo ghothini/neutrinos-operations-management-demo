@@ -16,17 +16,21 @@ export class LandingComponent implements OnInit {
   showRouter!: boolean;
   showOperations!: boolean;
   employee: any;
-  routerSubscription: Subscription;
-  operationsSubscription: Subscription;
   sickLeaveDaysSubscription!: Subscription;
   annualLeaveDaysSubscrition!: Subscription;
   remainingSickLeaveDays: any;
   remainingAnnualLeaveDays: any;
   southAfricanTime: any;
   showNotifications: boolean = false;
+  showPolicies: boolean = false;
   allNotifications: any;
+  allPolicies: any;
   employeeNotifications: any;
   notificationsElement: any;
+  toSignPolicy: any;
+  isManager: any;
+  manager: any;
+  showChangePassword = false;
   constructor(private router: Router, private sharedService: SharedServiceService,
     private dialog: MatDialog, private snackbar: MatSnackBar) {
     // Show employee operations options or their routes
@@ -34,21 +38,29 @@ export class LandingComponent implements OnInit {
     this.showRouter = show[0];
     this.showOperations = show[1];
     this.employee = this.sharedService.get('employee', 'session');
+    this.isManager = this.sharedService.get('temp', 'session')
+    this.allPolicies = this.sharedService.get('policies', 'local');
+    // this.checkManager();
     // Get employee notifications
     this.allNotifications = this.sharedService.get('allNotifications', 'local');
     this.employeeNotifications = this.allNotifications.filter((notification: any) => notification.employeeId === this.employee.id && !notification.seen && notification.direction === 'toEmployee').reverse();
-    this.routerSubscription = this.sharedService.watchRouterShow().subscribe((showRouterBoolean: boolean) => this.showRouter = showRouterBoolean);
-    this.operationsSubscription = this.sharedService.watchOperationsShow().subscribe((showOperationsBoolean: boolean) => this.showOperations = showOperationsBoolean);
-    this.sickLeaveDaysSubscription = this.sharedService.watchSickLeaveDays().subscribe((sickLeaveDays: any) => this.remainingSickLeaveDays = sickLeaveDays);
-    this.annualLeaveDaysSubscrition = this.sharedService.watchAnnualLeaveDays().subscribe((annualLeaveDays: any) => this.remainingAnnualLeaveDays = annualLeaveDays);
+    this.sharedService.watchRouterShow().subscribe((showRouterBoolean: boolean) => this.showRouter = showRouterBoolean);
+    this.sharedService.watchOperationsShow().subscribe((showOperationsBoolean: boolean) => this.showOperations = showOperationsBoolean);
+    this.sharedService.watchSickLeaveDays().subscribe((sickLeaveDays: any) => this.remainingSickLeaveDays = sickLeaveDays);
+    this.sharedService.watchAnnualLeaveDays().subscribe((annualLeaveDays: any) => this.remainingAnnualLeaveDays = annualLeaveDays);
+    this.sharedService.watchChangePasswrd().subscribe((changePasswrd: boolean) => this.showChangePassword = changePasswrd)
     this.remainingSickLeaveDays = this.employee.profile?.remainingSickLeaveDays;
     this.remainingAnnualLeaveDays = this.employee.profile?.remainingAnnualLeaveDays;
+
+    if (this.employee.profile.password === '123') {
+      this.showChangePassword = true;
+    }
 
     //  Update showing of time
     setInterval(() => {
       this.southAfricanTime = this.updateDate()
-    },1000)
-    
+    }, 1000)
+
     // const employees = [
     //   {
     //     "startWorkDay": "",
@@ -111,17 +123,27 @@ export class LandingComponent implements OnInit {
     // ]
     // this.sharedService.set('employees','local',employees);
   }
-  
+
   ngOnInit(): void {
+    const changePasswrdElement = document.getElementById('changePasswrd') as HTMLElement;
+    if (this.showChangePassword) {
+      changePasswrdElement.style.display = 'flex'
+    }
+
+    if (this.showChangePassword) {
+      setInterval(() => {
+        changePasswrdElement.style.display = 'none'
+      }, 10000)
+    }
     const notificationButtonElement = document.getElementById('notificationButton');
-    this.notificationsElement = document.getElementById('notifications');
-    notificationButtonElement?.addEventListener('click',() => {
-      if(this.employeeNotifications.length < 1) {
-        this.snackbar.open('No notifications updates to see','Ok',{duration: 3000});
+    this.notificationsElement = document.getElementById('notifications') as HTMLElement;
+    notificationButtonElement?.addEventListener('click', () => {
+      if (this.employeeNotifications.length < 1) {
+        this.snackbar.open('No notifications updates to see', 'Ok', { duration: 3000 });
         return;
       }
       this.showNotifications = !this.showNotifications;
-      if(this.showNotifications) {
+      if (this.showNotifications) {
         this.notificationsElement?.classList.remove('hide')
       } else {
         this.notificationsElement?.classList.add('hide')
@@ -137,13 +159,13 @@ export class LandingComponent implements OnInit {
     currentHrs = date.getHours();
     currentMin = date.getMinutes();
     currentSec = date.getSeconds();
-    if(currentMin < 10) {
+    if (currentMin < 10) {
       currentMin = `0${currentMin}`;
     }
-    if(currentSec < 10) {
+    if (currentSec < 10) {
       currentSec = `0${currentSec}`;
     }
-    if(currentHrs < 10) {
+    if (currentHrs < 10) {
       currentHrs = `0${currentHrs}`;
     }
     currentTime = currentHrs + ':' + currentMin + ':' + currentSec;
@@ -185,6 +207,7 @@ export class LandingComponent implements OnInit {
   }
 
   logOut(): void {
+    sessionStorage.removeItem('employee')
     this.router.navigate(['/sign-in']);
   }
 
@@ -200,14 +223,29 @@ export class LandingComponent implements OnInit {
     this.employeeNotifications = this.employeeNotifications.filter((notification: any) => notification.id != notificationId);
     console.log(this.employeeNotifications);
     this.allNotifications.forEach((notification: any) => {
-      if(notification.id === notificationId) {
+      if (notification.id === notificationId) {
         notification.seen = true;
-        this.sharedService.set('allNotifications','local',this.allNotifications);
+        this.sharedService.set('allNotifications', 'local', this.allNotifications);
       }
     })
+    this.snackbar.open('Notification deleted successfully', 'Ok', { duration: 3000 });
     // Hide notifications box
-    if(this.employeeNotifications.length < 1) {
+    if (this.employeeNotifications.length < 1) {
       this.notificationsElement.classList.add('hide');
+    }
+  }
+
+  signPolicy(policy: any) {
+    this.toSignPolicy = policy;
+  }
+  updateWatchClicks(): void {
+    this.showPolicies = !this.showPolicies;
+  }
+
+  checkManager(): void {
+    if (this.isManager.profile.dateOfBirth) {
+      this.manager = this.sharedService.get('manager', 'session');
+      this.employee = this.isManager;
     }
   }
 }

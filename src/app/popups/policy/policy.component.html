@@ -1,0 +1,61 @@
+<div class="full-height main-container column full-width flex">
+    <div class="flex column inner-container">
+        <div class="flex a-center space-around full-width">
+            <h1 class="operationTitle margin-0">{{isUpdating ? 'Update Policy' : 'Add Policy'}}</h1>
+            <img (click)="goBack()" title="Go Back" class="backIcon cursor"
+                src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" alt="Go back button">
+        </div>
+        <form [formGroup]="policyForm" class="full-width flex column">
+            <!-- Title -->
+            <mat-form-field class="full-width">
+                <mat-label>Title</mat-label>
+                <input type="text" formControlName="title" matInput>
+                <mat-error >
+                    This field is required
+                </mat-error>
+            </mat-form-field>
+            <!-- Content -->
+            <mat-form-field class="full-width">
+                <mat-label>Content</mat-label>
+                <input type="text" formControlName="content"
+                    matInput>
+                <mat-error >
+                    This field is required
+                </mat-error>
+            </mat-form-field>
+            <!-- Procedure -->
+            <mat-form-field class="full-width">
+                <mat-label>Procedure</mat-label>
+                <input type="text"  formControlName="procedure"
+                    matInput>
+                <mat-error>
+                    This field is required
+                </mat-error>
+            </mat-form-field>
+            <!-- Select Category -->
+            <mat-form-field class="full-width">
+                <mat-label>Category</mat-label>
+                <mat-select  formControlName="category">
+                    <mat-option *ngFor="let category of categories" [value]="category">{{category | titlecase}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Please select an option
+                </mat-error>
+            </mat-form-field>
+            <!-- Select Form Link -->
+            <mat-form-field class="full-width">
+                <mat-label>Form Link</mat-label>
+                <mat-select  formControlName="formLink">
+                    <mat-option *ngFor="let formLink of formLinks" [value]="formLink">{{formLink}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Please select an option
+                </mat-error>
+            </mat-form-field>
+            <div class="flex gap-1em">
+                <button class="flex-1" mat-raised-button color="warn">Cancel</button>
+                <button class="flex-1" mat-raised-button color="primary" (click)="isUpdating ? update() : submit()">{{isUpdating ? 'Update' : 'Submit'}}</button>
+            </div>
+        </form>
+    </div>
+</div>
