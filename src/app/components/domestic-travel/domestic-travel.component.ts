@@ -25,7 +25,8 @@ export class DomesticTravelComponent {
     prefferedReturnTime: '',
     customerName: '',
     projectName: '',
-    currensy: ''
+    currensy: '',
+    status: 'pending'
   }
   employeeCredentialsFormData: any = {
     surname: 'Mokotelakoena',

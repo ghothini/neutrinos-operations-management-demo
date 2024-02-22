@@ -6,6 +6,7 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { LeaveApplicationComponent } from '../leave-application/leave-application.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OperationsOverviewComponent } from '../popups/operations-overview/operations-overview.component';
 
 @Component({
   selector: 'app-landing',
@@ -16,6 +17,7 @@ export class LandingComponent implements OnInit {
   showRouter!: boolean;
   showOperations!: boolean;
   employee: any;
+  allEmployees: any;
   sickLeaveDaysSubscription!: Subscription;
   annualLeaveDaysSubscrition!: Subscription;
   remainingSickLeaveDays: any;
@@ -30,7 +32,10 @@ export class LandingComponent implements OnInit {
   toSignPolicy: any;
   isManager: any;
   manager: any;
+  employeePendingActions: string[] = [];
   showChangePassword = false;
+  completedActions: string[] = [];
+
   constructor(private router: Router, private sharedService: SharedServiceService,
     private dialog: MatDialog, private snackbar: MatSnackBar) {
     // Show employee operations options or their routes
@@ -38,6 +43,7 @@ export class LandingComponent implements OnInit {
     this.showRouter = show[0];
     this.showOperations = show[1];
     this.employee = this.sharedService.get('employee', 'session');
+    this.getPendingActions();
     this.isManager = this.sharedService.get('temp', 'session')
     this.allPolicies = this.sharedService.get('policies', 'local');
     // this.checkManager();
@@ -51,6 +57,7 @@ export class LandingComponent implements OnInit {
     this.sharedService.watchChangePasswrd().subscribe((changePasswrd: boolean) => this.showChangePassword = changePasswrd)
     this.remainingSickLeaveDays = this.employee.profile?.remainingSickLeaveDays;
     this.remainingAnnualLeaveDays = this.employee.profile?.remainingAnnualLeaveDays;
+    console.log(this.remainingAnnualLeaveDays)
 
     if (this.employee.profile.password === '123') {
       this.showChangePassword = true;
@@ -58,7 +65,18 @@ export class LandingComponent implements OnInit {
 
     //  Update showing of time
     setInterval(() => {
+      this.allEmployees = this.sharedService.get('employees','local');
       this.southAfricanTime = this.updateDate()
+      this.allEmployees.forEach((employee: any) => {
+        if (employee.id === this.employee.id) {
+          if(employee.profile.operationsOperated.visaApplications.length > 0 && !this.completedActions.includes('Visa Applications')) this.completedActions.push('Visa Applications');
+          if(employee.profile.operationsOperated.visaExtensions.length > 0 && !this.completedActions.includes('Visa Extensions')) this.completedActions.push('Visa Extensions');
+          if(employee.profile.operationsOperated.guesthouseServices.length > 0 && !this.completedActions.includes('Guesthouse Services')) this.completedActions.push('Guesthouse Services');
+          if(employee.profile.operationsOperated.domesticTravels.length > 0 && !this.completedActions.includes('Domestic Travels')) this.completedActions.push('Domestic Travels');
+          if(employee.profile.operationsOperated.flightsInformation.length > 0 && !this.completedActions.includes('Flights Information')) this.completedActions.push('Flights Information');
+          if(employee.profile.operationsOperated.internationalTravels.length > 0 && !this.completedActions.includes('International Travels')) this.completedActions.push('International Travels');
+        }
+      })
     }, 1000)
 
     // const employees = [
@@ -151,6 +169,17 @@ export class LandingComponent implements OnInit {
     })
   }
 
+  getPendingActions(): void {
+    // Get employees pending actions
+    if(this.employee.profile.operationsOperated.visaApplications.length > 0) this.employeePendingActions.push('Visa Application');
+    if(this.employee.profile.operationsOperated.visaExtensions.length > 0) this.employeePendingActions.push('Visa Extension');
+    if(this.employee.profile.operationsOperated.internationalTravels.length > 0) this.employeePendingActions.push('International Travel');
+    if(this.employee.profile.operationsOperated.domesticTravels.length > 0) this.employeePendingActions.push('Domestic Travel');
+    if(this.employee.profile.operationsOperated.flightsInformation.length > 0) this.employeePendingActions.push('Flight Information');
+    if(this.employee.profile.operationsOperated.guesthouseServices.length > 0) this.employeePendingActions.push('Guesthouse Service');
+    console.log(this.employeePendingActions);
+  }
+
   updateDate(): any {
     // South Africa Time
     let currentHrs, currentMin, currentSec, currentMs, currentTime;
@@ -204,6 +233,16 @@ export class LandingComponent implements OnInit {
 
   showProfile(): void {
     this.dialog.open(ProfileComponent)
+  }
+
+  showOperationsOverview(operations: string): void {
+    console.log(operations)
+    this.dialog.open(OperationsOverviewComponent,{
+      width: '100%',
+      data: {
+        _operation: operations
+      }
+    })
   }
 
   logOut(): void {

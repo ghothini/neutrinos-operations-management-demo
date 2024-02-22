@@ -142,9 +142,6 @@ export class AdminComponent implements OnInit {
           break;
       }
     })
-    // console.log('managers',managers);
-    // console.log('employees',employees);
-    // console.log('operators',operators);
     this.sharedService.set('operators', 'local', operators);
     this.sharedService.set('managers', 'local', managers);
     this.sharedService.set('employees', 'local', employees);

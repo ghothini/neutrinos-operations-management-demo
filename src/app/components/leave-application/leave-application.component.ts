@@ -46,7 +46,7 @@ export class LeaveApplicationComponent {
 
     // this.profileFormData = this.employee;
     this.leaveFormGroup = new FormGroup({
-      leaveType: new FormControl('', [Validators.required]),
+      leaveType: new FormControl('annual', [Validators.required]),
       dateStartLeave: new FormControl('', [Validators.required]),
       dateEndLeave: new FormControl('', [Validators.required]),
     })

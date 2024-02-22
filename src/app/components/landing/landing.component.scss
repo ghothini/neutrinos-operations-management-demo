@@ -1,3 +1,5 @@
+$project-blue: #3f51b5;
+
 .headerImg {
     height: 41px;
     z-index: 1;
@@ -5,6 +7,11 @@
     padding: 3px;
     background-color: #ced3d9;
     border-radius: 50%;
+}
+
+.actionsSummary {
+    background-color: white !important;
+
 }
 
 .addLeave {
@@ -29,11 +36,44 @@ footer {
     color: #325a8d;
 }
 
-.neutrinosMarquee {
-    background-color: #ced3d9;
-    width: 45%;
-    height: 51px;
-    z-index: 1;
+.main-container {
+
+    // .account-container {
+    //     // right: 0;
+    // }
+
+    .inner-container {
+        padding-right: 3em;
+    }
+
+    .actions-summary-container {
+        width: 700px;
+    }
+
+    .neutrinosMarquee {
+        // background-color: ghostwhite;
+        height: 163px;
+        padding-left: 4px;
+        z-index: 1;
+
+        .mat-card {
+            height: 147px;
+            width: 200px;
+        }
+    }
+
+    .sidenav-container {
+        height: 172px;
+        overflow-y: auto;
+
+        .operation-summary {
+            gap: .2em;
+
+            &:hover {
+                color: $project-blue;
+            }
+        }
+    }
 }
 
 .underlineAnnual {
@@ -61,8 +101,8 @@ footer {
 }
 
 .notificationsCount {
-    top: 65px;
-    right: 1px;
+    top: -143px;
+    right: 0;
     width: 15px;
     display: flex;
     justify-content: center;
@@ -126,8 +166,24 @@ footer {
 }
 
 .frame {
-    height: 500px;
-    margin-top: -44px;
+    height: 415px;
+    margin-top: -10px;
+    right: 0;
+    bottom: 0;
+}
+
+.frameImg {
+    height: 31px;
+    left: calc(70% + 122px);
+    bottom: 58px;
+}
+
+.frameTxt {
+    width: 81px;
+    text-align: center;
+    font-size: 23px;
+    left: calc(80% + 38px);
+    top: calc(50% + 56px);
 }
 
 .padding-bottom-10 {
@@ -155,10 +211,45 @@ footer {
     margin-top: -7px;
 }
 
+.loud-speaker {
+    width: 33px;
+}
+
+.notiHeader {
+    margin-bottom: 4px;
+}
+
+.actionContainer {
+    gap: 3px;
+    width: 180px;
+}
+
+.summarySpeaker {
+    top: -5px;
+    left: -13px;
+    z-index: 1;
+}
+
+.actions-container {
+    margin-top: 5px;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.summaryP {
+    margin-top: -4px;
+}
+
+.actionContainer:hover {
+    cursor: pointer;
+}
+
 .notifications {
     position: absolute;
-    right: 65px;
-    top: 84px;
+    right: 3px;
+    top: 229px;
+    padding: 10px;
+    background-color: #ced3d9;
     width: 252px;
     z-index: 1;
     display: flex;
@@ -168,8 +259,8 @@ footer {
 }
 
 .notificationsIcon {
-    right: 2px;
-    top: 68px;
+    right: 0;
+    bottom: -143px;
 }
 
 .notificationItem {
@@ -187,29 +278,15 @@ footer {
     margin-top: 12px;
 }
 
-.frameImg {
-    height: 31px;
-    left: 98px;
-    bottom: 94px;
-}
-
 .timeContainer {
     // background-color: #ced3d9;
-    top: 69px;
-    left: 174px;
+    bottom: 310px;
+    right: 114px;
     rotate: -0.1deg;
     border-radius: 10px;
     height: 37px;
     padding: 1px;
     color: black;
-}
-
-.frameTxt {
-    width: 81px;
-    text-align: center;
-    top: 201px;
-    left: 147px;
-    font-size: 23px;
 }
 
 .operation:nth-child(3) {
@@ -302,4 +379,20 @@ footer {
 .backBtn {
     height: 35px;
     margin-left: 34px;
+}
+
+.summaryLine {
+    height: 1.5px;
+    width: 140px;
+    background-color: #3f51b5;
+    margin-bottom: 5px;
+}
+
+.showNotifications {
+    height: 250px;
+    width: 10px;
+    background-color: #ced3d9;
+    top: calc(50% - 73px);
+    right: 7px;
+    border-radius: 7px;
 }

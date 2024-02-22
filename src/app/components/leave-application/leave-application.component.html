@@ -1,20 +1,12 @@
 <div class="half width">
     <mat-card class="full-width padding-10">
-        <div class="flex column gap-1em">
-            <div class="flex center-center">
-                <div class="flex container a-center padding-2">
-                    <div class="companyLeave relative">
-                        <img src="../../../assets/images/neutrinos-logo.png" alt="">
-                        <hr class="absolute full-width">
-                        <h2 class="margin-0 absolute">LEAVE</h2>
-                    </div>
-                </div>
-            </div>
-            <form [formGroup]="leaveFormGroup" class="flex column">
-                <div class="flex column a-center full-width">
-                    <div class="flex gap-05em a-center">
-                        <h2 class="margin-0 leaveType">Type of leave?</h2>
-                        <h1 class="margin-0 type">{{leaveFormGroup.value.leaveType | titlecase}}</h1>
+        <div class="main-container flex column gap-1em">
+            <p class="title margin-0"><strong>Leave application</strong></p>
+            <hr class="full-width">
+            <form [formGroup]="leaveFormGroup" class="flex column gap-05em">
+                <div class="flex column full-width">
+                    <div class="flex gap-05em">
+                        <h2 class="margin-0 leaveType">Choose leave application type?</h2>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="leaveType">
                         <mat-radio-button value="annual">Annual</mat-radio-button>
@@ -45,6 +37,9 @@
                             Please fill in information
                         </mat-error>
                     </mat-form-field>
+                </div>
+                <div class="flex column">
+                    <p  class="cursor margin-0">By continuing, you accept <span class="form color-black">{{leaveFormGroup.get('leaveType')?.value | titlecase}} Leave Policy</span></p>
                 </div>
                 <div class="flex center-center">
                     <button mat-raised-button color="primary" (click)="submit()">Submit</button>

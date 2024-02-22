@@ -25,7 +25,8 @@ export class GuesthouseServiceComponent {
     problem: '',
     otherGuesthouse: '',
     addressProblemDate: '',
-    additionalInfo: ''
+    additionalInfo: '',
+    status: 'pending'
   }
 
   notification: any = {

@@ -26,7 +26,8 @@ export class FlightInformationComponent {
     ticketNo: '',
     pickupDate: '',
     arrivalTime: '',
-    whatsappNo: ''
+    whatsappNo: '',
+    status: 'pending'
   }
 
   notification: any = {

@@ -12,8 +12,9 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-// flex
+$project-blue: #3f51b5;
 
+// flex
 .flex {
     display: flex;
 }
@@ -69,10 +70,21 @@ body {
     padding: 4em 4em 0em 4em;
 }
 
+.p-t-5em {
+    padding-top: 5em;
+}
+
 .relative {
     position: relative;
 }
 
+.border-box {
+    box-sizing: border-box;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
 
 .margin-0 {
     margin: 0;
@@ -88,7 +100,7 @@ app-guesthouse-service, app-international-travel, app-domestic-travel
     width: 50%;
 }
 
-.full-width {
+.full-width, app-graph {
     width: 100%;
 }
 
@@ -156,6 +168,10 @@ app-change-password {
 
 .gap-2em {
     gap: 2em;
+}
+
+.gap-3em {
+    gap: 3em;
 }
 
 .padding-20 {

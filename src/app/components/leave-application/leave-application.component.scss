@@ -1,6 +1,4 @@
-.companyLeave img {
-    height: 41px !important;
-}
+$policy-text-color: blue;
 
 hr {
     top: 38%;
@@ -25,10 +23,20 @@ hr {
     font-size: 22px;
 }
 
-.companyLeave h2 {
-    top: calc(50% - 12px);
-    right: calc(50% - 46px);
-    font-size: x-large;
-    color: #fdf9f9;
-    z-index: 1;
+.main-container {
+    .title {
+        font-size: 24px;
+    }
+
+    .form {
+        color: $policy-text-color;
+
+        &:hover {
+            text-decoration: underline solid black;
+        }
+    }
+}
+
+.color-black {
+    color: black;
 }

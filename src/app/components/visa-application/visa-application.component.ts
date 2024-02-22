@@ -24,7 +24,8 @@ export class VisaApplicationComponent {
     passportNo: '',
     birthCountry: '',
     expireDate: '',
-    nationality: ''
+    nationality: '',
+    status: 'pending'
   }
 
   notification: any = {

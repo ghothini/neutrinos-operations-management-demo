@@ -24,7 +24,8 @@ export class VisaExtensionComponent {
     passportNo: '',
     expireDate: null,
     renewalDate: null,
-    time: ''
+    time: '',
+    status: 'pending'
   }
 
   notification: any = {
@@ -55,6 +56,7 @@ export class VisaExtensionComponent {
         this.managerId = employee.profile.managerId;
         this.notification.employeeId = employee.id
         this.notification.managerId = employee.profile.managerId;
+        this.visaExtensionData['managerId'] = employee.profile.managerId;
       }
     })
     

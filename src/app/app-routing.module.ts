@@ -21,10 +21,12 @@ import { OperatorGuard } from './guards/operator.guard';
 import { ManagerlandingGuard } from './guards/managerlanding.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { OperatorLandingGuard } from './guards/operator-landing.guard';
+import { GraphComponent } from './components/charts/graph/graph.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' }, // redirect to `sign-in`
   { path: 'sign-in', component: SignInComponent },
+  { path: 'temp', component: GraphComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
   {

@@ -1,0 +1,17 @@
+.main-container {
+    hr, .operation, .chart-container {
+        width: 85%;
+    }
+
+    .operation {
+        padding-bottom: 1.5em;
+
+        .tableTitle {
+            font-size: 19px;
+        }
+    }
+
+    .graph-container {
+        height: 250px;
+    }
+}

@@ -33,7 +33,8 @@ export class InternationalTravelComponent {
     designation: '',
     department: '',
     sector: '',
-    currensy: ''
+    currensy: '',
+    status: 'pending'
   }
   employeeCredentialsFormData: any = {
     surname: 'Mokotelakoena',

@@ -1,184 +1,219 @@
 <div class="flex full-height">
-    <mat-card class="full-height flex column space-between padding-4em">
-        <div class="full-height flex relative column space-between">
-            <div class="full-height flex column">
-                <div class="header flex space-between relative a-center full-width j-center">
+    <div class="full-height relative">
+        <div class="main-container full-height flex column">
+            <div class="inner-container flex space-between border-box relative a-center j-center">
+                <div class="actions-summary-container full-width flex a-center">
+                    <marquee class="neutrinosMarquee flex a-center half-width">
+                        <mat-card class="mat-card flex j-center">
+                            <div class="full-width a-center flex column">
+                                <img class="no-border-radius headerImg actionsSummary"
+                                    src="../../../assets/images/neutrinos-logo.png" alt="">
+                                <div class="actions-container flex column gap-05em a-center full-width">
+                                    <p class="margin-0">{{completedActions.length}} Pending Actions</p>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </marquee>
+                    <div *ngIf="completedActions.length > 0" style="background-color: ghostwhite;"
+                        class="sidenav-container flex center-center column gap-05em">
+                        <!-- <p class="margin-0">Visa</p>
+                        <p class="margin-0">Guesthouse</p>
+                        <p class="margin-0 text-center">International Travel</p> -->
+                        <mat-list>
+                            <div  *ngFor="let action of completedActions" (click)="showOperationsOverview(action)">
+                                <mat-list-item>
+                                    <div class="operation-summary flex a-center cursor relative">
+                                        <div class="flex a-center" matTooltip="Ratings">
+                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                                        </div>
+                                        <p class="margin-0">{{action}}</p>
+                                    </div>
+                                </mat-list-item>
+                                <mat-divider *ngIf="action != completedActions[completedActions.length -1]"></mat-divider>
+                            </div>
+                        </mat-list>
+                    </div>
+                </div>
+                <div class="account-container flex gap-3em a-center">
+                    <button class="z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
                     <div class="flex a-center">
-                        <div class="flex gap-05em a-center cursor" title="Remaining Leave Days" (click)="showProfile()">
-                            <img class="userIcon headerImg" src="../../../assets/images/user-icon.png" title="Profile" alt="">
-                            <p class="margin-0 color-blue leaveText">Annual Leave: <span
+                        <div class="flex gap-05em a-center cursor" title="Remaining Leave Days">
+                            <img (click)="requestLeave()" class="addLeave cursor headerImg"
+                                src="../../../assets/icons/add_FILL0_wght400_GRAD0_opsz24.svg" alt="Add a leave request"
+                                title="Add a leave request">
+                            <hr class="leavesHr full-width">
+                            <p (click)="showProfile()" class="margin-0 color-blue leaveText">Annual Leave: <span
                                     class="color-black">{{remainingAnnualLeaveDays}}</span>
                             </p>
-                            <p class="margin-0 color-blue leaveText">Sick Leave: <span
+                            <p (click)="showProfile()" class="margin-0 color-blue leaveText">Sick Leave: <span
                                     class="color-black">{{remainingSickLeaveDays}}</span></p>
-                            <hr class="leavesHr full-width">
-                        </div>
-                        <img (click)="requestLeave()" class="addLeave cursor headerImg"
-                            src="../../../assets/icons/add_FILL0_wght400_GRAD0_opsz24.svg" alt="Add a leave request"
-                            title="Add a leave request">
-                    </div>
-                    <marquee class="neutrinosMarquee half-width">
-                        <img class="no-border-radius headerImg" src="../../../assets/images/neutrinos-logo.png" alt="">
-                    </marquee>
-                    <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
-                    <img class="cursor absolute notificationsIcon headerImg"
-                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
-                        id="notificationButton">
-                    <div class="absolute notificationsCount">
-                        <p class="margin-0">{{employeeNotifications.length}}</p>
-                    </div>
-                    <div id="notifications" class="hide flex column notifications">
-                        <div *ngFor="let notification of employeeNotifications"
-                            class="flex a-center gap-05em relative notificationItem cursor">
-                            <img (click)="seenNotification(notification.id)"
-                            src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt="Delete notification">
-                            <div class="notificationTitle">
-                                <p class="margin-0">{{notification.notificationType | titlecase}}</p>
-                            </div>
-                            <div class="flex gap-05em a-center status">
-                                <p class="statusP margin-0 color-white">{{notification.status | titlecase}}</p>
-                            </div>
+                            <img (click)="showProfile()" class="userIcon headerImg"
+                                src="../../../assets/images/user-icon.png" title="Profile" alt="">
                         </div>
                     </div>
                 </div>
-                <div class="flex full-width gap-2em">
-                    <div class="width-60">
-                        <mat-tab-group>
-                            <mat-tab label="Human Resource">
-                                <div *ngIf="showPolicies" class="full-width">
-                                    <mat-tab-group>
-                                        <mat-tab label="Policy">
-                                            <div class="policyContent flex column full-width">
-                                                <h2 class="text-center">{{toSignPolicy.title}}</h2>
-                                                <p class="text-center">{{toSignPolicy.content}}</p>
-                                                <div>
-                                                    <img class="backBtn" (click)="updateWatchClicks()"
-                                                        src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
-                                                        matTooltip="Go Back" alt="">
-                                                </div>
+                <div id="notifications" class="hide flex column notifications">
+                    <div class="flex notiHeader space-between">
+                        <img class="loud-speaker" src="../../../assets/images/loud-speaker.webp" alt="">
+                        <div class="flex gap-05em a-center cursor">
+                            <p class="margin-0">Mark all read</p>
+                            <img src="../../../assets/icons/done_all_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                        </div>
+                    </div>
+                    <div *ngFor="let notification of employeeNotifications"
+                        class="flex a-center gap-05em relative notificationItem cursor">
+                        <img (click)="seenNotification(notification.id)"
+                            src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg" alt="Delete notification">
+                        <div class="notificationTitle">
+                            <p class="margin-0">{{notification.notificationType | titlecase}}</p>
+                        </div>
+                        <div class="flex gap-05em a-center status">
+                            <p class="statusP margin-0 color-white">{{notification.status | titlecase}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex full-width gap-2em">
+                <div class="width-60 relative">
+                    <mat-tab-group>
+                        <mat-tab label="Human Resource">
+                            <div *ngIf="showPolicies" class="full-width">
+                                <mat-tab-group>
+                                    <mat-tab label="Policy">
+                                        <div class="policyContent flex column full-width">
+                                            <h2 class="text-center">{{toSignPolicy.title}}</h2>
+                                            <p class="text-center">{{toSignPolicy.content}}</p>
+                                            <div>
+                                                <img class="backBtn" (click)="updateWatchClicks()"
+                                                    src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
+                                                    matTooltip="Go Back" alt="">
                                             </div>
-                                        </mat-tab>
-                                        <mat-tab label="Procedure">
-                                            <div class="policyContent flex column full-width">
-                                                <h2 class="text-center">Policy Procedure</h2>
-                                                <p class="text-center">{{toSignPolicy.content}}</p>
-                                                <div>
-                                                    <img class="backBtn" (click)="updateWatchClicks()"
-                                                        src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
-                                                        matTooltip="Go Back" alt="">
-                                                </div>
-                                            </div>
-                                        </mat-tab>
-                                        <mat-tab label="Form">
-                                            <div class="policyContent flex column full-width">
-                                                <h2 class="text-center">Policy Form Link</h2>
-                                                <!-- Select Form Link -->
-                                                <mat-form-field class="full-width">
-                                                    <mat-label>Form Link</mat-label>
-                                                    <mat-select formControlName="formLink">
-                                                        <mat-option>{{toSignPolicy.formLink}}</mat-option>
-                                                    </mat-select>
-                                                    <mat-error>
-                                                        Please select an option
-                                                    </mat-error>
-                                                </mat-form-field>
-                                                <div>
-                                                    <img class="backBtn" (click)="updateWatchClicks()"
-                                                        src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
-                                                        matTooltip="Go Back" alt="">
-                                                </div>
-                                            </div>
-                                        </mat-tab>
-                                    </mat-tab-group>
-                                </div>
-                                <div *ngIf="!showPolicies" class="flex column j-end full-width">
-                                    <div class="flex gap-1em column">
-                                        <div class="flex center-center">
-                                            <img class="signature" src="../../../assets/images/signature.svg" alt="">
                                         </div>
-                                        <div class="policyContainer a-center cursor">
-                                            <div (click)="signPolicy(policy)" (click)="updateWatchClicks()"
-                                                *ngFor="let policy of allPolicies" matTooltip="View policy"
-                                                class="operation a-center gap-1em flex column">
-                                                <img class="policy"
-                                                    src="../../../assets/icons/policy_FILL0_wght400_GRAD0_opsz24.svg"
-                                                    alt="">
-                                                <h2 class="margin-0 text-center">{{policy.title | titlecase}}</h2>
-                                                <div class="flex column gap-05em">
-                                                    <p class="leaveText policyTitle margin-0">{{policy.category | titlecase}}
-                                                    </p>
-                                                    <div class="underline"></div>
-                                                </div>
+                                    </mat-tab>
+                                    <mat-tab label="Procedure">
+                                        <div class="policyContent flex column full-width">
+                                            <h2 class="text-center">Policy Procedure</h2>
+                                            <p class="text-center">{{toSignPolicy.content}}</p>
+                                            <div>
+                                                <img class="backBtn" (click)="updateWatchClicks()"
+                                                    src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
+                                                    matTooltip="Go Back" alt="">
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <mat-tab label="Form">
+                                        <div class="policyContent flex column full-width">
+                                            <h2 class="text-center">Policy Form Link</h2>
+                                            <!-- Select Form Link -->
+                                            <mat-form-field class="full-width">
+                                                <mat-label>Form Link</mat-label>
+                                                <mat-select formControlName="formLink">
+                                                    <mat-option>{{toSignPolicy.formLink}}</mat-option>
+                                                </mat-select>
+                                                <mat-error>
+                                                    Please select an option
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <div>
+                                                <img class="backBtn" (click)="updateWatchClicks()"
+                                                    src="../../../assets/icons/arrow_back_FILL0_wght400_GRAD0_opsz24.svg"
+                                                    matTooltip="Go Back" alt="">
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                </mat-tab-group>
+                            </div>
+                            <div *ngIf="!showPolicies" class="flex column j-end full-width">
+                                <div class="flex gap-1em column">
+                                    <div class="flex center-center">
+                                        <img class="signature" src="../../../assets/images/signature.svg" alt="">
+                                    </div>
+                                    <div class="policyContainer a-center cursor">
+                                        <div (click)="signPolicy(policy)" (click)="updateWatchClicks()"
+                                            *ngFor="let policy of allPolicies" matTooltip="View policy"
+                                            class="operation a-center gap-1em flex column">
+                                            <img class="policy"
+                                                src="../../../assets/icons/policy_FILL0_wght400_GRAD0_opsz24.svg"
+                                                alt="">
+                                            <h2 class="margin-0 text-center">{{policy.title | titlecase}}</h2>
+                                            <div class="flex column gap-05em">
+                                                <p class="leaveText policyTitle margin-0">{{policy.category |
+                                                    titlecase}}
+                                                </p>
+                                                <div class="underline"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </mat-tab>
-                            <mat-tab label="Operations">
-                                <router-outlet *ngIf="showRouter"></router-outlet>
-                                <div *ngIf="showOperations" class="flex wrap gap-1em">
-                                    <mat-card class="operation cursor flex gap-1em column center-center"
-                                        (click)="showVisaApplicationForm()">
-                                        <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
-                                        <p class="absolute visaApp margin-0 text-center">Visa Application</p>
-                                    </mat-card>
-                                    <mat-card class="operation cursor flex gap-1em column center-center"
-                                        (click)="showVisaExtensionForm()">
-                                        <img class="visaLogo" src="../../../assets/images/visa-xtend.png" alt="">
-                                        <p class="absolute visaExt margin-0 text-center">Visa Extension</p>
-                                    </mat-card>
-                                    <mat-card class="operation cursor flex space-between column a-center"
-                                        (click)="showInternationalTravelForm()">
-                                        <img class="flightLogo margin-top-5" src="../../../assets/images/flightlogo.png"
-                                            alt="">
-                                        <p class="absolute internationalTravel margin-0 text-center">Internation Travel
-                                        </p>
-                                    </mat-card>
-                                    <mat-card
-                                        class="operation cursor flex space-between padding-bottom-10 column a-center"
-                                        (click)="showFlightInformationForm()">
-                                        <img class="landingLogo"
-                                            src="../../../assets/icons/flight_land_FILL0_wght400_GRAD0_opsz24.svg"
-                                            alt="">
-                                        <p class="absolute flightInfo margin-0 text-center">Flight Information</p>
-                                    </mat-card>
-                                    <mat-card
-                                        class="operation cursor flex space-between padding-bottom-10 column a-center"
-                                        (click)="showGuesthouseServiceForm()">
-                                        <img class="guesthouseLogo" src="../../../assets/images/services.png" alt="">
-                                        <p class="absolute guesthouseService margin-0 text-center">Guesthouse Service
-                                        </p>
-                                    </mat-card>
-                                    <mat-card
-                                        class="operation cursor flex space-between padding-bottom-10 column a-center"
-                                        (click)="showDomesticTravelForm()">
-                                        <img class="domesticTransportLogo"
-                                            src="../../../assets/images/domesticTransport.png" alt="">
-                                        <p class="absolute domesticTravel margin-0 text-center">Domestic Travel</p>
-                                    </mat-card>
-                                </div>
-                            </mat-tab>
-                        </mat-tab-group>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Operations">
+                            <router-outlet *ngIf="showRouter"></router-outlet>
+                            <div *ngIf="showOperations" class="flex wrap gap-1em">
+                                <mat-card class="operation cursor flex gap-1em column center-center"
+                                    (click)="showVisaApplicationForm()">
+                                    <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
+                                    <p class="absolute visaApp margin-0 text-center">Visa Application</p>
+                                </mat-card>
+                                <mat-card class="operation cursor flex gap-1em column center-center"
+                                    (click)="showVisaExtensionForm()">
+                                    <img class="visaLogo" src="../../../assets/images/visa-xtend.png" alt="">
+                                    <p class="absolute visaExt margin-0 text-center">Visa Extension</p>
+                                </mat-card>
+                                <mat-card class="operation cursor flex space-between column a-center"
+                                    (click)="showInternationalTravelForm()">
+                                    <img class="flightLogo margin-top-5" src="../../../assets/images/flightlogo.png"
+                                        alt="">
+                                    <p class="absolute internationalTravel margin-0 text-center">Internation Travel
+                                    </p>
+                                </mat-card>
+                                <mat-card class="operation cursor flex space-between padding-bottom-10 column a-center"
+                                    (click)="showFlightInformationForm()">
+                                    <img class="landingLogo"
+                                        src="../../../assets/icons/flight_land_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                                    <p class="absolute flightInfo margin-0 text-center">Flight Information</p>
+                                </mat-card>
+                                <mat-card class="operation cursor flex space-between padding-bottom-10 column a-center"
+                                    (click)="showGuesthouseServiceForm()">
+                                    <img class="guesthouseLogo" src="../../../assets/images/services.png" alt="">
+                                    <p class="absolute guesthouseService margin-0 text-center">Guesthouse Service
+                                    </p>
+                                </mat-card>
+                                <mat-card class="operation cursor flex space-between padding-bottom-10 column a-center"
+                                    (click)="showDomesticTravelForm()">
+                                    <img class="domesticTransportLogo"
+                                        src="../../../assets/images/domesticTransport.png" alt="">
+                                    <p class="absolute domesticTravel margin-0 text-center">Domestic Travel</p>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <!-- <img class="cursor z-index absolute notificationsIcon headerImg"
+                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
+                        id="notificationButton"> -->
+                    <!-- <div class="absolute notificationsCount">
+                        <p class="margin-0">{{employeeNotifications.length}}</p>
+                    </div> -->
+                </div>
+                <div class="flex-1 full-height center-center">
+                    <img class="frame absolute" src="../../../assets/images/android-frame.png" alt="">
+                    <img class="frameImg absolute" src="../../../assets/images/neutrinos-logo.png" alt="">
+                    <div class="flex z-index timeContainer center-center absolute">
+                        <h2 class="frameTime margin-0">{{southAfricanTime}}</h2>
                     </div>
-                    <div class="flex-1 relative full-height">
-                        <img class="frame" src="../../../assets/images/phoneframe.jpg" alt="">
-                        <img class="frameImg absolute" src="../../../assets/images/neutrinos-logo.png" alt="">
-                        <div class="flex timeContainer center-center absolute">
-                            <h2 class="frameTime margin-0">{{southAfricanTime}}</h2>
-                        </div>
-                        <img src="../../../assets/images/s-africa.png" class="frameTxt margin-0 absolute"
-                            alt="South Africa Image">
-                    </div>
+                    <img src="../../../assets/images/s-africa.png" class="frameTxt margin-0 absolute"
+                        alt="South Africa Image">
                 </div>
             </div>
-            <!-- <div class="footer flex column a-center">
+        </div>
+        <!-- <div class="footer flex column a-center">
                 <img *ngIf="showRouter" class="editIcon cursor" src="../../../assets/images/edit-icon.png" alt="Please adhere to the specification needed on each field and the time
                 frames which have been
                 stipulated" title="Please adhere to the specification needed on each field and the 
                 time frames which have been stipulated">
             </div> -->
-            <app-change-password *ngIf="showChangePassword" id="changePasswrd" class="absolute"></app-change-password>
-        </div>
-    </mat-card>
+        <app-change-password *ngIf="showChangePassword" id="changePasswrd" class="absolute"></app-change-password>
+    </div>
 </div>

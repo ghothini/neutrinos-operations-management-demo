@@ -27,6 +27,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { PolicyComponent } from './popups/policy/policy.component';
 import { SystemUsersComponent } from './components/system-users/system-users.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { OperationsOverviewComponent } from './components/popups/operations-overview/operations-overview.component';
+import { GraphComponent } from './components/charts/graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     PolicyComponent,
     SystemUsersComponent,
     ChangePasswordComponent,
+    OperationsOverviewComponent,
+    GraphComponent,
   ],
   imports: [
     BrowserModule,
