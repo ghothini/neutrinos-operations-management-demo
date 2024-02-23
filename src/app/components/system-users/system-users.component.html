@@ -4,39 +4,42 @@
         <table class="overflow-y" mat-table [dataSource]="dataSource" matSort>
             <!-- ID -->
             <ng-container matColumnDef="userId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <th mat-header-cell *matHeaderCellDef> ID </th>
                 <td mat-cell *matCellDef="let element">{{element.id}}</td>
             </ng-container>
 
             <!-- Fullname -->
             <ng-container matColumnDef="fullName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fullname </th>
+                <th mat-header-cell *matHeaderCellDef> Fullname </th>
                 <td mat-cell *matCellDef="let element">{{element.profile.fullName | titlecase}}</td>
             </ng-container>
 
             <!-- Gender -->
             <ng-container matColumnDef="gender">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                <th mat-header-cell *matHeaderCellDef> Gender </th>
                 <td mat-cell *matCellDef="let element">{{element.profile.gender | titlecase}}</td>
             </ng-container>
 
             <!-- Email -->
             <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <th mat-header-cell *matHeaderCellDef> Email </th>
                 <td mat-cell *matCellDef="let element">{{element.profile.email}}</td>
             </ng-container>
 
             <!-- Manager Name Column -->
-            <ng-container matColumnDef="manager">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Manager Name </th>
-                <td mat-cell *matCellDef="let element">{{element.profile.manager | titlecase}}</td>
+            <ng-container matColumnDef="joinDate">
+                <th mat-header-cell *matHeaderCellDef> Start Date</th>
+                <td mat-cell *matCellDef="let element">{{element.profile.dateJoinedCompany | date}}</td>
             </ng-container>
 
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-                <td  mat-cell *matCellDef="let element" >
-                    <img class="cursor" (click)="deleteUser(element)" matTooltip="Delete user" src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg" alt="Delete notification">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="flex gap-05em a-center">
+                        <img class="zaUser" src="../../../assets/images/za.svg" alt="Delete notification">
+                        <img class="cursor" (click)="deleteUser(element)" src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg" alt="Delete notification">
+                    </div>
                 </td>
             </ng-container>
 

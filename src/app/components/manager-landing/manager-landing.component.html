@@ -1,77 +1,119 @@
 <div class="flex full-height">
-    <mat-card class="full-height flex column space-between padding-4em">
-        <div class="full-height flex column space-between">
-            <div class="flex column">
-                <div class="header flex space-between a-center full-width j-center">
-                    <div class="flex a-center gap-1em">
-                        <div class="flex gap-05em a-center cursor" title="Switch to your employee account">
-                            <img class="userIcon headerImg" src="../../../assets/images/admin-img.png" title="Profile" alt="">
-                            <div class="flex">
-                                <h2 (click)="switchAcc()" class="margin-0">Switch Account</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <marquee class="neutrinosMarquee half-width">
-                        <img class="no-border-radius headerImg " src="../../../assets/images/neutrinos-logo.png" alt="">
-                    </marquee>
-                    <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out</button>
-                    <div>
-                        <img class="headerImg cursor absolute notificationsIcon"
-                            src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
-                            id="notificationButton">
-                    </div>
-                    <div id="notificationsCount" class="absolute notificationsCount">
-                        <p class="margin-0">{{managerNotifications.length}}</p>
-                    </div>
-                    <div id="notifications" class="hide flex notifications gap-05em">
-                        <div class="flex a-center gap-05em column relative cursor">
-                            <div *ngFor="let notification of managerNotifications"
-                                class="flex gap-05em a-center notificationItem">
-                                    <img (click)="seenNotification(notification.id)"
-                                        src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg"
-                                        alt="Delete notification">
-                                <p class="margin-0 color-white">new</p>
-                                <div class="flex gap-05em">
-                                    <p class="margin-0">{{notification.notificationType | titlecase}}</p>
-                                    <p class="margin-0">({{notification.lastName}})</p>
-                                </div>
-                            </div>
+    <div class="parent-container full-height flex column center-center border-box space-between">
+        <div class="flex column">
+            <div class="flex space-between a-center full-width j-center">
+                <div class="flex a-center gap-1em">
+                    <div class="flex gap-05em a-center cursor" title="Switch to your employee account">
+                        <img class="userIcon headerImg" src="../../../assets/images/admin-img.png" title="Profile"
+                            alt="">
+                        <div class="flex">
+                            <h2 (click)="switchAcc()" class="margin-0">Switch Account</h2>
                         </div>
                     </div>
                 </div>
-                <div class="main-container flex gap-1em full-height full-width">
-                    <div [class.center-center]="showOperations" class="left flex-1 flex">
-                        <div *ngIf="showRouter">
-                            <router-outlet></router-outlet>
-                        </div>
-                        <div *ngIf="showOperations" class="flex gap-1em">
-                            <mat-card class="all relative flex center-center column cursor gap-1em"
-                                (click)="showLeaves()">
-                                <div class="companyLeave relative">
-                                    <img src="../../../assets/images/neutrinos-logo.png" alt="">
-                                    <hr class="absolute full-width">
-                                    <h2 class="margin-0 absolute">LEAVES</h2>
-                                </div>
-                                <p class="margin-0 title absolute textAbs">Leaves Applications</p>
-                            </mat-card>
-                            <mat-card class="all relative flex center-center column cursor" (click)="showVisas()">
-                                <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
-                                <p class="margin-0 title absolute textAbs">Visa Applications</p>
-                            </mat-card>
-                        </div>
-                    </div>
-                    <div class="left flex-1">
-                        <div class="full-width full-height column a-center">
-                            <div>
-                                <h2 class="text-center">Neutrinos Operations Summary</h2>
-                            </div>
-                            <div class="flex center-center">
-                                <canvas class="cursor" id="pie-chart"></canvas>
+                <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+                <div>
+                    <img class="headerImg cursor absolute notificationsIcon"
+                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
+                        id="notificationButton">
+                </div>
+                <div id="notificationsCount" class="absolute notificationsCount">
+                    <p class="margin-0">{{managerNotifications.length}}</p>
+                </div>
+                <div id="notifications" class="hide flex notifications gap-05em">
+                    <div class="flex a-center gap-05em column relative cursor">
+                        <div *ngFor="let notification of managerNotifications"
+                            class="flex gap-05em a-center notificationItem">
+                            <img (click)="seenNotification(notification.id)"
+                                src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg"
+                                alt="Delete notification">
+                            <p class="margin-0 color-white">new</p>
+                            <div class="flex gap-05em">
+                                <p class="margin-0">{{notification.notificationType | titlecase}}</p>
+                                <p class="margin-0">({{notification.lastName}})</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="main-container flex gap-1em full-height full-width">
+                <div [class.center-center]="showOperations" class="left flex-1 flex">
+                    <div *ngIf="showRouter">
+                        <router-outlet></router-outlet>
+                    </div>
+                    <div *ngIf="showOperations" class="flex gap-1em">
+                        <mat-card class="all relative flex center-center column cursor gap-1em" (click)="showLeaves()">
+                            <div class="companyLeave relative">
+                                <img src="../../../assets/images/neutrinos-logo.png" alt="">
+                                <hr class="absolute full-width">
+                                <h2 class="margin-0 absolute">LEAVES</h2>
+                            </div>
+                            <p class="margin-0 title absolute textAbs">Leaves Applications</p>
+                        </mat-card>
+                        <mat-card class="all relative flex center-center column cursor" (click)="showVisas()">
+                            <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
+                            <p class="margin-0 title absolute textAbs">Visa Applications</p>
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="left flex-1">
+                    <div class="full-width full-height column a-center">
+                        <div>
+                            <h2 class="text-center">Neutrinos Operations Summary</h2>
+                        </div>
+                        <!-- <div class="flex center-center">
+                            <canvas class="cursor" id="pie-chart"></canvas>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
         </div>
-    </mat-card>
+        <div *ngIf="showOperations" class="footer column">
+            <div class="flex">
+                <div class="footer-content flex space-between">
+                    <div class="footer-tab gap-05em flex column">
+                        <small class="margin-0 small">Support</small>
+                        <div class="tab-list flex column">
+                            <p class="margin-0"><strong>FAQ</strong></p>
+                            <p class="margin-0"><strong>Contact Us</strong></p>
+                            <p class="margin-0"><strong>Lorem ipsou sd</strong></p>
+                            <p class="margin-0"><strong>Sitemap</strong></p>
+                        </div>
+                    </div>
+                    <div class="footer-tab gap-05em flex column">
+                        <small class="margin-0 small">Company</small>
+                        <div class="tab-list flex column">
+                            <p class="margin-0"><strong>About us</strong></p>
+                            <p class="margin-0"><strong>Team</strong></p>
+                            <p class="margin-0"><strong>Careers</strong></p>
+                            <p class="margin-0"><strong>Lorem ipsou sd</strong></p>
+                        </div>
+                    </div>
+                    <div class="footer-tab gap-05em flex column">
+                        <small class="margin-0 small">Useful Links</small>
+                        <div class="tab-list flex column">
+                            <p class="margin-0"><strong>Terms of Use</strong></p>
+                            <p class="margin-0"><strong>Lorem ipsou sd</strong></p>
+                            <p class="margin-0"><strong>Privacy Policy</strong></p>
+                            <p class="margin-0"><strong>Applications Procedure</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="downloadsSites flex">
+                    <div class="sites flex column center-center">
+                        <img src="../../../assets/images/Hauwei-Badges.png" alt="">
+                        <img src="../../../assets/images/app-store-Badges.png" alt="">
+                        <img class="linkedInIcon" src="../../../assets/images/LInkedin-new-redesign.png" alt="">
+                    </div>
+                    <div class="rights-container flex column gap-05em a-center">
+                        <small>Copyright &copy; 2024 by Rusteburg 8903</small>
+                        <small>ALL RIGHTS RESERVED</small>
+                        <div class="companyLogo">
+                            <img src="../../../assets/images/neutrinos-logo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

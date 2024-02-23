@@ -1,9 +1,8 @@
 .headerImg {
     height: 41px;
     z-index: 1;
-    margin-top: 5px;    
+    margin-top: 5px;
     padding: 3px;
-    background-color: #ced3d9;
     border-radius: 50%;
 }
 
@@ -29,19 +28,63 @@ canvas {
     width: 30px;
 }
 
-.no-border-radius {
-    border-radius: 0px 0px !important;
-}
-
-footer {
-    color: #325a8d;
-}
-
-.neutrinosMarquee {
+.footer {
     background-color: #ced3d9;
-    width: 45%;
-    height: 51px;
     z-index: 1;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 5px;
+    width: 83%;
+
+    .downloadsSites {
+        padding-left: 2em;
+        gap: 1.3em;
+
+        .sites {
+            gap: 5px;
+
+            .linkedInIcon {
+                margin-top: .6em;
+                height: 24px !important;
+            }
+        }
+
+        img {
+            height: 33px;
+            cursor: pointer;
+        }
+
+        .rights-container {
+            margin-top: 7px;
+            padding-bottom: 3px;
+        }
+
+
+    }
+
+    .footer-content {
+        width: 65%;
+        padding-right: 5px;
+        border-right: 1px dotted;
+
+        .footer-tab {
+            .tab-list {
+                gap: 2px;
+            }
+
+            .small {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .companyLogo {
+        height: 41px;
+        right: 149px;
+        bottom: 133px;
+        margin-top: 5px;
+    }
 }
 
 .underlineAnnual {
@@ -68,23 +111,10 @@ footer {
     color: black;
 }
 
-.footer {
-    // color: #325a8d;
-    width: 740px;;
-}
-
 .editIcon {
     width: 32px;
 }
 
-.footer p {
-    font-size: 16px;
-}
-
-.footer {
-    border-radius: 10px;
-    // background-color: #ced3d9;
-}
 .guesthouseLogo {
     width: 100px;
 }
@@ -162,7 +192,7 @@ footer {
     border: 1px solid #ced3d9;
 }
 
-.textAbs{
+.textAbs {
     bottom: 0;
 }
 
@@ -215,7 +245,7 @@ hr {
     left: 98px !important;
     top: 198px !important;
 }
- 
+
 .notifications {
     position: absolute;
     left: 154px;

@@ -1,4 +1,7 @@
 .main-container {
+
+    padding-top: 1.5em;
+
     hr, .operation, .chart-container {
         width: 85%;
     }
@@ -12,6 +15,6 @@
     }
 
     .graph-container {
-        height: 250px;
+        height: 270px;
     }
 }

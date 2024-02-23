@@ -114,8 +114,8 @@ app-guesthouse-service, app-international-travel, app-domestic-travel
 
 app-change-password {
     width: 20%;
-    right: -15px;
-    bottom: 4px;
+    left: 8px;
+    bottom: 6px;
 }
 
 .width-96 {
@@ -212,11 +212,6 @@ app-change-password {
     gap: 1em;
     flex-wrap: wrap;
     height: auto !important;
-}
-
-
-.logOut {
-    margin-right: 50px;
 }
 
 .mat-mdc-option .mdc-list-item__primary-text{

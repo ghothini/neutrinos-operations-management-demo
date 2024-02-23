@@ -1,26 +1,27 @@
-.adminIcon {
-    height: 92px;
-}
-
-.uploadP {
-    font-size: 16px;
-}
-
 .systemUsersImg {
     height: 37px;
 }
 
-.logo-container {
-    top: 35px;
-    width: 50%;
+.main-container {
+    background-color: ghostwhite;
+
+    .mat-card {
+        padding: 10px;
+
+        .countP {
+            font-weight: 400;
+            color: white;
+        }
+    }
+
+    .policies {
+        height: 175px;
+        overflow-y: auto;
+    }
 }
 
-.main-container {
-    background-image: "neutrinosBackgroundImg";
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #04429f;
+.uploadP {
+    font-size: 16px;
 }
 
 .z-index {
@@ -72,8 +73,4 @@
 
 .header {
     padding: 0px 20px 0px 20px;
-}
-
-.systemUsersNo {
-    font-size: large;
 }

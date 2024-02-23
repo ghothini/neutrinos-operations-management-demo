@@ -1,31 +1,29 @@
-<div  class="full-height main-container flex full-width center-center relative">
-    <mat-card class="width-70 z-index">
+<div class="main-container full-height flex full-width center-center relative">
+    <mat-card class="mat-card width-70 z-index">
         <div class="full-width flex column gap-2em">
             <div class="flex column gap-2em">
-                <div class="header flex space-between a-center">
-                    <img class="adminIcon" src="../../../assets/images/admin-icon.svg" alt="Admin icon picture">
-                    <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out |
-                        Administrator</button>
-                </div>
-                <div class="flex space-between">
-                    <div (click)="showUsers()" matTooltip="Total number of system users"
-                        class="flex gap-05em a-center cursor">
+                <div class="flex space-between a-center">
+                    <div (click)="showUsers()" matTooltip="No. system users"
+                        class="flex gap-05em column a-center cursor">
                         <img src="../../../assets/images/s-africa.png" alt="">
-                        <p class="systemUsersNo">No. system users: </p>
                         <div class="flex center-center usersCount">
-                            <h2 class="uploadP margin-0">{{usersCount}}</h2>
+                            <h2 class="uploadP countP margin-0">{{usersCount}}</h2>
                         </div>
                     </div>
-                    <div class="flex column a-center">
-                        <p class="uploadP margin-0">Upload <strong>Neutrinos Operations System</strong> Users</p>
-                        <input id="upload" type="file">
+                    <div class="flex column a-center gap-1em">
+                        <button class="logOut z-index" mat-raised-button color="primary" (click)="logOut()">Log Out |
+                            Administrator</button>
+                        <div class="flex column gap-05em a-center">
+                            <p class="uploadP margin-0">Upload <strong>Neutrinos Operations System</strong> Users</p>
+                            <input id="upload" type="file">
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="width-96 relative">
                 <mat-tab-group class="mat-tab-group">
                     <mat-tab label="Policies">
-                        <div class="mat-elevation-z8 full-width">
+                        <div class="policies mat-elevation-z8 full-width">
                             <table mat-table [dataSource]="dataSource" matSort>
                                 <!-- Policy Name -->
                                 <ng-container matColumnDef="policyName">
@@ -111,9 +109,4 @@
             </div>
         </div>
     </mat-card>
-    <div class="logo-container center-center flex absolute">
-        <img class="nutrinosImg" src="../../../assets/images/neutrinos-logo.png" alt="">
-    </div>
-    <img id="neutrinosBackgroundImg" class="absolute neutrinosBackgroundImg" src="../../../assets/images/neutrinos.webp"
-        alt="">
 </div>

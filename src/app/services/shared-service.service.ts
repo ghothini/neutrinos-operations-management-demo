@@ -22,6 +22,7 @@ export class SharedServiceService {
   employeeAccountSubject = new Subject<any>();
   showNotificationsIconSubject = new Subject<any>();
   systemUsersCountSubject = new Subject<any>();
+  policiesSubject = new Subject<any>();
   employee: any;
   showChangePasswrd: boolean = false;
   changePasswrdSubject = new Subject<any>();
@@ -68,6 +69,12 @@ export class SharedServiceService {
     this.allVisaApplicationsSubject.next(this.allVisaApplications);
   }
 
+  updatePolicies(): void {
+    let policies = localStorage.getItem('policies');
+    policies = policies ? JSON.parse(policies) : [];
+    this.policiesSubject.next(policies);
+  }
+
   watchRouterShow(): Observable<any> {
     return this.routerShowSubject.asObservable();
   }
@@ -86,6 +93,10 @@ export class SharedServiceService {
 
   watchSystemUsers(): Observable<any> {
     return this.systemUsersCountSubject.asObservable();
+  }
+
+  watchPolicies(): Observable<any> {
+    return this.policiesSubject.asObservable();
   }
 
   // Logged In Employee Account

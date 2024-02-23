@@ -8,7 +8,7 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
   styleUrls: ['./system-users.component.scss']
 })
 export class SystemUsersComponent {
-  displayedColumns: string[] = ['userId', 'fullName', 'gender', 'email', 'manager','actions'];
+  displayedColumns: string[] = ['userId', 'fullName', 'gender', 'email', 'joinDate','actions'];
   dataSource: any;
   systemUsers: any;
   employees: any;

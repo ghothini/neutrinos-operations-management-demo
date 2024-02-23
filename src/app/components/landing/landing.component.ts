@@ -65,16 +65,22 @@ export class LandingComponent implements OnInit {
 
     //  Update showing of time
     setInterval(() => {
-      this.allEmployees = this.sharedService.get('employees','local');
+      this.allEmployees = this.sharedService.get('employees', 'local');
+      const allLeaves = this.sharedService.get('allLeaves', 'local');
       this.southAfricanTime = this.updateDate()
       this.allEmployees.forEach((employee: any) => {
         if (employee.id === this.employee.id) {
-          if(employee.profile.operationsOperated.visaApplications.length > 0 && !this.completedActions.includes('Visa Applications')) this.completedActions.push('Visa Applications');
-          if(employee.profile.operationsOperated.visaExtensions.length > 0 && !this.completedActions.includes('Visa Extensions')) this.completedActions.push('Visa Extensions');
-          if(employee.profile.operationsOperated.guesthouseServices.length > 0 && !this.completedActions.includes('Guesthouse Services')) this.completedActions.push('Guesthouse Services');
-          if(employee.profile.operationsOperated.domesticTravels.length > 0 && !this.completedActions.includes('Domestic Travels')) this.completedActions.push('Domestic Travels');
-          if(employee.profile.operationsOperated.flightsInformation.length > 0 && !this.completedActions.includes('Flights Information')) this.completedActions.push('Flights Information');
-          if(employee.profile.operationsOperated.internationalTravels.length > 0 && !this.completedActions.includes('International Travels')) this.completedActions.push('International Travels');
+          if (employee.profile.operationsOperated.visaApplications.length > 0 && !this.completedActions.includes('Visa Applications')) this.completedActions.push('Visa Applications');
+          if (employee.profile.operationsOperated.visaExtensions.length > 0 && !this.completedActions.includes('Visa Extensions')) this.completedActions.push('Visa Extensions');
+          if (employee.profile.operationsOperated.guesthouseServices.length > 0 && !this.completedActions.includes('Guesthouse Services')) this.completedActions.push('Guesthouse Services');
+          if (employee.profile.operationsOperated.domesticTravels.length > 0 && !this.completedActions.includes('Domestic Travels')) this.completedActions.push('Domestic Travels');
+          if (employee.profile.operationsOperated.flightsInformation.length > 0 && !this.completedActions.includes('Flights Information')) this.completedActions.push('Flights Information');
+          if (employee.profile.operationsOperated.internationalTravels.length > 0 && !this.completedActions.includes('International Travels')) this.completedActions.push('International Travels');
+        }
+      })
+      allLeaves.forEach((leave: any) => {
+        if(leave.employeeId === this.employee.id && !this.completedActions.includes('Leave Applications')) {
+          this.completedActions.push('Leave Applications');
         }
       })
     }, 1000)
@@ -151,7 +157,7 @@ export class LandingComponent implements OnInit {
     if (this.showChangePassword) {
       setInterval(() => {
         changePasswrdElement.style.display = 'none'
-      }, 10000)
+      }, 1000)
     }
     const notificationButtonElement = document.getElementById('notificationButton');
     this.notificationsElement = document.getElementById('notifications') as HTMLElement;
@@ -171,12 +177,12 @@ export class LandingComponent implements OnInit {
 
   getPendingActions(): void {
     // Get employees pending actions
-    if(this.employee.profile.operationsOperated.visaApplications.length > 0) this.employeePendingActions.push('Visa Application');
-    if(this.employee.profile.operationsOperated.visaExtensions.length > 0) this.employeePendingActions.push('Visa Extension');
-    if(this.employee.profile.operationsOperated.internationalTravels.length > 0) this.employeePendingActions.push('International Travel');
-    if(this.employee.profile.operationsOperated.domesticTravels.length > 0) this.employeePendingActions.push('Domestic Travel');
-    if(this.employee.profile.operationsOperated.flightsInformation.length > 0) this.employeePendingActions.push('Flight Information');
-    if(this.employee.profile.operationsOperated.guesthouseServices.length > 0) this.employeePendingActions.push('Guesthouse Service');
+    if (this.employee.profile.operationsOperated.visaApplications.length > 0) this.employeePendingActions.push('Visa Application');
+    if (this.employee.profile.operationsOperated.visaExtensions.length > 0) this.employeePendingActions.push('Visa Extension');
+    if (this.employee.profile.operationsOperated.internationalTravels.length > 0) this.employeePendingActions.push('International Travel');
+    if (this.employee.profile.operationsOperated.domesticTravels.length > 0) this.employeePendingActions.push('Domestic Travel');
+    if (this.employee.profile.operationsOperated.flightsInformation.length > 0) this.employeePendingActions.push('Flight Information');
+    if (this.employee.profile.operationsOperated.guesthouseServices.length > 0) this.employeePendingActions.push('Guesthouse Service');
     console.log(this.employeePendingActions);
   }
 
@@ -237,7 +243,7 @@ export class LandingComponent implements OnInit {
 
   showOperationsOverview(operations: string): void {
     console.log(operations)
-    this.dialog.open(OperationsOverviewComponent,{
+    this.dialog.open(OperationsOverviewComponent, {
       width: '100%',
       data: {
         _operation: operations

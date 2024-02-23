@@ -48,6 +48,7 @@ export class PolicyComponent {
     if(this.policyForm.invalid) return;
     this.allPolicies.push(this.policyForm.value)
     this.sharedService.set('policies','local',this.allPolicies);
+    this.sharedService.updatePolicies();
     this.snackbar.open('Policy added successfully','Ok',{duration: 3000});
     this.dialogRef.close();
   }

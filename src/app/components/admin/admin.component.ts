@@ -37,9 +37,9 @@ export class AdminComponent implements OnInit {
     }
     this.dataSource = this.policies
 
-    // Subscriptions
-
+    // Listeners
     this.sharedService.watchSystemUsers().subscribe((usersCount: number) => this.usersCount = usersCount)
+    this.sharedService.watchPolicies().subscribe((policies: any) => {this.dataSource = policies})
   }
 
   ngOnInit(): void {
@@ -164,7 +164,8 @@ export class AdminComponent implements OnInit {
     this.dialog.open(PolicyComponent,{
       data: {
         data: policy
-      }
+      },
+      width: '100%'
     })
   }
 
