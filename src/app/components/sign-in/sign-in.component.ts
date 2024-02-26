@@ -10,6 +10,7 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
+  hide = true;
   allEmployees: any;
   allManagers: any;
   allOperators: any;

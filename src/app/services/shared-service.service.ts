@@ -24,8 +24,10 @@ export class SharedServiceService {
   systemUsersCountSubject = new Subject<any>();
   policiesSubject = new Subject<any>();
   employee: any;
+  managerPieData: any;
   showChangePasswrd: boolean = false;
   changePasswrdSubject = new Subject<any>();
+  managerPieSubject = new Subject<any>();
 
   updateOperationsShow(): any {
     this.showRouter = !this.showRouter;
@@ -106,8 +108,25 @@ export class SharedServiceService {
     this.employeeAccountSubject.next(this.employee);
   }
 
+  updateManagerPieData(data: any): void {
+    this.managerPieData = data;
+    this.managerPieSubject.next(data);
+  }
+
+  initManagerPieData(data: any): void {
+    this.managerPieData = data;
+  }
+
+  getInitManagerPieData(): void {
+    return this.managerPieData;
+  }
+
   watchEmployeeAccount(): Observable<any> {
     return this.employeeAccountSubject.asObservable();
+  }
+
+  watchManagerPieData(): Observable<any> {
+    return this.managerPieSubject.asObservable();
   }
 
   watchAnnualLeaveDays(): Observable<any> {

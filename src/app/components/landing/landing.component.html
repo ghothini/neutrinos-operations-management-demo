@@ -20,18 +20,22 @@
                         <p class="margin-0">Guesthouse</p>
                         <p class="margin-0 text-center">International Travel</p> -->
                         <mat-list>
-                            <div  *ngFor="let action of completedActions" (click)="showOperationsOverview(action)">
+                            <div *ngFor="let action of completedActions" (click)="showOperationsOverview(action)">
                                 <mat-list-item>
                                     <div class="operation-summary flex a-center cursor relative">
                                         <div class="flex a-center" matTooltip="Ratings">
-                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg"
+                                                alt="">
+                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg"
+                                                alt="">
+                                            <img src="../../../assets/icons/star_half_FILL0_wght400_GRAD0_opsz24.svg"
+                                                alt="">
                                         </div>
                                         <p class="margin-0">{{action}}</p>
                                     </div>
                                 </mat-list-item>
-                                <mat-divider *ngIf="action != completedActions[completedActions.length -1]"></mat-divider>
+                                <mat-divider
+                                    *ngIf="action != completedActions[completedActions.length -1]"></mat-divider>
                                 <mat-divider *ngIf="completedActions.length === 1"></mat-divider>
                             </div>
                         </mat-list>
@@ -134,7 +138,7 @@
                                     <div class="policyContainer a-center cursor">
                                         <div (click)="signPolicy(policy)" (click)="updateWatchClicks()"
                                             *ngFor="let policy of allPolicies" matTooltip="View policy"
-                                            class="operation a-center gap-1em flex column">
+                                            class="operation operation-ext a-center gap-1em flex column">
                                             <img class="policy"
                                                 src="../../../assets/icons/policy_FILL0_wght400_GRAD0_opsz24.svg"
                                                 alt="">
@@ -191,12 +195,6 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-                    <!-- <img class="cursor z-index absolute notificationsIcon headerImg"
-                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
-                        id="notificationButton"> -->
-                    <!-- <div class="absolute notificationsCount">
-                        <p class="margin-0">{{employeeNotifications.length}}</p>
-                    </div> -->
                 </div>
                 <div class="flex-1 full-height center-center">
                     <img class="frame absolute" src="../../../assets/images/android-frame.png" alt="">
@@ -206,6 +204,11 @@
                     </div>
                     <img src="../../../assets/images/s-africa.png" class="frameTxt margin-0 absolute"
                         alt="South Africa Image">
+                </div>
+                <img id="notificationsBtn" class="cursor z-index absolute notificationsIcon headerImg"
+                    src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                <div class="absolute notificationsCount">
+                    <p class="margin-0">{{employeeNotifications.length}}</p>
                 </div>
             </div>
         </div>

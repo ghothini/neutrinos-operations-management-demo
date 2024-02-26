@@ -1,26 +1,6 @@
 <div class="main-container background-img-color relative flex column full-height">
     <div class="flex full-height relative">
         <div class="flex width-900 a-center space-around column">
-            <!-- <div class="neutrios">
-                <img class="world" src="../../../assets/images/complete.png" alt="">
-            </div> -->
-            <div class="highlights flex column gap-1em">
-                <div class="flex">
-                    <div class="headings flex column center-center gap-1em">
-                        <h2 class="margin-0">Access leave</h2>
-                        <p class="margin-0 text-center">Control how you want to use your leave days</p>
-                    </div>
-                    <div class="headings flex column center-center gap-1em">
-                        <h2 class="margin-0">Manage visa</h2>
-                        <p class="text-center margin-0">Apply for a new visa</p>
-                    </div>
-                    <div class="headings flex column center-center gap-1em">
-                        <h2 class="margin-0">Safe and secure</h2>
-                        <p class="text-center margin-0">Drop-offs/Pick-ups are attended by verified Neutrinos drivers
-                        </p>
-                    </div>
-                </div>
-            </div>
             <div class="footer flex space-around a-center">
                 <div class="flex gap-05em">
                     <img class="swipeUp" src="../../../assets/icons/swipe-up.svg" alt="">
@@ -45,29 +25,32 @@
         </div>
         <div class="z-index form-container absolute width-430 j-center flex column gap-2em">
             <div class="flex">
-                <form class="half-width flex column padding-10" [formGroup]="loginFormGroup">
-                    <div class="flex column height-74">
-                        <label for="email">Email Address</label>
-                        <input class="input" formControlName="email" type="email" name="email"
-                            placeholder="example@example.com">
-                        <small *ngIf="loginFormGroup.get('email')?.hasError('pattern')" class="error-message margin-0">
-                            Enter valid <strong>email</strong>
-                        </small>
-                        <small *ngIf="loginFormGroup.get('email')?.hasError('required')" class="error-message margin-0">
+                <form class="form flex column padding-10" [formGroup]="loginFormGroup">
+                    <h2 class="form-p margin-0 text-center">Neutrinos Operations Platform</h2>
+                    <!-- Email -->
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput formControlName="email" placeholder="Email Address">
+                        <mat-error *ngIf="loginFormGroup.get('email')?.hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="loginFormGroup.get('email')?.hasError('required')">
                             Email is <strong>required</strong>
-                        </small>
-                    </div>
+                        </mat-error>
+                    </mat-form-field>
                     <!-- Password -->
-                    <div class="flex column height-74">
-                        <label for="password">Password</label>
-                        <input class="input" formControlName="password" type="password" name="password"
-                            placeholder="***">
-                        <small *ngIf="loginFormGroup.get('password')?.hasError('required')"
-                            class="error-message margin-0">
-                            Enter a valid <strong>password</strong>
-                        </small>
-                    </div>
-                    <div class="flex margin-top column gap-05em">
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="loginFormGroup.get('password')?.hasError('required')">
+                            Enter a valid <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="flex column gap-05em">
                         <div class="buttonCancel cursor flex center-center">
                             <p class="margin-0">Cancel</p>
                         </div>
@@ -83,7 +66,7 @@
             <p class="downloadPdf margin-0">WHAT DO YOU NEED TO KNOW ABOUT OUR OPERATIONS APP
                 <sup class="cursor padding-left-5" style="color: #0062e1;">DOWNLOAD PDF</sup>
             </p>
-            <div class="downloads know-more flex gap-1em j-center">
+            <div class="downloads know-more flex j-center">
                 <img src="../../../assets/images/Google.png"
                     alt="Download google application not available coming soon">
                 <img src="../../../assets/images/app-store-Badges.png"

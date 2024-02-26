@@ -1,0 +1,64 @@
+.footer {
+    background-color: #ced3d9;
+    z-index: 1;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+
+    .downloadsSites {
+        padding-left: 2em;
+        gap: 1.3em;
+        width: 400px;
+
+        .sites {
+            gap: 5px;
+        }
+
+        img {
+            height: 33px;
+            cursor: pointer;
+        }
+
+        .linkedInIcon {
+            height: 24px !important;
+        }
+ 
+        .xIcon {
+            height: 22px;
+        }
+
+        .follow-container {
+            gap: .2em;
+            right: 51px;
+            top: 21px;
+        }
+
+
+    }
+
+    .footer-content {
+        width: 65%;
+        padding-right: 5px;
+        border-right: 1px dotted;
+
+        .footer-tab {
+            .tab-list {
+                gap: 2px;
+            }
+
+            .small {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .inner-footer {
+        .companyLogo {
+            img {
+                height: 48px;
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { OperationsOverviewComponent } from '../popups/operations-overview/opera
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, AfterViewInit {
   showRouter!: boolean;
   showOperations!: boolean;
   employee: any;
@@ -32,6 +32,7 @@ export class LandingComponent implements OnInit {
   toSignPolicy: any;
   isManager: any;
   manager: any;
+  notificationButtonElement: any;
   employeePendingActions: string[] = [];
   showChangePassword = false;
   completedActions: string[] = [];
@@ -79,7 +80,7 @@ export class LandingComponent implements OnInit {
         }
       })
       allLeaves.forEach((leave: any) => {
-        if(leave.employeeId === this.employee.id && !this.completedActions.includes('Leave Applications')) {
+        if (leave.employeeId === this.employee.id && !this.completedActions.includes('Leave Applications')) {
           this.completedActions.push('Leave Applications');
         }
       })
@@ -159,9 +160,12 @@ export class LandingComponent implements OnInit {
         changePasswrdElement.style.display = 'none'
       }, 1000)
     }
-    const notificationButtonElement = document.getElementById('notificationButton');
+  }
+
+  ngAfterViewInit(): void {
+    this.notificationButtonElement = document.getElementById('notificationsBtn');
     this.notificationsElement = document.getElementById('notifications') as HTMLElement;
-    notificationButtonElement?.addEventListener('click', () => {
+    this.notificationButtonElement?.addEventListener('click', () => {
       if (this.employeeNotifications.length < 1) {
         this.snackbar.open('No notifications updates to see', 'Ok', { duration: 3000 });
         return;

@@ -151,11 +151,21 @@
 }
 
 .form-container {
-    top: calc(50% - -29px);
+    top: calc(50% - -17px);
+    left: 5px;
 }
 
-.margin-top {
-    margin-top: 3px;
+.form {
+    width: 62%;
+    // gap: 10px;
+
+    .form-p {
+        margin-bottom: 7px;
+        margin-bottom: 7px;
+        font-size: larger;
+        font-weight: 500;
+        color: white;
+    }
 }
 
 label {
@@ -184,11 +194,12 @@ label {
 
 .know-more {
     width: 228px;
+    gap: 10px;
 }
 
 .more-container {
-    bottom: 3px;
-    right: 0;
+    bottom: 10px;
+    right: 8px;
     padding-right: 5px;
 }
 

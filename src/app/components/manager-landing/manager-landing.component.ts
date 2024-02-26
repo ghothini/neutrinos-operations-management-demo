@@ -36,6 +36,7 @@ export class ManagerLandingComponent implements OnInit {
   operator: any;
   notificationButtonElement: any;
   notificationCountElement: any;
+  pieData: any;
 
   constructor(private sharedService: SharedServiceService, private router: Router,
     private snackbar: MatSnackBar) {
@@ -57,19 +58,20 @@ export class ManagerLandingComponent implements OnInit {
       // Pending visa applications
       this.pendingVisaApplications = this.allVisaApplications
       this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
-        this.pendingLeaves = allLeaves;
-        this.updateChartData(allLeaves);
-        console.log()
+        this.pieData.pendingLeavesCount = allLeaves.length;
+        this.updatePieData(this.pieData);
       })
       this.sharedService.watchVisaApplications().subscribe((visaApplications: any) => {
         this.allManagerVisaApplications = visaApplications
         this.pendingVisaApplications = this.allManagerVisaApplications
-        this.updateChartApplicationsData(this.pendingVisaApplications);
+        this.pieData.pendingVisasCount = this.pendingVisaApplications.length;
+        this.updatePieData(this.pieData);
       })
 
     } else {
       this.allManagerLeaves = this.allLeaves.filter((leave: any) => leave.managerId === this.manager.id);
       this.pendingLeaves = this.allManagerLeaves.filter((leave: any) => leave.status.toLowerCase() === 'pending')
+      console.log('manager-pend',this.pendingLeaves)
 
       this.allNotifications = this.sharedService.get('allNotifications', 'local');
       this.managerNotifications = this.allNotifications.filter((notification: any) => notification.managerId === this.manager.id && notification.direction === 'toManager' && !notification.seen).reverse();
@@ -81,12 +83,14 @@ export class ManagerLandingComponent implements OnInit {
       this.pendingVisaApplications = this.allManagerVisaApplications.filter((visaApplication: any) => visaApplication.status === 'pending');
       this.sharedService.watchAllLeaves().subscribe((allLeaves: any) => {
         this.pendingLeaves = allLeaves.filter((leave: any) => leave.status.toLowerCase() === 'pending');
-        this.updateChartData(this.pendingLeaves);
+        this.pieData.pendingLeavesCount = this.pendingLeaves.length;
+        this.updatePieData(this.pieData);
       })
       this.sharedService.watchVisaApplications().subscribe((visaApplications: any) => {
-        this.allManagerVisaApplications = visaApplications.filter((application: any) => application.managerId === this.manager.id);
-        this.pendingVisaApplications = this.allManagerVisaApplications.filter((visaApplication: any) => visaApplication.status === 'pending');
-        this.updateChartApplicationsData(this.pendingVisaApplications);
+        this.allManagerVisaApplications = visaApplications;
+        this.pendingVisaApplications = this.allManagerVisaApplications.filter((visa: any) => visa.status.toLowerCase() === 'pending');
+        this.pieData.pendingVisasCount = this.pendingVisaApplications.length;
+        this.updatePieData(this.pieData);
       })
     }
     this.sharedService.watchNotificationIcon().subscribe((show: any) => {
@@ -102,6 +106,13 @@ export class ManagerLandingComponent implements OnInit {
       this.notificationButtonElement.style.display = 'flex';
       this.notificationCountElement.style.display = 'flex';
     });
+
+    // Pie data
+    this.pieData = {
+      pendingLeavesCount: this.pendingLeaves.length,
+      pendingVisasCount: this.pendingVisaApplications.length
+    }
+    this.sharedService.initManagerPieData(this.pieData);
   }
 
   checkOperator(): void {
@@ -157,73 +168,9 @@ export class ManagerLandingComponent implements OnInit {
 
   }
 
-  updateChartData(pendingLeaves: any): void {
-    if (pendingLeaves.length === 0 && this.pendingVisaApplications.length === 0) {
-      this.pendingDefaultActions = 1;
-    } else {
-      this.pendingDefaultActions = 0;
-    }
-    this.chart.destroy();
-    this.chart = new Chart(this.chartContainer, {
-      type: 'pie',
-      data: {
-        labels: ['Pending Leaves', 'Pending Visa Applications'],
-        datasets: [{
-          backgroundColor: ['#a99494', '#3f51b5'],
-          data: [pendingLeaves.length, this.pendingVisaApplications.length]
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            grid: {
-              display: false
-            }
-          },
-          x: {
-            grid: {
-              display: false
-            }
-          }
-        }
-      }
-    })
+  updatePieData(pieData: any): void {
+    this.sharedService.updateManagerPieData(pieData);
   }
-
-
-  updateChartApplicationsData(pendingVisaApplications: any): void {
-    if (this.pendingLeaves.length === 0 && this.pendingVisaApplications.length === 0) {
-      this.pendingDefaultActions = 1;
-    } else {
-      this.pendingDefaultActions = 0;
-    }
-
-    this.chart.destroy();
-    this.chart = new Chart(this.chartContainer, {
-      type: 'pie',
-      data: {
-        labels: ['Pending Leaves', 'Pending Visa Applications'],
-        datasets: [{
-          backgroundColor: ['#a99494', '#3f51b5'],
-          data: [this.pendingLeaves.length, pendingVisaApplications.length]
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            grid: {
-              display: false
-            }
-          },
-          x: {
-            grid: {
-              display: false
-            }
-          }
-        }
-      }
-    })
-  };
 
   showProfile(): void {
     // this.dialog.open(ProfileComponent)
@@ -254,7 +201,7 @@ export class ManagerLandingComponent implements OnInit {
 
   showVisas(): void {
     if (this.allManagerVisaApplications.length === 0) {
-      this.snackbar.open('No visa applications to act on yet', 'Ok', { duration: 3000 });
+      this.snackbar.open('0 Visa application', 'Ok', { duration: 3000 });
       return;
     }
     this.showNotificationsIcon = false;

@@ -29,6 +29,8 @@ import { SystemUsersComponent } from './components/system-users/system-users.com
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { OperationsOverviewComponent } from './components/popups/operations-overview/operations-overview.component';
 import { GraphComponent } from './components/charts/graph/graph.component';
+import { PieComponent } from './components/graphs/pie/pie.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { GraphComponent } from './components/charts/graph/graph.component';
     ChangePasswordComponent,
     OperationsOverviewComponent,
     GraphComponent,
+    PieComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

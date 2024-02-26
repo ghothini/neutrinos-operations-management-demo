@@ -1,17 +1,43 @@
 <div class="flex full-height">
     <div class="parent-container full-height flex column center-center border-box space-between">
-        <div class="flex column">
-            <div class="flex space-between a-center full-width j-center">
-                <div class="flex a-center gap-1em">
-                    <div class="flex gap-05em a-center cursor" title="Switch to your employee account">
-                        <img class="userIcon headerImg" src="../../../assets/images/admin-img.png" title="Profile"
-                            alt="">
-                        <div class="flex">
-                            <h2 (click)="switchAcc()" class="margin-0">Switch Account</h2>
-                        </div>
+        <div class="main-container border-box wrap flex gap-1em full-width">
+            <div [class.center-center]="showOperations" class="center-center flex">
+                <div *ngIf="showRouter">
+                    <router-outlet></router-outlet>
+                </div>
+                <div *ngIf="showOperations" class="main-actions-container flex column">
+                    <h2>Applications</h2>
+                    <div class="actions-container flex gap-1em">
+                        <mat-card class="all relative flex center-center column cursor gap-1em" (click)="showLeaves()">
+                            <img class="visaLogo extVisa" src="../../../assets/images/leave-card.png" alt="">
+                            <p class="margin-0 title absolute textAbs">Leaves</p>
+                        </mat-card>
+                        <mat-card class="all relative flex center-center column cursor" (click)="showVisas()">
+                            <img class="visaLogo" src="../../../assets/images/passport-card.png" alt="">
+                            <p class="margin-0 title absolute textAbs">Visas</p>
+                        </mat-card>
                     </div>
                 </div>
+            </div>
+            <div class="left border-box">
+                <div class=" full-height column a-center">
+                    <div>
+                        <h2 class="text-center margin-0">Neutrinos Management Summary</h2>
+                    </div>
+                    <hr class="full-width">
+                    <app-pie class="cursor"></app-pie>
+                </div>
+            </div>
+        </div>
+        <div class="full-width flex j-center gap-1em">
+            <div class="m-r-2em flex column j-center gap-05em profile-container">
+                <div class="flex gap-05em column a-center cursor" title="Switch to your employee account">
+                    <img class="userIcon" src="../../../assets/images/admin-img.png" title="Profile" alt="">
+                    <button mat-raised-button color="primary" (click)="switchAcc()">Switch Account</button>
+                </div>
+                <hr class="full-width">
                 <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+                <!-- Notifications -->
                 <div>
                     <img class="headerImg cursor absolute notificationsIcon"
                         src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
@@ -36,83 +62,8 @@
                     </div>
                 </div>
             </div>
-            <div class="main-container flex gap-1em full-height full-width">
-                <div [class.center-center]="showOperations" class="left flex-1 flex">
-                    <div *ngIf="showRouter">
-                        <router-outlet></router-outlet>
-                    </div>
-                    <div *ngIf="showOperations" class="flex gap-1em">
-                        <mat-card class="all relative flex center-center column cursor gap-1em" (click)="showLeaves()">
-                            <div class="companyLeave relative">
-                                <img src="../../../assets/images/neutrinos-logo.png" alt="">
-                                <hr class="absolute full-width">
-                                <h2 class="margin-0 absolute">LEAVES</h2>
-                            </div>
-                            <p class="margin-0 title absolute textAbs">Leaves Applications</p>
-                        </mat-card>
-                        <mat-card class="all relative flex center-center column cursor" (click)="showVisas()">
-                            <img class="visaLogo" src="../../../assets/images/visa-application.png" alt="">
-                            <p class="margin-0 title absolute textAbs">Visa Applications</p>
-                        </mat-card>
-                    </div>
-                </div>
-                <div class="left flex-1">
-                    <div class="full-width full-height column a-center">
-                        <div>
-                            <h2 class="text-center">Neutrinos Operations Summary</h2>
-                        </div>
-                        <!-- <div class="flex center-center">
-                            <canvas class="cursor" id="pie-chart"></canvas>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="showOperations" class="footer column">
-            <div class="flex">
-                <div class="footer-content flex space-between">
-                    <div class="footer-tab gap-05em flex column">
-                        <small class="margin-0 small">Support</small>
-                        <div class="tab-list flex column">
-                            <p class="margin-0"><strong>FAQ</strong></p>
-                            <p class="margin-0"><strong>Contact Us</strong></p>
-                            <p class="margin-0"><strong>Lorem ipsou sd</strong></p>
-                            <p class="margin-0"><strong>Sitemap</strong></p>
-                        </div>
-                    </div>
-                    <div class="footer-tab gap-05em flex column">
-                        <small class="margin-0 small">Company</small>
-                        <div class="tab-list flex column">
-                            <p class="margin-0"><strong>About us</strong></p>
-                            <p class="margin-0"><strong>Team</strong></p>
-                            <p class="margin-0"><strong>Careers</strong></p>
-                            <p class="margin-0"><strong>Lorem ipsou sd</strong></p>
-                        </div>
-                    </div>
-                    <div class="footer-tab gap-05em flex column">
-                        <small class="margin-0 small">Useful Links</small>
-                        <div class="tab-list flex column">
-                            <p class="margin-0"><strong>Terms of Use</strong></p>
-                            <p class="margin-0"><strong>Lorem ipsou sd</strong></p>
-                            <p class="margin-0"><strong>Privacy Policy</strong></p>
-                            <p class="margin-0"><strong>Applications Procedure</strong></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="downloadsSites flex">
-                    <div class="sites flex column center-center">
-                        <img src="../../../assets/images/Hauwei-Badges.png" alt="">
-                        <img src="../../../assets/images/app-store-Badges.png" alt="">
-                        <img class="linkedInIcon" src="../../../assets/images/LInkedin-new-redesign.png" alt="">
-                    </div>
-                    <div class="rights-container flex column gap-05em a-center">
-                        <small>Copyright &copy; 2024 by Rusteburg 8903</small>
-                        <small>ALL RIGHTS RESERVED</small>
-                        <div class="companyLogo">
-                            <img src="../../../assets/images/neutrinos-logo.png" alt="">
-                        </div>
-                    </div>
-                </div>
+            <div class="flex footer-container">
+                <app-footer></app-footer>
             </div>
         </div>
     </div>

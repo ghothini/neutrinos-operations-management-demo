@@ -1,20 +1,19 @@
 <div class="half width">
     <mat-card class="full-width padding-10">
         <div class="main-container flex column gap-1em">
-            <p class="title margin-0 text-center"><strong>Leave application</strong></p>
-            <hr class="half-width">
-            <form [formGroup]="leaveFormGroup" class="flex column gap-05em">
+            <p class="title margin-0"><strong>Leave application</strong></p>
+            <hr class="full-width">
+            <form [formGroup]="leaveFormGroup" class="flex column gap-1em">
                 <div class="flex column full-width">
-                    <div class="flex gap-05em">
-                        <h2 class="margin-0 leaveType">Choose type of leave application:</h2>
+                    <div class="flex gap-05em a-center">
+                        <h2 class="margin-0 leaveType">Type of leave application:</h2>
+                        <section>
+                            <mat-button-toggle-group formControlName="leaveType" aria-label="Font Style">
+                                <mat-button-toggle value="sick">Sick</mat-button-toggle>
+                                <mat-button-toggle value="annual">Annual</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </section>
                     </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="leaveType">
-                        <mat-radio-button value="annual">Annual</mat-radio-button>
-                        <mat-radio-button value="sick">Sick</mat-radio-button>
-                        <mat-error *ngIf="leaveFormGroup.get('leaveType')?.hasError('required')">
-                            <small>Choose a leave option</small>
-                        </mat-error>
-                    </mat-radio-group>
                 </div>
                 <div class="full-width flex gap-1em">
                     <!-- Leave Start Date -->
@@ -38,10 +37,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="flex column">
+                <div class="flex space-around a-center">
                     <p  class="cursor margin-0">By continuing, you accept <span class="form color-black">{{leaveFormGroup.get('leaveType')?.value | titlecase}} Leave Policy</span></p>
-                </div>
-                <div class="flex center-center">
                     <button mat-raised-button color="primary" (click)="submit()">Submit</button>
                 </div>
             </form>

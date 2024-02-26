@@ -1,9 +1,13 @@
+$primary-bg-color: #ced3d9;
+
 .headerImg {
-    height: 41px;
+    height: 48px;
+    rotate: 22deg;
     z-index: 1;
     margin-top: 5px;
-    padding: 3px;
+    padding: 5px;
     border-radius: 50%;
+    background-color: $primary-bg-color;
 }
 
 .addLeave {
@@ -18,73 +22,9 @@ canvas {
     width: 70%;
 }
 
-.userIcon {
-    z-index: 1;
-    height: 58px !important;
-}
-
 .leavesHr {
     rotate: 90deg;
     width: 30px;
-}
-
-.footer {
-    background-color: #ced3d9;
-    z-index: 1;
-    padding-right: 1em;
-    padding-left: 1em;
-    padding-top: 1em;
-    padding-bottom: 5px;
-    width: 83%;
-
-    .downloadsSites {
-        padding-left: 2em;
-        gap: 1.3em;
-
-        .sites {
-            gap: 5px;
-
-            .linkedInIcon {
-                margin-top: .6em;
-                height: 24px !important;
-            }
-        }
-
-        img {
-            height: 33px;
-            cursor: pointer;
-        }
-
-        .rights-container {
-            margin-top: 7px;
-            padding-bottom: 3px;
-        }
-
-
-    }
-
-    .footer-content {
-        width: 65%;
-        padding-right: 5px;
-        border-right: 1px dotted;
-
-        .footer-tab {
-            .tab-list {
-                gap: 2px;
-            }
-
-            .small {
-                font-size: 14px;
-            }
-        }
-    }
-
-    .companyLogo {
-        height: 41px;
-        right: 149px;
-        bottom: 133px;
-        margin-top: 5px;
-    }
 }
 
 .underlineAnnual {
@@ -113,6 +53,21 @@ canvas {
 
 .editIcon {
     width: 32px;
+}
+
+.parent-container {
+    .profile-container {
+        width: 129px;
+
+        .userIcon {
+            z-index: 1;
+            height: 81px !important;
+        }
+    }
+
+    .footer-container {
+        align-items: end;
+    }
 }
 
 .guesthouseLogo {
@@ -183,12 +138,26 @@ canvas {
 // 
 
 .main-container {
-    width: 93%;
+    width: 100%;
+    margin-top: 1em;
+
+    .m-r-2em {
+        margin-right: 2em;
+    }
+
+    .main-actions-container {
+        margin-left: 1em;
+    }
+
+    .actions-container {
+        width: 760px;
+    }
 }
+
 
 .all {
     height: 169px;
-    width: 238px;
+    width: 139px;
     border: 1px solid #ced3d9;
 }
 
@@ -205,18 +174,6 @@ canvas {
     right: 5px;
 }
 
-.companyLeave h2 {
-    top: calc(50% - 6px);
-    right: calc(50% - 57px);
-    font-size: x-large;
-    color: #784d4d;
-    z-index: 1;
-}
-
-.companyLeave img {
-    height: 41px !important;
-}
-
 hr {
     top: 48%;
     right: -3%;
@@ -225,6 +182,10 @@ hr {
 .visaLogo {
     height: 143px;
     margin-top: -20px
+}
+
+.extVisa {
+    height: 131px !important;
 }
 
 .title {
@@ -241,15 +202,11 @@ hr {
     background-color: #5b80ba;
 }
 
-.notificationsIcon {
-    left: 98px !important;
-    top: 198px !important;
-}
 
 .notifications {
     position: absolute;
-    left: 154px;
-    top: 140px;
+    left: 521px;
+    top: 73px;
     z-index: 1;
     display: flex;
     border-radius: 7px;
@@ -258,8 +215,8 @@ hr {
 }
 
 .notificationsCount {
-    top: 196px;
-    left: 133px;
+    right: 6px;
+    top: 11px;
     width: 15px;
     display: flex;
     justify-content: center;
@@ -281,8 +238,8 @@ hr {
 }
 
 .notificationsIcon {
-    right: 2px;
-    top: 68px;
+    right: 9px;
+    top: 1px;
 }
 
 .hide {
