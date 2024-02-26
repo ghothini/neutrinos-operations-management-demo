@@ -1,8 +1,17 @@
 <div class="flex full-height">
-    <div class="parent-container full-height flex column center-center border-box space-between">
-        <div class="main-container border-box wrap flex gap-1em full-width">
-            <div [class.center-center]="showOperations" class="center-center flex">
-                <div *ngIf="showRouter">
+    <div class="parent-container full-height flex column border-box">
+        <div class="main-container border-box wrap flex center-center gap-1em full-width">
+            <div *ngIf="showOperations" class="left border-box">
+                <div class=" full-height column a-center">
+                    <div>
+                        <h2 class="text-center margin-0">Management Summary</h2>
+                    </div>
+                    <hr class="full-width">
+                    <app-pie class="cursor"></app-pie>
+                </div>
+            </div>
+            <div [class.center-center]="showOperations" class="inner-container center-center flex">
+                <div *ngIf="showRouter" class="m-l-1em">
                     <router-outlet></router-outlet>
                 </div>
                 <div *ngIf="showOperations" class="main-actions-container flex column">
@@ -19,50 +28,38 @@
                     </div>
                 </div>
             </div>
-            <div class="left border-box">
-                <div class=" full-height column a-center">
-                    <div>
-                        <h2 class="text-center margin-0">Neutrinos Management Summary</h2>
+        </div>
+        <!-- Notifications -->
+        <div>
+            <img class="headerImg cursor absolute notificationsIcon"
+                src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt="" id="notificationButton">
+        </div>
+        <div class="absolute notificationsCount">
+            <p class="margin-0">{{managerNotifications.length}}</p>
+        </div>
+        <div id="notifications" class="hide flex notifications gap-05em">
+            <div class="flex a-center gap-05em column relative cursor">
+                <div *ngFor="let notification of managerNotifications" class="flex gap-05em a-center notificationItem">
+                    <img (click)="seenNotification(notification.id)"
+                        src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg" alt="Delete notification">
+                    <p class="margin-0 color-white">new</p>
+                    <div class="flex gap-05em">
+                        <p class="margin-0">{{notification.notificationType | titlecase}}</p>
+                        <p class="margin-0">({{notification.lastName}})</p>
                     </div>
-                    <hr class="full-width">
-                    <app-pie class="cursor"></app-pie>
                 </div>
             </div>
         </div>
-        <div class="full-width flex j-center gap-1em">
-            <div class="m-r-2em flex column j-center gap-05em profile-container">
+        <div id="footer" class="full-width flex relative">
+            <div class="m-l-1em  flex column j-center gap-05em profile-container">
                 <div class="flex gap-05em column a-center cursor" title="Switch to your employee account">
                     <img class="userIcon" src="../../../assets/images/admin-img.png" title="Profile" alt="">
                     <button mat-raised-button color="primary" (click)="switchAcc()">Switch Account</button>
                 </div>
                 <hr class="full-width">
                 <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
-                <!-- Notifications -->
-                <div>
-                    <img class="headerImg cursor absolute notificationsIcon"
-                        src="../../../assets/icons/notifications_FILL0_wght400_GRAD0_opsz24.svg" alt=""
-                        id="notificationButton">
-                </div>
-                <div id="notificationsCount" class="absolute notificationsCount">
-                    <p class="margin-0">{{managerNotifications.length}}</p>
-                </div>
-                <div id="notifications" class="hide flex notifications gap-05em">
-                    <div class="flex a-center gap-05em column relative cursor">
-                        <div *ngFor="let notification of managerNotifications"
-                            class="flex gap-05em a-center notificationItem">
-                            <img (click)="seenNotification(notification.id)"
-                                src="../../../assets/icons/delete_FILL0_wght400_GRAD0_opsz24.svg"
-                                alt="Delete notification">
-                            <p class="margin-0 color-white">new</p>
-                            <div class="flex gap-05em">
-                                <p class="margin-0">{{notification.notificationType | titlecase}}</p>
-                                <p class="margin-0">({{notification.lastName}})</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="flex footer-container">
+            <div class="flex footer-container absolute">
                 <app-footer></app-footer>
             </div>
         </div>

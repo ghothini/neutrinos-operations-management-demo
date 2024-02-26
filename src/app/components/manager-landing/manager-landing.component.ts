@@ -35,7 +35,7 @@ export class ManagerLandingComponent implements OnInit {
   isOperator: any;
   operator: any;
   notificationButtonElement: any;
-  notificationCountElement: any;
+  footerElement: any;
   pieData: any;
 
   constructor(private sharedService: SharedServiceService, private router: Router,
@@ -103,8 +103,7 @@ export class ManagerLandingComponent implements OnInit {
     this.routerSubscription = this.sharedService.watchRouterShow().subscribe((showRouterBoolean: boolean) => this.showRouter = showRouterBoolean);
     this.operationsSubscription = this.sharedService.watchOperationsShow().subscribe((showOperationsBoolean: boolean) => {
       this.showOperations = showOperationsBoolean;
-      this.notificationButtonElement.style.display = 'flex';
-      this.notificationCountElement.style.display = 'flex';
+      this.footerElement.style.display = 'flex';
     });
 
     // Pie data
@@ -125,8 +124,7 @@ export class ManagerLandingComponent implements OnInit {
   ngOnInit(): void {
 
     this.notificationButtonElement = document.getElementById('notificationButton') as HTMLElement;
-    this.notificationCountElement = document.getElementById('notificationsCount') as HTMLElement;
-    this.notificationCountElement = document.getElementById('notificationsCount') as HTMLElement;
+    this.footerElement = document.getElementById('footer') as HTMLElement;
     this.notificationsElement = document.getElementById('notifications');
     this.notificationButtonElement?.addEventListener('click', () => {
       if (this.managerNotifications.length < 1) {
@@ -194,20 +192,18 @@ export class ManagerLandingComponent implements OnInit {
   showLeaves(): void {
     this.showNotificationsIcon = false;
     this.sharedService.updateOperationsShow();
-    this.notificationButtonElement.style.display = 'none';
-    this.notificationCountElement.style.display = 'none';
+    this.footerElement.style.display = 'none';
     this.router.navigate(['/manager-landing/leaves']);
   }
 
   showVisas(): void {
     if (this.allManagerVisaApplications.length === 0) {
-      this.snackbar.open('0 Visa application', 'Ok', { duration: 3000 });
+      this.snackbar.open('No visa applications', 'Ok', { duration: 3000 });
       return;
     }
     this.showNotificationsIcon = false;
     this.sharedService.updateOperationsShow();
-    this.notificationButtonElement.style.display = 'none';
-    this.notificationCountElement.style.display = 'none';
+    this.footerElement.style.display = 'none';
     this.router.navigate(['/manager-landing/visas']);
   }
 

@@ -56,6 +56,7 @@ canvas {
 }
 
 .parent-container {
+    gap: .35em;
     .profile-container {
         width: 129px;
 
@@ -66,7 +67,12 @@ canvas {
     }
 
     .footer-container {
-        align-items: end;
+        top: 37px;
+        left: 283px;
+    }
+
+    .m-l-1em {
+        margin-left: 1em;
     }
 }
 
@@ -135,11 +141,17 @@ canvas {
     width: 129px;
 }
 
-// 
-
 .main-container {
     width: 100%;
     margin-top: 1em;
+
+    .inner-container {
+        width: 400px;
+
+        .m-l-1em {
+            margin-left: -12em;
+        }
+    }
 
     .m-r-2em {
         margin-right: 2em;
@@ -150,7 +162,7 @@ canvas {
     }
 
     .actions-container {
-        width: 760px;
+        width: 100%;
     }
 }
 
@@ -205,7 +217,7 @@ hr {
 
 .notifications {
     position: absolute;
-    left: 521px;
+    right: 7px;
     top: 73px;
     z-index: 1;
     display: flex;
@@ -214,8 +226,12 @@ hr {
     overflow-y: auto;
 }
 
+.news-font-family {
+    font-family: "News Cycle", sans-serif
+}
+
 .notificationsCount {
-    right: 6px;
+    right: 13px;
     top: 11px;
     width: 15px;
     display: flex;
@@ -238,7 +254,7 @@ hr {
 }
 
 .notificationsIcon {
-    right: 9px;
+    right: 1em;
     top: 1px;
 }
 
